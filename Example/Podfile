@@ -1,0 +1,14 @@
+platform :ios, '11.0'
+
+use_frameworks!
+
+target 'CuotasModule_Example' do
+  pod 'CuotasModule', :path => '../'
+  pod 'Commons', :path => '../../Commons/'
+
+  target 'CuotasModule_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

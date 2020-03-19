@@ -1,0 +1,26 @@
+//
+//  BankSelectCleanWorker.swift
+//  MercadoLibreTest
+//
+//  Created by Jon Olivet on 9/28/18.
+//  Copyright (c) 2018 Jon Olivet. All rights reserved.
+//
+
+import Commons
+
+class BankSelectCleanWorker {
+  
+    var repo: APICuotasModuleProtocol = APICuotasModule()
+
+    func getBankSelect(request: BankSelectClean.BankSelect.Request,
+                       successCompletion: @escaping ([BankSelectModel]?) -> Void,
+                       failureCompletion: @escaping (String) -> Void) {
+            repo.getBankSelect(selectedPaymentMethodId: request.selectedPaymentMethod.paymentId,
+                               successCompletion: { (receivedBankSelectModels) in
+                                successCompletion(receivedBankSelectModels)
+            }) { (error) in
+                failureCompletion(error)
+            }
+    }
+    
+}
