@@ -29,7 +29,9 @@ class APICuotasModule: Networker, APICuotasModuleProtocol {
     func getPaymentMethods(successCompletion: @escaping ([PaymentMethodModel]?) -> Void,
                            failureCompletion: @escaping (String) -> Void) {
 
-        let url = "https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88"
+        let url = Configuration.Api.paymentMethods
+        print("Here: ", url)
+//        let url = "https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88"
 
         var paymentMethodArray: [PaymentMethodModel] = []
 
@@ -81,7 +83,8 @@ class APICuotasModule: Networker, APICuotasModuleProtocol {
                        successCompletion: @escaping ([BankSelectModel]?) -> Void,
                        failureCompletion: @escaping (String) -> Void) {
 
-        let url = "https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&payment_method_id=\(selectedPaymentMethodId)"
+        let url = Configuration.Api.bankSelect + "&payment_method_id=\(selectedPaymentMethodId)"
+//        let url = "https://api.mercadopago.com/v1/payment_methods/card_issuers?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&payment_method_id=\(selectedPaymentMethodId)"
 
         var bankSelectModelArray: [BankSelectModel] = []
 
@@ -131,7 +134,8 @@ class APICuotasModule: Networker, APICuotasModuleProtocol {
                    successCompletion: @escaping ([CuotasModel]?) -> Void,
                    failureCompletion: @escaping (String) -> Void) {
 
-        let url = "https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=\(amountEntered)&payment_method_id=\(selectedPaymentMethodId)&issuer.id=\(bankSelectedId)"
+        let url = Configuration.Api.cuotas + "&amount=\(amountEntered)&payment_method_id=\(selectedPaymentMethodId)&issuer.id=\(bankSelectedId)"
+//        let url = "https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=\(amountEntered)&payment_method_id=\(selectedPaymentMethodId)&issuer.id=\(bankSelectedId)"
 
         var cuotaModelArray: [CuotasModel] = []
 

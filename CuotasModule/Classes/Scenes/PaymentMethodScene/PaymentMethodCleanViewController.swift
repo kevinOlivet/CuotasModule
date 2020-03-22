@@ -24,7 +24,9 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     
     var spinner: UIActivityIndicatorView!
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
-    
+
+    let networker = Networker()
+
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Object lifecycle
@@ -134,7 +136,6 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
         
         let localUrlString = paymentMethod.secureThumbnail
         
-        let networker = Networker()
         networker.downloadImage(urlString: localUrlString) { (data) in
             cell.paymentImageView.image = UIImage(data: data)
         }
