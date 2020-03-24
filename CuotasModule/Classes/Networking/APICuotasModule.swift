@@ -30,7 +30,6 @@ class APICuotasModule: Networker, APICuotasModuleProtocol {
                            failureCompletion: @escaping (String) -> Void) {
 
         let url = Configuration.Api.paymentMethods
-        print("Here: ", url)
 //        let url = "https://api.mercadopago.com/v1/payment_methods?public_key=444a9ef5-8a6b-429f-abdf-587639155d88"
 
         var paymentMethodArray: [PaymentMethodModel] = []
@@ -136,6 +135,7 @@ class APICuotasModule: Networker, APICuotasModuleProtocol {
 
         let url = Configuration.Api.cuotas + "&amount=\(amountEntered)&payment_method_id=\(selectedPaymentMethodId)&issuer.id=\(bankSelectedId)"
 //        let url = "https://api.mercadopago.com/v1/payment_methods/installments?public_key=444a9ef5-8a6b-429f-abdf-587639155d88&amount=\(amountEntered)&payment_method_id=\(selectedPaymentMethodId)&issuer.id=\(bankSelectedId)"
+        print("Here: ", url)
 
         var cuotaModelArray: [CuotasModel] = []
 
