@@ -37,7 +37,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0AD4A52426A0C800DA4B56 /* Configurations.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configurations.plist; sourceTree = "<group>"; };
 		90D848B48DB90D5CAB3ACA97 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		D26AF18BC9C76682DBBDE4FD /* CuotasModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CuotasModule.podspec; path = ../CuotasModule.podspec; sourceTree = "<group>"; };
+		D26AF18BC9C76682DBBDE4FD /* CuotasModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CuotasModule.podspec; path = ../CuotasModule.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E82752D925A9E546CE7A3607 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

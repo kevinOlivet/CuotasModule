@@ -8,7 +8,20 @@
 
 import Foundation
 
-struct CuotasModel: Equatable {
-    var installments: Int
-    var recommendedMessage: String
+struct CuotasResult: Codable {
+    let payerCosts: [PayerCost]
+
+    enum CodingKeys: String, CodingKey {
+        case payerCosts = "payer_costs"
+    }
+
+    struct PayerCost: Codable {
+        let installments: Int
+        let recommendedMessage: String
+
+        enum CodingKeys: String, CodingKey {
+            case installments
+            case recommendedMessage = "recommended_message"
+        }
+    }
 }

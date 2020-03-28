@@ -22,7 +22,7 @@ pod 'CuotasModule'
 
 ## Author
 
-Jon Olivet, jon.olivet@externos.bci.cl
+Jon Olivet, kevinolivet@yahoo.com
 
 ## License
 

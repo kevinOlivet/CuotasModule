@@ -19,7 +19,7 @@ enum CuotasClean {
     }
     enum Response {
         struct Success {
-            var cuotasModelArray: [CuotasModel]
+            var cuotasModelArray: [CuotasResult.PayerCost]
         }
         struct Failure {
             var errorTitle: String

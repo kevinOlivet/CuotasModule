@@ -34,7 +34,7 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
         var displayedBankSelect: [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect] = []
         for bankSelect in response.bankSelectArray {
             let displayBank = BankSelectClean.BankSelect.ViewModel.DisplayBankSelect(name: bankSelect.name,
-                                                                                     bankId: bankSelect.bankId,
+                                                                                     bankId: bankSelect.id,
                                                                                      secureThumbnail: bankSelect.secureThumbnail)
             displayedBankSelect.append(displayBank)
         }

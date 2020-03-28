@@ -16,7 +16,7 @@ enum PaymentMethodClean {
         var amountEntered: Int
     }
     struct Response {
-        // Refers to an old method but so does Bci to Models in Commons
+        // Refers to an old method but so does Main to Models in Commons
         var paymentMethodArray: [PaymentMethodModel]
     }
     struct ViewModel {

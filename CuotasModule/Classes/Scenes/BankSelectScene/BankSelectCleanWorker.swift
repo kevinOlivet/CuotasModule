@@ -12,15 +12,20 @@ class BankSelectCleanWorker {
   
     var repo: APICuotasModuleProtocol = APICuotasModule()
 
-    func getBankSelect(request: BankSelectClean.BankSelect.Request,
-                       successCompletion: @escaping ([BankSelectModel]?) -> Void,
-                       failureCompletion: @escaping (String) -> Void) {
-            repo.getBankSelect(selectedPaymentMethodId: request.selectedPaymentMethod.paymentId,
-                               successCompletion: { (receivedBankSelectModels) in
-                                successCompletion(receivedBankSelectModels)
-            }) { (error) in
-                failureCompletion(error)
+    func getBankSelect(
+        request: BankSelectClean.BankSelect.Request,
+        successCompletion: @escaping ([BankSelectModel]?) -> Void,
+        failureCompletion: @escaping (String) -> Void
+    ) {
+
+        repo.getBankSelect(
+            selectedPaymentMethodId: request.selectedPaymentMethod.id,
+            success: { (receivedBankSelectModels, _) in
+                successCompletion(receivedBankSelectModels)
+            },
+            failure: { (error, _) in
+                failureCompletion(error.localizedDescription)
             }
+        )
     }
-    
 }

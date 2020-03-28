@@ -12,13 +12,16 @@ class PaymentMethodCleanWorker {
     
     var repo: APICuotasModuleProtocol = APICuotasModule()
 
-    func getPaymentMethods(successCompletion: @escaping ([PaymentMethodModel]?) -> Void,
-                           failureCompletion: @escaping (String) -> Void) {
-        
-        repo.getPaymentMethods(successCompletion: { (receivedPaymentMethods) in
-            successCompletion(receivedPaymentMethods)
-        }) { (error) in
-            failureCompletion(error)
-        }
+    func getPaymentMethods(
+        successCompletion: @escaping ([PaymentMethodModel]?) -> Void,
+        failureCompletion: @escaping (String) -> Void
+    ) {
+
+        repo.getPaymentMethods(
+            success: { receivedPaymentMethods, _ in
+                successCompletion(receivedPaymentMethods)
+            }) { error, _ in
+                failureCompletion(error.localizedDescription)
+            }
     }
 }

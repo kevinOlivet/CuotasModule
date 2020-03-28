@@ -9,7 +9,7 @@ Used to inject the Cuotas scene
 
   s.homepage         = 'https://japanart1234.wixsite.com/jonolivet/ios-developer-info'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Jon Olivet' => 'jon.olivet@externos.bci.cl' }
+  s.author           = { 'Jon Olivet' => 'kevinolivet@yahoo.com' }
   s.source           = { :path => '.' }
 
   s.ios.deployment_target = '11.0'

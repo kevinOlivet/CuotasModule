@@ -8,12 +8,20 @@
 
 import Foundation
 
-struct PaymentMethodModel: Equatable {
-    var name: String
-    var paymentId: String
-    var secureThumbnail: String
-    var paymentTypeId: String
-    var minAllowedAmount: Double
-    var maxAllowedAmount: Double
+struct PaymentMethodModel: Codable {
+    let name: String
+    let id: String
+    let secureThumbnail: String
+    let paymentTypeId: String
+    let minAllowedAmount: Double
+    let maxAllowedAmount: Double
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case paymentTypeId = "payment_type_id"
+        case secureThumbnail = "secure_thumbnail"
+        case minAllowedAmount = "min_allowed_amount"
+        case maxAllowedAmount = "max_allowed_amount"
+    }
 }
 

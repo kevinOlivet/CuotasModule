@@ -44,7 +44,7 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
         for method in response.paymentMethodArray {
             if method.paymentTypeId == "credit_card" {
                 let viewModel = PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess(name: method.name,
-                                                                                                                 paymentId: method.paymentId,
+                                                                                                                 paymentId: method.id,
                                                                                                                  secureThumbnail: method.secureThumbnail,
                                                                                                                  paymentTypeId: method.paymentTypeId,
                                                                                                                  minAllowedAmount: method.minAllowedAmount,

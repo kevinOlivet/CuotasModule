@@ -17,7 +17,7 @@ protocol CuotasCleanDataStore {
     var amountEntered: Int! { get set }
     var selectedPaymentMethod: PaymentMethodModel! { get set }
     var bankSelected: BankSelectModel? { get set }
-    var cuotasModelArray: [CuotasModel]? { get set }
+    var cuotasModelArray: [CuotasResult.PayerCost]? { get set }
 }
 
 class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
@@ -27,26 +27,27 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
     var amountEntered: Int!
     var selectedPaymentMethod: PaymentMethodModel!
     var bankSelected: BankSelectModel?
-    var cuotasModelArray: [CuotasModel]?
+    var cuotasModelArray: [CuotasResult.PayerCost]?
     
     // MARK: Do something
     
     func getCuotas(request: CuotasClean.Cuotas.Request) {
         presenter?.presentSpinner()
         
-        worker?.getCuotas(request: request,
-                          successCompletion: { (cuotas) in
-                            self.presenter?.hideSpinner()
-                            if let cuotas = cuotas {
-                                self.cuotasModelArray = cuotas
-                                let response = CuotasClean.Cuotas.Response.Success(cuotasModelArray: cuotas)
-                                self.presenter?.presentCuotas(response: response)
-                            } else {
-                                let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
-                                                                                   errorMessage: "Error Parsing".localized(),
-                                                                                   buttonTitle: "Ok".localized())
-                                self.presenter?.presentErrorAlert(response: response)
-                            }
+        worker?.getCuotas(
+            request: request,
+            successCompletion: { (cuotas) in
+                self.presenter?.hideSpinner()
+                if let cuotas = cuotas?.first {
+                    self.cuotasModelArray = cuotas.payerCosts
+                    let response = CuotasClean.Cuotas.Response.Success(cuotasModelArray: cuotas.payerCosts)
+                    self.presenter?.presentCuotas(response: response)
+                } else {
+                    let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
+                                                                       errorMessage: "Error Parsing".localized(),
+                                                                       buttonTitle: "Ok".localized())
+                    self.presenter?.presentErrorAlert(response: response)
+                }
         }) { (error) in
             self.presenter?.hideSpinner()
             let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
