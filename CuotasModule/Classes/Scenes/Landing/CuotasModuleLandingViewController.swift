@@ -48,7 +48,7 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
     // MARK: View lifecycle
     override  func viewDidLoad() {
         super.viewDidLoad()
-//        interactor?.setupUI(request: CuotasModuleLanding.Basic.Request())
+        interactor?.setupUI(request: CuotasModuleLanding.Basic.Request())
     }
 
     var didLayoutOnce: Bool = false
@@ -65,8 +65,8 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
     // MARK: Methods
     func displaySetupUI(viewModel: CuotasModuleLanding.Basic.ViewModel) {
         view.addTapAction(target: self, action: #selector(goToCuotasModule))
-//        titleLabel.text = viewModel.title
-//        subtitleLabel.text = viewModel.subtitle
+        titleLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
     }
 
     @objc

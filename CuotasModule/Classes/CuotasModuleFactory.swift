@@ -17,7 +17,7 @@ public class CuotasModuleFactory {
         CuotasModuleMainNavigationController()
     }
 
-    /// Func getExampleRootViewController for the CuotasModuleDigitalFactory
+    /// Func getExampleRootViewController for the CuotasModuleFactory
     public func getExampleRootViewController() -> UIViewController {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [CuotasModuleMainNavigationController()]
@@ -31,14 +31,7 @@ private class CuotasModuleMainNavigationController: UINavigationController {
     let viewController = CuotasModuleLandingViewController()
 
     init() {
-        viewController.tabBarItem = UITabBarItem(
-            title: "CuotasModule",
-            image: .none,
-            tag: 1
-        )
-
-        let bundleToUse = Utils.bundle(forClass: CuotasModuleLandingViewController.classForCoder())
-        super.init(nibName: "CuotasModuleLandingViewController", bundle: bundleToUse)
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)
@@ -50,6 +43,7 @@ private class CuotasModuleMainNavigationController: UINavigationController {
         super.viewDidLoad()
         extendedLayoutIncludesOpaqueBars = true
         navigationBar.isHidden = true
+        viewController.extendedLayoutIncludesOpaqueBars = true
         viewControllers = [viewController]
     }
 
