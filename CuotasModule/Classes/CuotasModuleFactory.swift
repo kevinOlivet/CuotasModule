@@ -31,7 +31,13 @@ private class CuotasModuleMainNavigationController: UINavigationController {
     let viewController = CuotasModuleLandingViewController()
 
     init() {
-        super.init(nibName: nil, bundle: nil)
+        viewController.tabBarItem = UITabBarItem(
+            title: "Cuotas",
+            image: UIImage(named: "tab_home"),
+            tag: 0
+        )
+        let bundleToUse = Utils.bundle(forClass: CuotasModuleLandingViewController.classForCoder())
+        super.init(nibName: "CuotasModuleLandingViewController", bundle: bundleToUse)
     }
 
     @available(*, unavailable)

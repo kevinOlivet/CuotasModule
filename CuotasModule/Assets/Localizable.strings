@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Jon Olivet on 3/29/20.
+  
+*/
+
+// MARK: - CuotasModule
+
+WELCOME_TITLE = "Welcome to the CuotasModuleLanding page";
+WELCOME_SUBTITLE = "Please tap anywhere to begin";

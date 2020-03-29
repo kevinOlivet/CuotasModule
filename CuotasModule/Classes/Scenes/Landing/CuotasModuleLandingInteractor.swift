@@ -21,8 +21,8 @@ class CuotasModuleLandingInteractor: CuotasModuleLandingBusinessLogic, CuotasMod
 
     func setupUI(request: CuotasModuleLanding.Basic.Request) {
         let response = CuotasModuleLanding.Basic.Response(
-            title: "Welcome to the CuotasModuleLanding page",
-            subtitle: "Please tap anywhere to begin"
+            title: "WELCOME_TITLE",
+            subtitle: "WELCOME_SUBTITLE"
         )
         presenter?.presentSetupUI(response: response)
     }
