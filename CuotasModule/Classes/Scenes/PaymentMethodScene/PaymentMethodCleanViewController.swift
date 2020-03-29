@@ -25,7 +25,7 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     var spinner: UIActivityIndicatorView!
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
 
-    let networker = Networker()
+    let networker = APICuotasModule()
 
     @IBOutlet weak var tableView: UITableView!
     

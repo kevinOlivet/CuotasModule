@@ -18,11 +18,6 @@ protocol APICuotasModuleProtocol {
                        success: @escaping (_ result: [BankSelectModel], Int) -> Void,
                        failure: @escaping (_ error: NTError, Int) -> Void)
 
-//    func getCuotas(amountEntered: Int,
-//                   selectedPaymentMethodId: String,
-//                   bankSelectedId: String,
-//                   successCompletion: @escaping ([CuotasModel]?) -> Void,
-//                   failureCompletion: @escaping (String) -> Void)
     func getCuotas(amountEntered: Int,
                    selectedPaymentMethodId: String,
                    bankSelectedId: String,

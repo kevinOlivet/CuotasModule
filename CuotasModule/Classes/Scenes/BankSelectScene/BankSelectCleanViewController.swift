@@ -24,7 +24,8 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     
     var spinner: UIActivityIndicatorView!
     var bankSelectModelArray = [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect]()
-    
+    let networker = APICuotasModule()
+
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Object lifecycle
@@ -118,7 +119,6 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BankSelectCell", for: indexPath) as! BankSelectCollectionViewCell
-        let networker = Networker()
 
         if bankSelectModelArray.count > 0 {
             let bankSelectModel = bankSelectModelArray[indexPath.row]

@@ -22,12 +22,12 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
   var worker: EnterAmountCleanWorker?
     
   var amountEnteredDataStore: Int = 0
-  
+  let validator: TextValidationProtocol = NumericValidation()
+
   // MARK: Do something
   
     func handleNextButtonTapped(amountEntered: String) {
         if !amountEntered.isEmpty {
-            let validator = NumericValidation.sharedInstance
             if validator.validateString(str: amountEntered) {
                 if let amountEntered = Int(amountEntered) {
                     amountEnteredDataStore = amountEntered
