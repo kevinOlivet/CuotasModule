@@ -1,14 +1,83 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
-
 use_frameworks!
 
-target 'CuotasModule_Example' do
-  pod 'CuotasModule', :path => '../'
+# Title generated from here: http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=LIBRARY_NAME
+
+###
+### --- CONFIG ---
+#  ██████╗██╗   ██╗ ██████╗ ████████╗ █████╗ ███████╗
+# ██╔════╝██║   ██║██╔═══██╗╚══██╔══╝██╔══██╗██╔════╝
+# ██║     ██║   ██║██║   ██║   ██║   ███████║███████╗
+# ██║     ██║   ██║██║   ██║   ██║   ██╔══██║╚════██║
+# ╚██████╗╚██████╔╝╚██████╔╝   ██║   ██║  ██║███████║
+#  ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝
+###
+
+#Use this variable to change pod install from local_pods, remote_pods, develop_pods
+pods_environment = "master" # <- HERE: Change this line, options are: 'local', develop', or 'master'
+
+###
+### --- METHODS ---
+###
+
+#Use this funcion to compile PRIVATE pods as development in local
+def local_pods
+  color(32) { puts "Installing Local Pods..." }
   pod 'Commons', :path => '../../Commons/'
+end
+
+#Use this funcion to compile develop pods as development in develop
+def develop_pods
+    color(32) { puts "Installing Develop Pods..." }
+    pod 'Commons', :git => 'git@github.com:kevinOlivet/Commons.git', :branch => 'develop'
+end
+
+#Use this funcion to compile master pods as development in master
+def master_pods
+    color(32) { puts "Installing Develop Pods..." }
+    pod 'Commons', :git => 'git@github.com:kevinOlivet/Commons.git', :branch => 'master'
+end
+
+###
+### --- Utils ---
+###
+
+
+###
+#Load commons methods.
+require './configurations/Commons.rb'
+#Load podfile extensions, for post-pre instalations, etc.
+require './configurations/Extensions.rb'
+
+
+color(32) {
+    puts "--------------------------------------------------------------------------------"
+    puts ""
+    puts " ██████╗██╗   ██╗ ██████╗ ████████╗ █████╗ ███████╗"
+    puts "██╔════╝██║   ██║██╔═══██╗╚══██╔══╝██╔══██╗██╔════╝"
+    puts "██║     ██║   ██║██║   ██║   ██║   ███████║███████╗"
+    puts "██║     ██║   ██║██║   ██║   ██║   ██╔══██║╚════██║"
+    puts "╚██████╗╚██████╔╝╚██████╔╝   ██║   ██║  ██║███████║"
+    puts " ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚══════╝"                                           
+    puts ""
+    puts "--------------------------------------------------------------------------------"
+    puts " Executing Pod Install For CuotasModule_Example"
+    puts "--------------------------------------------------------------------------------"
+}
+
+###
+### --- PROCESSING ---
+###
+
+target 'CuotasModule_Example' do
+  color(32) { puts "\nFetching Modules Pods..." }
+  pod 'CuotasModule', :path => '../'
+
+#Main Pods
+pod_selector(pods_environment)
 
   target 'CuotasModule_Tests' do
     inherit! :search_paths
-
-    
   end
 end

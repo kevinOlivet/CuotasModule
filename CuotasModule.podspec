@@ -10,7 +10,7 @@ Used to inject the Cuotas scene
   s.homepage         = 'https://japanart1234.wixsite.com/jonolivet/ios-developer-info'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Jon Olivet' => 'kevinolivet@yahoo.com' }
-  s.source           = { :path => '.' }
+  s.source           = { :git => 'ssh://git@github.com/kevinOlivet/CuotasModule.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '11.0'
   s.swift_version = '5.0'
