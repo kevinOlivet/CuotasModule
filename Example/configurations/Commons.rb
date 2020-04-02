@@ -1,8 +1,8 @@
 DEBUG_DOMAINS = [
-  'Commons', 'CuotasModule'
+  'BasicCommons', 'CuotasModule'
 ]
 
-IGNORE_ASSETS_DOMAINS = [ 'Commons' ]
+IGNORE_ASSETS_DOMAINS = [ 'BasicCommons' ]
 
 # Print text to console with this codes: Colors red = 31 green = 32 blue = 34
 def color(color=32)
