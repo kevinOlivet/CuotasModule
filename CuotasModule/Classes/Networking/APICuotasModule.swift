@@ -7,7 +7,7 @@
 //
 
 import Alamofire
-import Commons
+import BasicCommons
 
 protocol APICuotasModuleProtocol {
 

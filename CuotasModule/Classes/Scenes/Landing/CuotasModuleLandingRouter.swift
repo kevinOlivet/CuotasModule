@@ -5,7 +5,7 @@
 //  Copyright © 2018 Banco de Crédito e Inversiones. All rights reserved.
 //
 
-import Commons
+import BasicCommons
 
 @objc
 protocol CuotasModuleLandingRoutingLogic {

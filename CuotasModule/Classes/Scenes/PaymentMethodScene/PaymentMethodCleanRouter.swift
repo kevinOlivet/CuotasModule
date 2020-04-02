@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import Commons
+import BasicCommons
 
 @objc protocol PaymentMethodCleanRoutingLogic {
   //func routeToSomewhere(segue: UIStoryboardSegue?)

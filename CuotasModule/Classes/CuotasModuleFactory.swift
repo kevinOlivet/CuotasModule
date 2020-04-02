@@ -5,7 +5,7 @@
 //  Copyright © 2020 Jon Olivet. All rights reserved.
 //
 
-import Commons
+import BasicCommons
 
 /// Class for the CuotasModuleFactory
 public class CuotasModuleFactory {

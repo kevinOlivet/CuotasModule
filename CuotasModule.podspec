@@ -20,7 +20,7 @@ Used to inject the Cuotas scene
   'CuotasModule/Assets/**/*.{storyboard,xib,xcassets,html,json,pdf,otf,ttf,plist,strings}'
   ]
 
-  s.dependency 'Commons'
+  s.dependency 'BasicCommons'
 
   # s.script_phases = [
   #   {

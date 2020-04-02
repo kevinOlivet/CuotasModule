@@ -15,7 +15,7 @@ use_frameworks!
 ###
 
 #Use this variable to change pod install from local_pods, remote_pods, develop_pods
-pods_environment = "master" # <- HERE: Change this line, options are: 'local', develop', or 'master'
+pods_environment = "develop" # <- HERE: Change this line, options are: 'local', develop', or 'master'
 
 ###
 ### --- METHODS ---
@@ -24,19 +24,19 @@ pods_environment = "master" # <- HERE: Change this line, options are: 'local', d
 #Use this funcion to compile PRIVATE pods as development in local
 def local_pods
   color(32) { puts "Installing Local Pods..." }
-  pod 'Commons', :path => '../../Commons/'
+  pod 'BasicCommons', :path => '../../BasicCommons/'
 end
 
 #Use this funcion to compile develop pods as development in develop
 def develop_pods
     color(32) { puts "Installing Develop Pods..." }
-    pod 'Commons', :git => 'git@github.com:kevinOlivet/Commons.git', :branch => 'develop'
+    pod 'BasicCommons', :git => 'git@github.com:kevinOlivet/BasicCommons.git', :branch => 'develop'
 end
 
 #Use this funcion to compile master pods as development in master
 def master_pods
     color(32) { puts "Installing Develop Pods..." }
-    pod 'Commons', :git => 'git@github.com:kevinOlivet/Commons.git', :branch => 'master'
+    pod 'BasicCommons', :git => 'git@github.com:kevinOlivet/BasicCommons.git', :branch => 'master'
 end
 
 ###

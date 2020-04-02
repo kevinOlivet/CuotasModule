@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import Commons
+import BasicCommons
 
 protocol BankSelectCleanDisplayLogic: class {
     //    func displaySomething(viewModel: BankSelectClean.Something.ViewModel)
