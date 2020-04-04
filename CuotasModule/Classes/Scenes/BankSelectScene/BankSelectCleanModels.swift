@@ -18,6 +18,7 @@ enum BankSelectClean {
         enum Response {
             struct Success {
                 var bankSelectArray: [BankSelectModel]
+                var selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
                 var errorTitle: String
@@ -33,6 +34,7 @@ enum BankSelectClean {
             }
             struct Success {
                 var bankSelectArray: [DisplayBankSelect]
+                var selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
                 var errorTitle: String

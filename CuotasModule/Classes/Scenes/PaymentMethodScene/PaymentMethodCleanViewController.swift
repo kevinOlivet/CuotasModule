@@ -7,6 +7,8 @@
 //
 
 import BasicCommons
+import Alamofire
+import AlamofireImage
 
 protocol PaymentMethodCleanDisplayLogic: class {    
     func displaySpinner()
@@ -24,8 +26,6 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     
     var spinner: UIActivityIndicatorView!
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
-
-    let networker = APICuotasModule()
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -134,16 +134,13 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
         let paymentMethod = paymentMethodsToDisplay[indexPath.row]
         cell.paymentMethodNameLabel.text = paymentMethod.name
         
-        let localUrlString = paymentMethod.secureThumbnail
-        
-        networker.downloadImage(urlString: localUrlString) { (data) in
-            cell.paymentImageView.image = UIImage(data: data)
-        }
+        cell.paymentImageView.af_setImage(withURL: URL(string: paymentMethod.secureThumbnail)!)
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let request = PaymentMethodClean.PaymentMethodsDetails.Request(indexPath: indexPath)
+        let request = PaymentMethodClean.PaymentMethodsDetails.Request(indexPath: indexPath.row)
         interactor?.handleDidSelectRow(request: request)
     }
 }

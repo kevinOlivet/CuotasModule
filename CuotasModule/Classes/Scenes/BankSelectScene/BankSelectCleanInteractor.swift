@@ -35,25 +35,33 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
     func getBankSelect(request: BankSelectClean.BankSelect.Request) {
         presenter?.presentSpinner()
         
-        worker?.getBankSelect(request: request,
-                              successCompletion: { (receivedBankSelectModels) in
-            self.presenter?.hideSpinner()
-            if let receivedBankSelectModels = receivedBankSelectModels {
-                self.bankSelectModelArray = receivedBankSelectModels
-                let response = BankSelectClean.BankSelect.Response.Success(bankSelectArray: receivedBankSelectModels)
-                self.presenter?.presentBankSelects(response: response)
-            } else {
-                let response = BankSelectClean.BankSelect.Response.Failure(errorTitle: "Error".localized(),
-                                                                           errorMessage: "Error Parsing".localized(),
-                                                                           buttonTitle: "Cancel".localized())
-                self.presenter?.presentErrorAlert(response: response)
-            }
-            
+        worker?.getBankSelect(
+            request: request,
+            successCompletion: { (receivedBankSelectModels) in
+                self.presenter?.hideSpinner()
+                if let receivedBankSelectModels = receivedBankSelectModels {
+                    self.bankSelectModelArray = receivedBankSelectModels
+                    let response = BankSelectClean.BankSelect.Response.Success(
+                        bankSelectArray: receivedBankSelectModels,
+                        selectedPaymentMethod: self.selectedPaymentMethod
+                    )
+                    self.presenter?.presentBankSelects(response: response)
+                } else {
+                    let response = BankSelectClean.BankSelect.Response.Failure(
+                        errorTitle: "Error".localized(),
+                        errorMessage: "Error Parsing".localized(),
+                        buttonTitle: "Cancel".localized()
+                    )
+                    self.presenter?.presentErrorAlert(response: response)
+                }
+
         }, failureCompletion: { (error) in
             self.presenter?.hideSpinner()
-            let response = BankSelectClean.BankSelect.Response.Failure(errorTitle: "Error".localized(),
-                                                                       errorMessage: error,
-                                                                       buttonTitle: "Cancel".localized())
+            let response = BankSelectClean.BankSelect.Response.Failure(
+                errorTitle: "Error".localized(),
+                errorMessage: error,
+                buttonTitle: "Cancel".localized()
+            )
             self.presenter?.presentErrorAlert(response: response)
         })
     }
@@ -61,15 +69,19 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
     func handleDidSelectItem(request: BankSelectClean.BankSelectDetails.Request) {
         selectedBankSelect = (bankSelectModelArray.count > 0) ? bankSelectModelArray[request.indexPath.row] : nil
         if let amountEntered = amountEntered, let selectedPaymentMethod = selectedPaymentMethod {
-            let response = BankSelectClean.BankSelectDetails.Response.Success(amountEntered: amountEntered,
-                                                                              selectedPaymentMethod: selectedPaymentMethod,
-                                                                              bankSelected: selectedBankSelect)
+            let response = BankSelectClean.BankSelectDetails.Response.Success(
+                amountEntered: amountEntered,
+                selectedPaymentMethod: selectedPaymentMethod,
+                bankSelected: selectedBankSelect
+            )
             presenter?.showCuotas(response: response)
         } else {
             // reusing the BankSelect.Response instead of BankSelectDetails.Response
-            let response = BankSelectClean.BankSelect.Response.Failure(errorTitle: "Error".localized(),
-                                                                              errorMessage: "Error Parsing".localized(),
-                                                                              buttonTitle: "Cancel".localized())
+            let response = BankSelectClean.BankSelect.Response.Failure(
+                errorTitle: "Error".localized(),
+                errorMessage: "Error Parsing".localized(),
+                buttonTitle: "Cancel".localized()
+            )
             presenter?.presentErrorAlert(response: response)
         }
         

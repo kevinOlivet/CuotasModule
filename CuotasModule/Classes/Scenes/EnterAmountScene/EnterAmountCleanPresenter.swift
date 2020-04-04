@@ -31,23 +31,29 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
     }
     
     func presentEnterAmountAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                       errorMessage: response.errorMessage,
-                                                                       buttonTitle: response.buttonTitle)
+        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(
+            errorTitle: response.errorTitle,
+            errorMessage: response.errorMessage,
+            buttonTitle: response.buttonTitle
+        )
         viewController?.displayEnterAmountAlert(viewModel: viewModel)
     }
     
     func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.TotalSuccess(successTitle: response.successTitle,
-                                                                      successMessage: response.successMessage,
-                                                                      buttonTitle: response.buttonTitle)
+        let viewModel = EnterAmountClean.EnterAmount.ViewModel.TotalSuccess(
+            successTitle: response.successTitle,
+            successMessage: response.successMessage,
+            buttonTitle: response.buttonTitle
+        )
         viewController?.displayCatchCuotaAlert(viewModel: viewModel)
     }
     
     func presentNumberToUseAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                       errorMessage: response.errorMessage,
-                                                                       buttonTitle: response.buttonTitle)
+        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(
+            errorTitle: response.errorTitle,
+            errorMessage: response.errorMessage,
+            buttonTitle: response.buttonTitle
+        )
         viewController?.displayNumberToUseAlert(viewModel: viewModel)
     }
 

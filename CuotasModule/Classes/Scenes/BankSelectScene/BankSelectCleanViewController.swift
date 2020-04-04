@@ -7,9 +7,10 @@
 //
 
 import BasicCommons
+import Alamofire
+import AlamofireImage
 
 protocol BankSelectCleanDisplayLogic: class {
-    //    func displaySomething(viewModel: BankSelectClean.Something.ViewModel)
     func displaySpinner()
     func hideSpinner()
     func fetchBankSelect()
@@ -24,7 +25,7 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     
     var spinner: UIActivityIndicatorView!
     var bankSelectModelArray = [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect]()
-    let networker = APICuotasModule()
+    var selectedPaymentMethod: PaymentMethodModel!
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -97,14 +98,17 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     
     func displayBankSelects(viewModel: BankSelectClean.BankSelect.ViewModel.Success) {
         bankSelectModelArray = viewModel.bankSelectArray
+        selectedPaymentMethod = viewModel.selectedPaymentMethod
         collectionView.reloadData()
     }
     
     func displayErrorAlert(viewModel: BankSelectClean.BankSelect.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+        Alerts.dismissableAlert(
+            title: viewModel.errorTitle,
+            message: viewModel.errorMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
     func showCuotas(viewModel: BankSelectClean.BankSelectDetails.ViewModel.Success) {
@@ -120,18 +124,14 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BankSelectCell", for: indexPath) as! BankSelectCollectionViewCell
 
-        if bankSelectModelArray.count > 0 {
+        if !bankSelectModelArray.isEmpty {
             let bankSelectModel = bankSelectModelArray[indexPath.row]
             cell.bankNameLabel.text = bankSelectModel.name
-            networker.downloadImage(urlString: bankSelectModel.secureThumbnail) { (data) in
-                cell.bankSelectImageView.image = UIImage(data: data) ?? UIImage(named: "noImage")
-            }
+            cell.bankSelectImageView.af_setImage(withURL: URL(string: bankSelectModel.secureThumbnail)!)
         } else {
             if let selectedPaymentMethod = interactor?.selectedPaymentMethod {
                 cell.bankNameLabel.text = selectedPaymentMethod.name
-                networker.downloadImage(urlString: selectedPaymentMethod.secureThumbnail) { (data) in
-                    cell.bankSelectImageView.image = UIImage(data: data) ?? UIImage(named: "noImage")
-                }
+                cell.bankSelectImageView.af_setImage(withURL: URL(string: selectedPaymentMethod.secureThumbnail)!)
             }
         }
         return cell

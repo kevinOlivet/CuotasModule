@@ -34,7 +34,7 @@ enum PaymentMethodClean {
     
     enum PaymentMethodsDetails {
         struct Request {
-            var indexPath: IndexPath
+            var indexPath: Int
         }
         
         enum Response {

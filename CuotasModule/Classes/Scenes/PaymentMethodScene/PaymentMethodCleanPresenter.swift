@@ -33,40 +33,45 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
     }
     
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                                   errorMessage: response.errorMessage,
-                                                                                   buttonTitle: response.buttonTitle)
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
+            errorTitle: response.errorTitle,
+            errorMessage: response.errorMessage,
+            buttonTitle: response.buttonTitle
+        )
         
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     
     func presentPaymentMethods(response: PaymentMethodClean.PaymentMethods.Response) {
         for method in response.paymentMethodArray {
-            if method.paymentTypeId == "credit_card" {
-                let viewModel = PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess(name: method.name,
-                                                                                                                 paymentId: method.id,
-                                                                                                                 secureThumbnail: method.secureThumbnail,
-                                                                                                                 paymentTypeId: method.paymentTypeId,
-                                                                                                                 minAllowedAmount: method.minAllowedAmount,
-                                                                                                                 maxAllowedAmount: method.maxAllowedAmount)
-                self.paymentMethodArray.append(viewModel)
-                
-            }
+            let viewModel = PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess(
+                name: method.name,
+                paymentId: method.id,
+                secureThumbnail: method.secureThumbnail,
+                paymentTypeId: method.paymentTypeId,
+                minAllowedAmount: method.minAllowedAmount,
+                maxAllowedAmount: method.maxAllowedAmount
+            )
+            self.paymentMethodArray.append(viewModel)
         }
         let viewModelArray = PaymentMethodClean.PaymentMethods.ViewModel(displayPaymentMethodViewModelArray: paymentMethodArray)
         viewController?.displayPaymentMethodArray(viewModel: viewModelArray)
     }
     
     func showBankSelect(response: PaymentMethodClean.PaymentMethodsDetails.Response.Success) {
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success(amountEntered: response.amountEntered,
-                                                                                   selectedPaymentMethod: response.selectedPaymentMethod)
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success(
+            amountEntered: response.amountEntered,
+            selectedPaymentMethod: response.selectedPaymentMethod
+        )
         viewController?.showBankSelect(viewModel: viewModel)
     }
     
     func presentWrongAmountAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                                   errorMessage: response.errorMessage,
-                                                                                   buttonTitle: response.buttonTitle)
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
+            errorTitle: response.errorTitle,
+            errorMessage: response.errorMessage,
+            buttonTitle: response.buttonTitle
+        )
         viewController?.displayWrongAmountAlert(viewModel: viewModel)
     }
 }
