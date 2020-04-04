@@ -29,17 +29,21 @@ class CuotasCleanPresenter: CuotasCleanPresentationLogic {
     }
     
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure) {
-        let viewModel = CuotasClean.Cuotas.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                            errorMessage: response.errorMessage,
-                                                            buttonTitle: response.buttonTitle)
+        let viewModel = CuotasClean.Cuotas.ViewModel.Failure(
+            errorTitle: response.errorTitle,
+            errorMessage: response.errorMessage,
+            buttonTitle: response.buttonTitle
+        )
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     
     func presentCuotas(response: CuotasClean.Cuotas.Response.Success) {
         var displayCuotasArray: [CuotasClean.Cuotas.ViewModel.DisplayCuota] = []
         for displayCuota in response.cuotasModelArray {
-            let cuota = CuotasClean.Cuotas.ViewModel.DisplayCuota(installments: "Installments: \(String(displayCuota.installments))".localized(),
-                                                                  recommendedMessage: displayCuota.recommendedMessage)
+            let cuota = CuotasClean.Cuotas.ViewModel.DisplayCuota(
+                installments: "Installments: \(String(displayCuota.installments))".localized,
+                recommendedMessage: displayCuota.recommendedMessage
+            )
             displayCuotasArray.append(cuota)
         }
         let viewModel = CuotasClean.Cuotas.ViewModel.Success(cuotasModelArray: displayCuotasArray)

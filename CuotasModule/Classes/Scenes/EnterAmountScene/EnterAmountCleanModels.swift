@@ -10,9 +10,24 @@ import UIKit
 
 enum EnterAmountClean {
   // MARK: Use cases
+
+    enum Texts {
+        struct Request {}
+        struct Response {
+            let title: String
+            let enterAmountLabel: String
+            let nextButton: String
+        }
+        struct ViewModel {
+            let title: String
+            let enterAmountLabel: String
+            let nextButton: String
+        }
+    }
   
   enum EnterAmount {
     struct Request {
+        let amountEntered: String
     }
     struct Response {
         struct Success {

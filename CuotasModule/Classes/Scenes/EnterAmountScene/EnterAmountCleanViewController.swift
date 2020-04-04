@@ -9,14 +9,12 @@
 import BasicCommons
 
 protocol EnterAmountCleanDisplayLogic: class {
-    func setUpUI()
+    func displaySetUpUI(viewModel: EnterAmountClean.Texts.ViewModel)
     func catchCuota(notification: Notification)
     func setTextFieldWithRegexNumber(numberToUse: String)
     func showPaymentMethod(amountEntered: Int)
-    func displayEnterAmountAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure)
     func displayCatchCuotaAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.TotalSuccess)
-    func displayNumberToUseAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure)
-    func nextButtonTapped(_ sender: Any)
+    func displayInputAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure)
 }
 
 public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanDisplayLogic {
@@ -71,7 +69,8 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        interactor?.prepareSetUpUI(request: EnterAmountClean.Texts.Request())
+        setupNotiications()
     }
     
     
@@ -80,16 +79,20 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     }
     
     // MARK: Do something
-    
-    func setUpUI() {
-        self.title = "Amount".localized()
-        enterAmountLabel.text = "Enter amount in Chilean Pesos".localized()
-        nextButton.titleLabel?.text = "Next".localized()
-        
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "cuotasFinishedNotification"),
-                                               object: nil,
-                                               queue: nil,
-                                               using: catchCuota)
+
+    func displaySetUpUI(viewModel: EnterAmountClean.Texts.ViewModel) {
+        title = viewModel.title
+        enterAmountLabel.text = viewModel.enterAmountLabel
+        nextButton.titleLabel?.text = viewModel.nextButton
+    }
+
+    private func setupNotiications() {
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name(rawValue: "cuotasFinishedNotification"),
+            object: nil,
+            queue: nil,
+            using: catchCuota
+        )
     }
     
     func catchCuota(notification: Notification) {
@@ -103,32 +106,29 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     func showPaymentMethod(amountEntered: Int) {
         router?.routeToPaymentMethod()
     }
-    
-    // Replace messages with viewModels
-    func displayEnterAmountAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
-    }
-    
+
     func displayCatchCuotaAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.TotalSuccess) {
         router?.routeToRootViewController()
-        Alerts.dismissableAlert(title: viewModel.successTitle,
-                                message: viewModel.successMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+        Alerts.dismissableAlert(
+            title: viewModel.successTitle,
+            message: viewModel.successMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
-    func displayNumberToUseAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+    func displayInputAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure) {
+        Alerts.dismissableAlert(
+            title: viewModel.errorTitle,
+            message: viewModel.errorMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         guard let amountEntered = enterAmountTextField.text else  { return }
-        interactor?.handleNextButtonTapped(amountEntered: amountEntered)
+        let request = EnterAmountClean.EnterAmount.Request(amountEntered: amountEntered)
+        interactor?.handleNextButtonTapped(request: request)
     }
 }

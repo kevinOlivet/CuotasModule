@@ -42,9 +42,9 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                 self.presenter?.presentPaymentMethods(response: response)
             } else {
                 let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-                    errorTitle: "Error".localized(),
-                    errorMessage: "Error Parsing".localized(),
-                    buttonTitle: "Cancel".localized()
+                    errorTitle: "Error".localized,
+                    errorMessage: "Error Parsing".localized,
+                    buttonTitle: "Cancel".localized
                 )
                 self.presenter?.presentErrorAlert(response: response)
             }
@@ -52,9 +52,9 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
         }) { (error) in
             self.presenter?.hideSpinner()
             let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-                errorTitle: "Error".localized(),
+                errorTitle: "Error".localized,
                 errorMessage: error,
-                buttonTitle: "Cancel".localized()
+                buttonTitle: "Cancel".localized
             )
             self.presenter?.presentErrorAlert(response: response)
         }
@@ -72,12 +72,12 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                 presenter?.showBankSelect(response: response)
             } else {
                 
-                let errorMessage = "\(selectedPaymentMethod.name) has a minimum amount of \(String(format: "%.2f", selectedPaymentMethod.minAllowedAmount)) and a maximum ammount of \(String(format: "%.2f", selectedPaymentMethod.maxAllowedAmount))".localized()
+                let errorMessage = "\(selectedPaymentMethod.name) has a minimum amount of \(String(format: "%.2f", selectedPaymentMethod.minAllowedAmount)) and a maximum ammount of \(String(format: "%.2f", selectedPaymentMethod.maxAllowedAmount))".localized
                 
                 let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-                    errorTitle: "Choose another".localized(),
+                    errorTitle: "Choose another".localized,
                     errorMessage: errorMessage,
-                    buttonTitle: "Ok".localized()
+                    buttonTitle: "Ok".localized
                 )
                 presenter?.presentWrongAmountAlert(response: response)
             }

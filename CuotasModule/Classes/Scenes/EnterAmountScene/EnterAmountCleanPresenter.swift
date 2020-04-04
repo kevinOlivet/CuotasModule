@@ -9,11 +9,12 @@
 import UIKit
 
 protocol EnterAmountCleanPresentationLogic {
+    func presentSetUpUI(response: EnterAmountClean.Texts.Response)
     func setTextFieldWithRegexNumber(numberToUse: String)
     func showPaymentMethod(amountEntered: Int)
-    func presentEnterAmountAlert(response: EnterAmountClean.EnterAmount.Response.Error)
+
     func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success)
-    func presentNumberToUseAlert(response: EnterAmountClean.EnterAmount.Response.Error)
+    func presentInputAlert(response: EnterAmountClean.EnterAmount.Response.Error)
 }
 
 class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
@@ -21,6 +22,14 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
     weak var viewController: EnterAmountCleanDisplayLogic?
     
     // MARK: Do something
+    func presentSetUpUI(response: EnterAmountClean.Texts.Response) {
+        let viewModel = EnterAmountClean.Texts.ViewModel(
+            title: response.title,
+            enterAmountLabel: response.enterAmountLabel.localized,
+            nextButton: response.nextButton.localized
+        )
+        viewController?.displaySetUpUI(viewModel: viewModel)
+    }
     
     func setTextFieldWithRegexNumber(numberToUse: String) {
         viewController?.setTextFieldWithRegexNumber(numberToUse: numberToUse)
@@ -30,31 +39,22 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
         viewController?.showPaymentMethod(amountEntered: amountEntered)
     }
     
-    func presentEnterAmountAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
-        )
-        viewController?.displayEnterAmountAlert(viewModel: viewModel)
-    }
-    
     func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success) {
         let viewModel = EnterAmountClean.EnterAmount.ViewModel.TotalSuccess(
-            successTitle: response.successTitle,
-            successMessage: response.successMessage,
-            buttonTitle: response.buttonTitle
+            successTitle: response.successTitle.localized,
+            successMessage: response.successMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
         viewController?.displayCatchCuotaAlert(viewModel: viewModel)
     }
     
-    func presentNumberToUseAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
+    func presentInputAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
         let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
-        viewController?.displayNumberToUseAlert(viewModel: viewModel)
+        viewController?.displayInputAlert(viewModel: viewModel)
     }
 
 }

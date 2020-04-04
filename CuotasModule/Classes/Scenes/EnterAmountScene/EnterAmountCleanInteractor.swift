@@ -9,7 +9,8 @@
 import BasicCommons
 
 protocol EnterAmountCleanBusinessLogic {
-    func handleNextButtonTapped(amountEntered: String)
+    func prepareSetUpUI(request: EnterAmountClean.Texts.Request)
+    func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request)
     func catchCuota(notification: Notification)
 }
 
@@ -25,32 +26,40 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
     let validator: TextValidationProtocol = NumericValidation()
 
     // MARK: Do something
+    func prepareSetUpUI(request: EnterAmountClean.Texts.Request) {
+        let response = EnterAmountClean.Texts.Response(
+            title: "Amount",
+            enterAmountLabel: "Enter amount in Chilean Pesos",
+            nextButton: "Next"
+        )
+        presenter?.presentSetUpUI(response: response)
+    }
 
-    func handleNextButtonTapped(amountEntered: String) {
-        if !amountEntered.isEmpty {
-            if validator.validateString(str: amountEntered) {
-                if let amountEntered = Int(amountEntered) {
+    func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request) {
+        if !request.amountEntered.isEmpty {
+            if validator.validateString(str: request.amountEntered) {
+                if let amountEntered = Int(request.amountEntered) {
                     amountEnteredDataStore = amountEntered
                     presenter?.showPaymentMethod(amountEntered: amountEntered)
                 }
             } else {
-                let numberToUse = validator.getMatchingString(str: amountEntered)
+                let numberToUse = validator.getMatchingString(str: request.amountEntered)
                 presenter?.setTextFieldWithRegexNumber(numberToUse: numberToUse!)
                 
                 let response = EnterAmountClean.EnterAmount.Response.Error(
-                    errorTitle: "Invalid number".localized(),
+                    errorTitle: "Invalid number",
                     errorMessage: validator.validationMessage,
-                    buttonTitle: "Ok".localized()
+                    buttonTitle: "Ok"
                 )
-                presenter?.presentNumberToUseAlert(response: response)
+                presenter?.presentInputAlert(response: response)
             }
         } else {
             let response = EnterAmountClean.EnterAmount.Response.Error(
-                errorTitle: "Enter amount".localized(),
-                errorMessage: "You need to enter an amount".localized(),
-                buttonTitle: "Ok".localized()
+                errorTitle: "Enter amount",
+                errorMessage: "You need to enter an amount",
+                buttonTitle: "Ok"
             )
-            presenter?.presentEnterAmountAlert(response: response)
+            presenter?.presentInputAlert(response: response)
         }
     }
     
@@ -58,9 +67,9 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
         guard let userInfo = notification.userInfo,
             let finalMessage = userInfo["finalMessage"] as? String else { return }
         let response = EnterAmountClean.EnterAmount.Response.Success(
-            successTitle: "Finished".localized(),
+            successTitle: "Finished",
             successMessage: finalMessage,
-            buttonTitle: "Ok".localized()
+            buttonTitle: "Ok"
         )
         presenter?.presentCatchCuotaAlert(response: response)
     }

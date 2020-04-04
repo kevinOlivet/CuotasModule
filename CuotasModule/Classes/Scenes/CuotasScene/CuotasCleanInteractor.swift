@@ -43,16 +43,20 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
                     let response = CuotasClean.Cuotas.Response.Success(cuotasModelArray: cuotas.payerCosts)
                     self.presenter?.presentCuotas(response: response)
                 } else {
-                    let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
-                                                                       errorMessage: "Error Parsing".localized(),
-                                                                       buttonTitle: "Ok".localized())
+                    let response = CuotasClean.Cuotas.Response.Failure(
+                        errorTitle: "Error".localized,
+                        errorMessage: "Error Parsing".localized,
+                        buttonTitle: "Ok".localized)
+
                     self.presenter?.presentErrorAlert(response: response)
                 }
         }) { (error) in
             self.presenter?.hideSpinner()
-            let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
-                                                               errorMessage: error,
-                                                               buttonTitle: "Ok".localized())
+            let response = CuotasClean.Cuotas.Response.Failure(
+                errorTitle: "Error".localized,
+                errorMessage: error,
+                buttonTitle: "Ok".localized
+            )
             self.presenter?.presentErrorAlert(response: response)
         }
     }
@@ -68,9 +72,11 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
                                             object: nil,
                                             userInfo: ["finalMessage": finalMessage])
         } else {
-            let response = CuotasClean.Cuotas.Response.Failure(errorTitle: "Error".localized(),
-                                                               errorMessage: "Error Parsing".localized(),
-                                                               buttonTitle: "Ok".localized())
+            let response = CuotasClean.Cuotas.Response.Failure(
+                errorTitle: "Error".localized,
+                errorMessage: "Error Parsing".localized,
+                buttonTitle: "Ok".localized
+            )
             self.presenter?.presentErrorAlert(response: response)
         }
     }

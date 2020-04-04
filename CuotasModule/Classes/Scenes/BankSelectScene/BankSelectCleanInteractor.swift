@@ -48,9 +48,9 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
                     self.presenter?.presentBankSelects(response: response)
                 } else {
                     let response = BankSelectClean.BankSelect.Response.Failure(
-                        errorTitle: "Error".localized(),
-                        errorMessage: "Error Parsing".localized(),
-                        buttonTitle: "Cancel".localized()
+                        errorTitle: "Error".localized,
+                        errorMessage: "Error Parsing".localized,
+                        buttonTitle: "Cancel".localized
                     )
                     self.presenter?.presentErrorAlert(response: response)
                 }
@@ -58,9 +58,9 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
         }, failureCompletion: { (error) in
             self.presenter?.hideSpinner()
             let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error".localized(),
+                errorTitle: "Error".localized,
                 errorMessage: error,
-                buttonTitle: "Cancel".localized()
+                buttonTitle: "Cancel".localized
             )
             self.presenter?.presentErrorAlert(response: response)
         })
@@ -78,9 +78,9 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
         } else {
             // reusing the BankSelect.Response instead of BankSelectDetails.Response
             let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error".localized(),
-                errorMessage: "Error Parsing".localized(),
-                buttonTitle: "Cancel".localized()
+                errorTitle: "Error".localized,
+                errorMessage: "Error Parsing".localized,
+                buttonTitle: "Cancel".localized
             )
             presenter?.presentErrorAlert(response: response)
         }
