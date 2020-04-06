@@ -43,7 +43,7 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                 for item in receivedPaymentMethods where item.paymentTypeId == "credit_card" {
                     self.paymentMethodArray.append(item)
                 }
-                let response = PaymentMethodClean.PaymentMethods.Response(paymentMethodArray: receivedPaymentMethods)
+                let response = PaymentMethodClean.PaymentMethods.Response(paymentMethodArray: self.paymentMethodArray)
                 self.presenter?.presentPaymentMethods(response: response)
             } else {
                 let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(

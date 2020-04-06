@@ -7,10 +7,4 @@
 
 import Foundation
 
-class CuotasModuleLandingWorker {
-
-//     func fetchSomething(completionHandler: @escaping ([SomethingDecodable]?, Error?) -> Void) {
-//
-//    }
-
-}
+class CuotasModuleLandingWorker {}

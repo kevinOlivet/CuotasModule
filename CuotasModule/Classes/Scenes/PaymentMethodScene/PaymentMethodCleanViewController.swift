@@ -72,8 +72,6 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageCache = AutoPurgingImageCache()
-        imageCache.removeAllImages()
         interactor?.prepareSetUpUI(request: PaymentMethodClean.Texts.Request())
         interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
     }
