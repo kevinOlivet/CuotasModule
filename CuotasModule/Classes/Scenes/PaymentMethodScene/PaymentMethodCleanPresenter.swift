@@ -9,11 +9,11 @@
 import UIKit
 
 protocol PaymentMethodCleanPresentationLogic {
+    func presentSetupUI(response: PaymentMethodClean.Texts.Response)
     func presentSpinner()
     func hideSpinner()
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure)
     func presentPaymentMethods(response: PaymentMethodClean.PaymentMethods.Response)
-    
     func showBankSelect(response: PaymentMethodClean.PaymentMethodsDetails.Response.Success)
     func presentWrongAmountAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure)
 }
@@ -22,7 +22,12 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
     weak var viewController: PaymentMethodCleanDisplayLogic?
     var paymentMethodArray = [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess]()
     
-    // MARK: Do something
+    // MARK: Methods
+    func presentSetupUI(response: PaymentMethodClean.Texts.Response) {
+        let title = "$\(String(response.title))"
+        let viewModel = PaymentMethodClean.Texts.ViewModel(title: title)
+        viewController?.displaySetupUI(viewModel: viewModel)
+    }
     
     func presentSpinner() {
         viewController?.displaySpinner()
@@ -34,11 +39,10 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
     
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
         let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
-        
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     
@@ -68,9 +72,9 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
     
     func presentWrongAmountAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
         let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
         viewController?.displayWrongAmountAlert(viewModel: viewModel)
     }

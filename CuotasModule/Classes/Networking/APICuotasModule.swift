@@ -29,7 +29,7 @@ class APICuotasModule: AuthenticatedAPI, APICuotasModuleProtocol {
 
     // PaymentMethod
     func getPaymentMethods(success: @escaping (_ result: [PaymentMethodModel], Int) -> Void,
-                          failure: @escaping (_ error: NTError, Int) -> Void) {
+                           failure: @escaping (_ error: NTError, Int) -> Void) {
 
         let url = Configuration.Api.paymentMethods
 

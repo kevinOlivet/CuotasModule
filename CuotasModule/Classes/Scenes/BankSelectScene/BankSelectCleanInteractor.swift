@@ -48,9 +48,9 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
                     self.presenter?.presentBankSelects(response: response)
                 } else {
                     let response = BankSelectClean.BankSelect.Response.Failure(
-                        errorTitle: "Error".localized,
-                        errorMessage: "Error Parsing".localized,
-                        buttonTitle: "Cancel".localized
+                        errorTitle: "Error",
+                        errorMessage: "Error Parsing",
+                        buttonTitle: "Cancel"
                     )
                     self.presenter?.presentErrorAlert(response: response)
                 }
@@ -58,9 +58,9 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
         }, failureCompletion: { (error) in
             self.presenter?.hideSpinner()
             let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error".localized,
-                errorMessage: error,
-                buttonTitle: "Cancel".localized
+                errorTitle: "Error",
+                errorMessage: "Service Error",
+                buttonTitle: "Cancel"
             )
             self.presenter?.presentErrorAlert(response: response)
         })
@@ -76,11 +76,10 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
             )
             presenter?.showCuotas(response: response)
         } else {
-            // reusing the BankSelect.Response instead of BankSelectDetails.Response
             let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error".localized,
-                errorMessage: "Error Parsing".localized,
-                buttonTitle: "Cancel".localized
+                errorTitle: "Error",
+                errorMessage: "Error with amount",
+                buttonTitle: "Cancel"
             )
             presenter?.presentErrorAlert(response: response)
         }

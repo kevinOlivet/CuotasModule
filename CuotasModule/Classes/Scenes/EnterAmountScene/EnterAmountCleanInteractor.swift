@@ -11,7 +11,7 @@ import BasicCommons
 protocol EnterAmountCleanBusinessLogic {
     func prepareSetUpUI(request: EnterAmountClean.Texts.Request)
     func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request)
-    func catchCuota(notification: Notification)
+    func catchCuota(request: EnterAmountClean.CatchNotification.Request)
 }
 
 public protocol EnterAmountCleanDataStore {
@@ -40,13 +40,14 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
             if validator.validateString(str: request.amountEntered) {
                 if let amountEntered = Int(request.amountEntered) {
                     amountEnteredDataStore = amountEntered
-                    presenter?.showPaymentMethod(amountEntered: amountEntered)
+                    presenter?.presentPaymentMethod()
                 }
             } else {
                 let numberToUse = validator.getMatchingString(str: request.amountEntered)
-                presenter?.setTextFieldWithRegexNumber(numberToUse: numberToUse!)
+                let numberResponse = EnterAmountClean.Regex.Response(numberToUse: numberToUse!)
+                presenter?.presentTextFieldWithRegexNumber(response: numberResponse)
                 
-                let response = EnterAmountClean.EnterAmount.Response.Error(
+                let response = EnterAmountClean.Errors.Response(
                     errorTitle: "Invalid number",
                     errorMessage: validator.validationMessage,
                     buttonTitle: "Ok"
@@ -54,7 +55,7 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
                 presenter?.presentInputAlert(response: response)
             }
         } else {
-            let response = EnterAmountClean.EnterAmount.Response.Error(
+            let response = EnterAmountClean.Errors.Response(
                 errorTitle: "Enter amount",
                 errorMessage: "You need to enter an amount",
                 buttonTitle: "Ok"
@@ -63,10 +64,10 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
         }
     }
     
-    func catchCuota(notification: Notification) {
-        guard let userInfo = notification.userInfo,
+    func catchCuota(request: EnterAmountClean.CatchNotification.Request) {
+        guard let userInfo = request.notification.userInfo,
             let finalMessage = userInfo["finalMessage"] as? String else { return }
-        let response = EnterAmountClean.EnterAmount.Response.Success(
+        let response = EnterAmountClean.CatchNotification.Response(
             successTitle: "Finished",
             successMessage: finalMessage,
             buttonTitle: "Ok"

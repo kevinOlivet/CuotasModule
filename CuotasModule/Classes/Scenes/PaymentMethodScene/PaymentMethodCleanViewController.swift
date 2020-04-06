@@ -10,7 +10,8 @@ import BasicCommons
 import Alamofire
 import AlamofireImage
 
-protocol PaymentMethodCleanDisplayLogic: class {    
+protocol PaymentMethodCleanDisplayLogic: class {
+    func displaySetupUI(viewModel: PaymentMethodClean.Texts.ViewModel)
     func displaySpinner()
     func hideSpinner()
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure)
@@ -71,22 +72,16 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
-        fetchPaymentMethods()
+        let imageCache = AutoPurgingImageCache()
+        imageCache.removeAllImages()
+        interactor?.prepareSetUpUI(request: PaymentMethodClean.Texts.Request())
+        interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
     }
     
-    // MARK: Do something
+    // MARK: Methods
     
-    func setUpUI() {
-        if let amountEntered = interactor?.amountEntered {
-            self.title = "$\(String(amountEntered))"
-        }
-    }
-    
-    func fetchPaymentMethods() {
-        // Where should amountEntered come from really?
-        let request = PaymentMethodClean.PaymentMethods.Request(amountEntered: interactor!.amountEntered!)
-        interactor?.getPaymentMethods(request: request)
+    func displaySetupUI(viewModel: PaymentMethodClean.Texts.ViewModel) {
+        self.title = viewModel.title
     }
     
     func displaySpinner() {
@@ -103,17 +98,21 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     }
     
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+        Alerts.dismissableAlert(
+            title: viewModel.errorTitle,
+            message: viewModel.errorMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
     func displayWrongAmountAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+        Alerts.dismissableAlert(
+            title: viewModel.errorTitle,
+            message: viewModel.errorMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
     func showBankSelect(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success) {
@@ -127,8 +126,10 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentMethodCell",
-                                                 for: indexPath) as! PaymentMethodTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "PaymentMethodCell",
+            for: indexPath
+            ) as! PaymentMethodTableViewCell
         
         // Change to ViewModel
         let paymentMethod = paymentMethodsToDisplay[indexPath.row]

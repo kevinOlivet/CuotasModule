@@ -29,7 +29,7 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
     var bankSelected: BankSelectModel?
     var cuotasModelArray: [CuotasResult.PayerCost]?
     
-    // MARK: Do something
+    // MARK: Methods
     
     func getCuotas(request: CuotasClean.Cuotas.Request) {
         presenter?.presentSpinner()
@@ -44,18 +44,18 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
                     self.presenter?.presentCuotas(response: response)
                 } else {
                     let response = CuotasClean.Cuotas.Response.Failure(
-                        errorTitle: "Error".localized,
-                        errorMessage: "Error Parsing".localized,
-                        buttonTitle: "Ok".localized)
+                        errorTitle: "Error",
+                        errorMessage: "Error Parsing",
+                        buttonTitle: "Ok")
 
                     self.presenter?.presentErrorAlert(response: response)
                 }
         }) { (error) in
             self.presenter?.hideSpinner()
             let response = CuotasClean.Cuotas.Response.Failure(
-                errorTitle: "Error".localized,
-                errorMessage: error,
-                buttonTitle: "Ok".localized
+                errorTitle: "Error",
+                errorMessage: "Service Error",
+                buttonTitle: "Ok"
             )
             self.presenter?.presentErrorAlert(response: response)
         }
@@ -73,9 +73,9 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
                                             userInfo: ["finalMessage": finalMessage])
         } else {
             let response = CuotasClean.Cuotas.Response.Failure(
-                errorTitle: "Error".localized,
-                errorMessage: "Error Parsing".localized,
-                buttonTitle: "Ok".localized
+                errorTitle: "Error",
+                errorMessage: "Error Parsing",
+                buttonTitle: "Ok"
             )
             self.presenter?.presentErrorAlert(response: response)
         }

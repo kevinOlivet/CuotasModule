@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class CuotasCleanWorker {
     

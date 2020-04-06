@@ -18,7 +18,7 @@ protocol CuotasCleanPresentationLogic {
 class CuotasCleanPresenter: CuotasCleanPresentationLogic {
     weak var viewController: CuotasCleanDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Methods
     
     func presentSpinner() {
         viewController?.displaySpinner()
@@ -30,9 +30,9 @@ class CuotasCleanPresenter: CuotasCleanPresentationLogic {
     
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure) {
         let viewModel = CuotasClean.Cuotas.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
         viewController?.displayErrorAlert(viewModel: viewModel)
     }

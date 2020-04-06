@@ -49,9 +49,9 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
     
     func presentErrorAlert(response: BankSelectClean.BankSelect.Response.Failure) {
         let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(
-            errorTitle: response.errorTitle,
-            errorMessage: response.errorMessage,
-            buttonTitle: response.buttonTitle
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
         )
         viewController?.displayErrorAlert(viewModel: viewModel)
     }

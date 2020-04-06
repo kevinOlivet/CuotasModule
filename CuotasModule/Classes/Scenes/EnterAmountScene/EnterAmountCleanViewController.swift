@@ -11,10 +11,10 @@ import BasicCommons
 protocol EnterAmountCleanDisplayLogic: class {
     func displaySetUpUI(viewModel: EnterAmountClean.Texts.ViewModel)
     func catchCuota(notification: Notification)
-    func setTextFieldWithRegexNumber(numberToUse: String)
-    func showPaymentMethod(amountEntered: Int)
-    func displayCatchCuotaAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.TotalSuccess)
-    func displayInputAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure)
+    func displayTextFieldWithRegexNumber(viewModel: EnterAmountClean.Regex.ViewModel)
+    func showPaymentMethod()
+    func displayCatchCuotaAlert(viewModel: EnterAmountClean.CatchNotification.ViewModel)
+    func displayInputAlert(viewModel: EnterAmountClean.Errors.ViewModel)
 }
 
 public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanDisplayLogic {
@@ -96,18 +96,19 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     }
     
     func catchCuota(notification: Notification) {
-        interactor?.catchCuota(notification: notification)
+        let request = EnterAmountClean.CatchNotification.Request(notification: notification)
+        interactor?.catchCuota(request: request)
     }
     
-    func setTextFieldWithRegexNumber(numberToUse: String) {
-        enterAmountTextField.text = numberToUse
+    func displayTextFieldWithRegexNumber(viewModel: EnterAmountClean.Regex.ViewModel) {
+        enterAmountTextField.text = viewModel.numberToUse
     }
     
-    func showPaymentMethod(amountEntered: Int) {
+    func showPaymentMethod() {
         router?.routeToPaymentMethod()
     }
 
-    func displayCatchCuotaAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.TotalSuccess) {
+    func displayCatchCuotaAlert(viewModel: EnterAmountClean.CatchNotification.ViewModel) {
         router?.routeToRootViewController()
         Alerts.dismissableAlert(
             title: viewModel.successTitle,
@@ -117,7 +118,7 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
         )
     }
     
-    func displayInputAlert(viewModel: EnterAmountClean.EnterAmount.ViewModel.Failure) {
+    func displayInputAlert(viewModel: EnterAmountClean.Errors.ViewModel) {
         Alerts.dismissableAlert(
             title: viewModel.errorTitle,
             message: viewModel.errorMessage,

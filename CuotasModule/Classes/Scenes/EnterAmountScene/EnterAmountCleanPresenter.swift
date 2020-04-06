@@ -10,11 +10,10 @@ import UIKit
 
 protocol EnterAmountCleanPresentationLogic {
     func presentSetUpUI(response: EnterAmountClean.Texts.Response)
-    func setTextFieldWithRegexNumber(numberToUse: String)
-    func showPaymentMethod(amountEntered: Int)
-
-    func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success)
-    func presentInputAlert(response: EnterAmountClean.EnterAmount.Response.Error)
+    func presentTextFieldWithRegexNumber(response: EnterAmountClean.Regex.Response)
+    func presentPaymentMethod()
+    func presentCatchCuotaAlert(response: EnterAmountClean.CatchNotification.Response)
+    func presentInputAlert(response: EnterAmountClean.Errors.Response)
 }
 
 class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
@@ -31,16 +30,17 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
         viewController?.displaySetUpUI(viewModel: viewModel)
     }
     
-    func setTextFieldWithRegexNumber(numberToUse: String) {
-        viewController?.setTextFieldWithRegexNumber(numberToUse: numberToUse)
+    func presentTextFieldWithRegexNumber(response: EnterAmountClean.Regex.Response) {
+        let viewModel = EnterAmountClean.Regex.ViewModel(numberToUse: response.numberToUse)
+        viewController?.displayTextFieldWithRegexNumber(viewModel: viewModel)
     }
     
-    func showPaymentMethod(amountEntered: Int) {
-        viewController?.showPaymentMethod(amountEntered: amountEntered)
+    func presentPaymentMethod() {
+        viewController?.showPaymentMethod()
     }
     
-    func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.TotalSuccess(
+    func presentCatchCuotaAlert(response: EnterAmountClean.CatchNotification.Response) {
+        let viewModel = EnterAmountClean.CatchNotification.ViewModel(
             successTitle: response.successTitle.localized,
             successMessage: response.successMessage.localized,
             buttonTitle: response.buttonTitle.localized
@@ -48,8 +48,8 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
         viewController?.displayCatchCuotaAlert(viewModel: viewModel)
     }
     
-    func presentInputAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(
+    func presentInputAlert(response: EnterAmountClean.Errors.Response) {
+        let viewModel = EnterAmountClean.Errors.ViewModel(
             errorTitle: response.errorTitle.localized,
             errorMessage: response.errorMessage.localized,
             buttonTitle: response.buttonTitle.localized
