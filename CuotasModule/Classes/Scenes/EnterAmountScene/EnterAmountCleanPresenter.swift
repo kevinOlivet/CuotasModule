@@ -9,11 +9,11 @@
 import UIKit
 
 protocol EnterAmountCleanPresentationLogic {
-    func setTextFieldWithRegexNumber(numberToUse: String)
-    func showPaymentMethod(amountEntered: Int)
-    func presentEnterAmountAlert(response: EnterAmountClean.EnterAmount.Response.Error)
-    func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success)
-    func presentNumberToUseAlert(response: EnterAmountClean.EnterAmount.Response.Error)
+    func presentSetUpUI(response: EnterAmountClean.Texts.Response)
+    func presentTextFieldWithRegexNumber(response: EnterAmountClean.Regex.Response)
+    func presentPaymentMethod()
+    func presentCatchCuotaAlert(response: EnterAmountClean.CatchNotification.Response)
+    func presentInputAlert(response: EnterAmountClean.Errors.Response)
 }
 
 class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
@@ -21,34 +21,40 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
     weak var viewController: EnterAmountCleanDisplayLogic?
     
     // MARK: Do something
-    
-    func setTextFieldWithRegexNumber(numberToUse: String) {
-        viewController?.setTextFieldWithRegexNumber(numberToUse: numberToUse)
+    func presentSetUpUI(response: EnterAmountClean.Texts.Response) {
+        let viewModel = EnterAmountClean.Texts.ViewModel(
+            title: response.title,
+            enterAmountLabel: response.enterAmountLabel.localized,
+            nextButton: response.nextButton.localized
+        )
+        viewController?.displaySetUpUI(viewModel: viewModel)
     }
     
-    func showPaymentMethod(amountEntered: Int) {
-        viewController?.showPaymentMethod(amountEntered: amountEntered)
+    func presentTextFieldWithRegexNumber(response: EnterAmountClean.Regex.Response) {
+        let viewModel = EnterAmountClean.Regex.ViewModel(numberToUse: response.numberToUse)
+        viewController?.displayTextFieldWithRegexNumber(viewModel: viewModel)
     }
     
-    func presentEnterAmountAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                       errorMessage: response.errorMessage,
-                                                                       buttonTitle: response.buttonTitle)
-        viewController?.displayEnterAmountAlert(viewModel: viewModel)
+    func presentPaymentMethod() {
+        viewController?.showPaymentMethod()
     }
     
-    func presentCatchCuotaAlert(response: EnterAmountClean.EnterAmount.Response.Success) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.TotalSuccess(successTitle: response.successTitle,
-                                                                      successMessage: response.successMessage,
-                                                                      buttonTitle: response.buttonTitle)
+    func presentCatchCuotaAlert(response: EnterAmountClean.CatchNotification.Response) {
+        let viewModel = EnterAmountClean.CatchNotification.ViewModel(
+            successTitle: response.successTitle.localized,
+            successMessage: response.successMessage.localized,
+            buttonTitle: response.buttonTitle.localized
+        )
         viewController?.displayCatchCuotaAlert(viewModel: viewModel)
     }
     
-    func presentNumberToUseAlert(response: EnterAmountClean.EnterAmount.Response.Error) {
-        let viewModel = EnterAmountClean.EnterAmount.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                       errorMessage: response.errorMessage,
-                                                                       buttonTitle: response.buttonTitle)
-        viewController?.displayNumberToUseAlert(viewModel: viewModel)
+    func presentInputAlert(response: EnterAmountClean.Errors.Response) {
+        let viewModel = EnterAmountClean.Errors.ViewModel(
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
+        )
+        viewController?.displayInputAlert(viewModel: viewModel)
     }
 
 }

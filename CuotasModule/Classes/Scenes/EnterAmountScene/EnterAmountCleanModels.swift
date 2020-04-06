@@ -6,43 +6,69 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 enum EnterAmountClean {
-  // MARK: Use cases
-  
-  enum EnterAmount {
-    struct Request {
-    }
-    struct Response {
-        struct Success {
-            var successTitle: String
-            var successMessage: String
-            var buttonTitle: String
+
+    enum Texts {
+        struct Request {}
+        struct Response {
+            let title: String
+            let enterAmountLabel: String
+            let nextButton: String
         }
-        struct Error {
-            var errorTitle: String
-            var errorMessage: String
-            var buttonTitle: String
+        struct ViewModel {
+            let title: String
+            let enterAmountLabel: String
+            let nextButton: String
         }
     }
-    
-    struct ViewModel {
-        struct DisplayAmountEntered {
-            var amountEntered: String
+
+    enum EnterAmount {
+        struct Request {
+            let amountEntered: String
         }
-        var displayAmountEntered: String
-        
-        struct Failure {
-            var errorTitle: String
-            var errorMessage: String
-            var buttonTitle: String
+        struct Response {}
+        struct ViewModel {}
+    }
+
+    enum CatchNotification {
+        struct Request {
+            let notification: Notification
         }
-        struct TotalSuccess {
-            var successTitle: String
-            var successMessage: String
-            var buttonTitle: String
+        struct Response {
+            let successTitle: String
+            let successMessage: String
+            let buttonTitle: String
+        }
+        struct ViewModel {
+            let successTitle: String
+            let successMessage: String
+            let buttonTitle: String
         }
     }
-  }
+
+    enum Errors {
+        struct Request {}
+        struct Response {
+            let errorTitle: String
+            let errorMessage: String
+            let buttonTitle: String
+        }
+        struct ViewModel {
+            let errorTitle: String
+            let errorMessage: String
+            let buttonTitle: String
+        }
+    }
+
+    enum Regex {
+        struct Request {}
+        struct Response {
+            let numberToUse: String
+        }
+        struct ViewModel {
+            let numberToUse: String
+        }
+    }
 }

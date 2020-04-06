@@ -9,53 +9,69 @@
 import BasicCommons
 
 protocol EnterAmountCleanBusinessLogic {
-    func handleNextButtonTapped(amountEntered: String)
-    func catchCuota(notification: Notification)
+    func prepareSetUpUI(request: EnterAmountClean.Texts.Request)
+    func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request)
+    func catchCuota(request: EnterAmountClean.CatchNotification.Request)
 }
 
 public protocol EnterAmountCleanDataStore {
-  var amountEnteredDataStore: Int { get set }
+    var amountEnteredDataStore: Int { get set }
 }
 
 class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountCleanDataStore {
-  var presenter: EnterAmountCleanPresentationLogic?
-  var worker: EnterAmountCleanWorker?
+    var presenter: EnterAmountCleanPresentationLogic?
+    var worker: EnterAmountCleanWorker?
     
-  var amountEnteredDataStore: Int = 0
-  let validator: TextValidationProtocol = NumericValidation()
+    var amountEnteredDataStore: Int = 0
+    let validator: TextValidationProtocol = NumericValidation()
 
-  // MARK: Do something
-  
-    func handleNextButtonTapped(amountEntered: String) {
-        if !amountEntered.isEmpty {
-            if validator.validateString(str: amountEntered) {
-                if let amountEntered = Int(amountEntered) {
+    // MARK: Do something
+    func prepareSetUpUI(request: EnterAmountClean.Texts.Request) {
+        let response = EnterAmountClean.Texts.Response(
+            title: "Amount",
+            enterAmountLabel: "Enter amount in Chilean Pesos",
+            nextButton: "Next"
+        )
+        presenter?.presentSetUpUI(response: response)
+    }
+
+    func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request) {
+        if !request.amountEntered.isEmpty {
+            if validator.validateString(str: request.amountEntered) {
+                if let amountEntered = Int(request.amountEntered) {
                     amountEnteredDataStore = amountEntered
-                    presenter?.showPaymentMethod(amountEntered: amountEntered)
+                    presenter?.presentPaymentMethod()
                 }
             } else {
-                let numberToUse = validator.getMatchingString(str: amountEntered)
-                presenter?.setTextFieldWithRegexNumber(numberToUse: numberToUse!)
+                let numberToUse = validator.getMatchingString(str: request.amountEntered)
+                let numberResponse = EnterAmountClean.Regex.Response(numberToUse: numberToUse!)
+                presenter?.presentTextFieldWithRegexNumber(response: numberResponse)
                 
-                let response = EnterAmountClean.EnterAmount.Response.Error(errorTitle: "Invalid number".localized(),
-                                                                           errorMessage: validator.validationMessage,
-                                                                           buttonTitle: "Ok".localized())
-                presenter?.presentNumberToUseAlert(response: response)
+                let response = EnterAmountClean.Errors.Response(
+                    errorTitle: "Invalid number",
+                    errorMessage: validator.validationMessage,
+                    buttonTitle: "Ok"
+                )
+                presenter?.presentInputAlert(response: response)
             }
         } else {
-            let response = EnterAmountClean.EnterAmount.Response.Error(errorTitle: "Enter amount".localized(),
-                                                                       errorMessage: "You need to enter an amount".localized(),
-                                                                       buttonTitle: "Ok".localized())
-            presenter?.presentEnterAmountAlert(response: response)
+            let response = EnterAmountClean.Errors.Response(
+                errorTitle: "Enter amount",
+                errorMessage: "You need to enter an amount",
+                buttonTitle: "Ok"
+            )
+            presenter?.presentInputAlert(response: response)
         }
     }
     
-    func catchCuota(notification: Notification) {
-        guard let userInfo = notification.userInfo,
+    func catchCuota(request: EnterAmountClean.CatchNotification.Request) {
+        guard let userInfo = request.notification.userInfo,
             let finalMessage = userInfo["finalMessage"] as? String else { return }
-        let response = EnterAmountClean.EnterAmount.Response.Success(successTitle: "Finished".localized(),
-                                                                     successMessage: finalMessage,
-                                                                     buttonTitle: "Ok".localized())
+        let response = EnterAmountClean.CatchNotification.Response(
+            successTitle: "Finished",
+            successMessage: finalMessage,
+            buttonTitle: "Ok"
+        )
         presenter?.presentCatchCuotaAlert(response: response)
     }
 }

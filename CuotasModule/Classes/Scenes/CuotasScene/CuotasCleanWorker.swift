@@ -6,18 +6,22 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import BasicCommons
 
 class CuotasCleanWorker {
-    
+
+    var reachability: ReachabilityCheckingProtocol = Reachability()
     var repo: APICuotasModuleProtocol = APICuotasModule()
 
     func getCuotas(request: CuotasClean.Cuotas.Request,
                    successCompletion: @escaping ([CuotasResult]?) -> Void,
-                   failureCompletion: @escaping (String) -> Void) {
+                   failureCompletion: @escaping (NTError) -> Void) {
 
         let bankSelectedId = (request.bankSelectedId != nil) ? request.bankSelectedId!.id :  ""
-
+        guard reachability.isConnectedToNetwork() == true else {
+            failureCompletion(NTError.noInternetConection)
+            return
+        }
         repo.getCuotas(
             amountEntered: request.amountEntered,
             selectedPaymentMethodId: request.selectedPaymentMethodId.id,
@@ -26,7 +30,7 @@ class CuotasCleanWorker {
                 successCompletion(cuotasResult)
             },
             failure: { error, _ in
-                failureCompletion(error.localizedDescription)
+                failureCompletion(error)
             }
         )
     }

@@ -6,58 +6,65 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 enum PaymentMethodClean {
   // MARK: Use cases
+
+    enum Texts {
+        struct Request {}
+        struct Response {
+            let title: Int
+        }
+        struct ViewModel {
+            let title: String
+        }
+    }
   
   enum PaymentMethods {
-    struct Request {
-        var amountEntered: Int
-    }
+    struct Request {}
     struct Response {
-        // Refers to an old method but so does Main to Models in Commons
-        var paymentMethodArray: [PaymentMethodModel]
+        let paymentMethodArray: [PaymentMethodModel]
     }
     struct ViewModel {
+        let displayPaymentMethodViewModelArray: [DisplayPaymentMethodViewModelSuccess]
         struct DisplayPaymentMethodViewModelSuccess: Equatable {
-            var name: String
-            var paymentId: String
-            var secureThumbnail: String
-            var paymentTypeId: String
-            var minAllowedAmount: Double
-            var maxAllowedAmount: Double
+            let name: String
+            let paymentId: String
+            let secureThumbnail: String
+            let paymentTypeId: String
+            let minAllowedAmount: Double
+            let maxAllowedAmount: Double
         }
-        var displayPaymentMethodViewModelArray: [DisplayPaymentMethodViewModelSuccess]
     }
   }
     
     enum PaymentMethodsDetails {
         struct Request {
-            var indexPath: IndexPath
+            let indexPath: Int
         }
         
         enum Response {
             struct Success {
-                var amountEntered: Int
-                var selectedPaymentMethod: PaymentMethodModel
+                let amountEntered: Int
+                let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorTitle: String
+                let errorMessage: String
+                let buttonTitle: String
             }
         }
         
         enum ViewModel {
             struct Success {
-                var amountEntered: Int
-                var selectedPaymentMethod: PaymentMethodModel
+                let amountEntered: Int
+                let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorTitle: String
+                let errorMessage: String
+                let buttonTitle: String
             }
         }
         

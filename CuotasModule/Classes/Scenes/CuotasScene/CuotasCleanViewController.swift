@@ -77,9 +77,11 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
     
     // MARK: Do something
     func fetchCuotas() {
-        let request = CuotasClean.Cuotas.Request(amountEntered: interactor!.amountEntered,
-                                                 selectedPaymentMethodId: interactor!.selectedPaymentMethod,
-                                                 bankSelectedId: interactor!.bankSelected)
+        let request = CuotasClean.Cuotas.Request(
+            amountEntered: interactor!.amountEntered,
+            selectedPaymentMethodId: interactor!.selectedPaymentMethod,
+            bankSelectedId: interactor!.bankSelected
+        )
         interactor?.getCuotas(request: request)
     }
     
@@ -92,10 +94,12 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
     }
     
     func displayErrorAlert(viewModel: CuotasClean.Cuotas.ViewModel.Failure) {
-        Alerts.dismissableAlert(title: viewModel.errorTitle,
-                                message: viewModel.errorMessage,
-                                vc: self,
-                                actionBtnText: viewModel.buttonTitle)
+        Alerts.dismissableAlert(
+            title: viewModel.errorTitle,
+            message: viewModel.errorMessage,
+            vc: self,
+            actionBtnText: viewModel.buttonTitle
+        )
     }
     
     func displayCuotasArray(viewModel: CuotasClean.Cuotas.ViewModel.Success) {

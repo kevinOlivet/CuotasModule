@@ -33,26 +33,35 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
     func presentBankSelects(response: BankSelectClean.BankSelect.Response.Success) {
         var displayedBankSelect: [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect] = []
         for bankSelect in response.bankSelectArray {
-            let displayBank = BankSelectClean.BankSelect.ViewModel.DisplayBankSelect(name: bankSelect.name,
-                                                                                     bankId: bankSelect.id,
-                                                                                     secureThumbnail: bankSelect.secureThumbnail)
+            let displayBank = BankSelectClean.BankSelect.ViewModel.DisplayBankSelect(
+                name: bankSelect.name,
+                bankId: bankSelect.id,
+                secureThumbnail: bankSelect.secureThumbnail
+            )
             displayedBankSelect.append(displayBank)
         }
-        let viewModel = BankSelectClean.BankSelect.ViewModel.Success(bankSelectArray: displayedBankSelect)
+        let viewModel = BankSelectClean.BankSelect.ViewModel.Success(
+            bankSelectArray: displayedBankSelect,
+            selectedPaymentMethod: response.selectedPaymentMethod
+        )
         viewController?.displayBankSelects(viewModel: viewModel)
     }
     
     func presentErrorAlert(response: BankSelectClean.BankSelect.Response.Failure) {
-        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(errorTitle: response.errorTitle,
-                                                                     errorMessage: response.errorMessage,
-                                                                     buttonTitle: response.buttonTitle)
+        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(
+            errorTitle: response.errorTitle.localized,
+            errorMessage: response.errorMessage.localized,
+            buttonTitle: response.buttonTitle.localized
+        )
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     
     func showCuotas(response: BankSelectClean.BankSelectDetails.Response.Success) {
-        let viewModel = BankSelectClean.BankSelectDetails.ViewModel.Success(amountEntered: response.amountEntered,
-                                                                            selectedPaymentMethod: response.selectedPaymentMethod,
-                                                                            bankSelected: response.bankSelected)
+        let viewModel = BankSelectClean.BankSelectDetails.ViewModel.Success(
+            amountEntered: response.amountEntered,
+            selectedPaymentMethod: response.selectedPaymentMethod,
+            bankSelected: response.bankSelected
+        )
         viewController?.showCuotas(viewModel: viewModel)
     }
 }
