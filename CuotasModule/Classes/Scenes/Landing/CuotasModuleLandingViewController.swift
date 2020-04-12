@@ -15,8 +15,8 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
     var interactor: CuotasModuleLandingBusinessLogic?
     var router: (NSObjectProtocol & CuotasModuleLandingRoutingLogic & CuotasModuleLandingDataPassing)?
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var subtitleLabel: UILabel!
 
     // MARK: Object lifecycle
     required init?(coder aDecoder: NSCoder) {
@@ -51,17 +51,6 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
         interactor?.setupUI(request: CuotasModuleLanding.Basic.Request())
     }
 
-    var didLayoutOnce: Bool = false
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        if !didLayoutOnce {
-            didLayoutOnce = true
-            interactor?.setupUI(request: CuotasModuleLanding.Basic.Request())
-        }
-    }
-
     // MARK: Methods
     func displaySetupUI(viewModel: CuotasModuleLanding.Basic.ViewModel) {
         view.addTapAction(target: self, action: #selector(goToCuotasModule))
@@ -73,4 +62,8 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
     func goToCuotasModule() {
         router?.routeToCuotasModule()
     }
+
+    // Getters
+    var titleLabelText: String? { titleLabel.text }
+    var subtitleLabelText: String? { subtitleLabel.text }
 }

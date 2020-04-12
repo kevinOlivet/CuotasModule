@@ -13,6 +13,22 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		8E0AD4A62426A0C800DA4B56 /* Configurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E0AD4A52426A0C800DA4B56 /* Configurations.plist */; };
+		8E56525F2443712400828EB9 /* EnterAmountCleanWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5652562443712400828EB9 /* EnterAmountCleanWorkerTests.swift */; };
+		8E5652602443712400828EB9 /* EnterAmountCleanPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5652572443712400828EB9 /* EnterAmountCleanPresenterTests.swift */; };
+		8E5652612443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5652592443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift */; };
+		8E5652622443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56525A2443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift */; };
+		8E5652632443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56525B2443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift */; };
+		8E5652642443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56525C2443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift */; };
+		8E5652652443712400828EB9 /* EnterAmountCleanViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56525D2443712400828EB9 /* EnterAmountCleanViewControllerTests.swift */; };
+		8E5652662443712400828EB9 /* EnterAmountCleanInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56525E2443712400828EB9 /* EnterAmountCleanInteractorTests.swift */; };
+		8EA1176224436056008A80F6 /* CuotasModuleLandingWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175924436056008A80F6 /* CuotasModuleLandingWorkerTests.swift */; };
+		8EA1176324436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175B24436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift */; };
+		8EA1176424436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175C24436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift */; };
+		8EA1176524436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175D24436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift */; };
+		8EA1176624436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175E24436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift */; };
+		8EA1176724436056008A80F6 /* CuotasModuleLandingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175F24436056008A80F6 /* CuotasModuleLandingPresenterTests.swift */; };
+		8EA1176824436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1176024436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift */; };
+		8EA1176924436056008A80F6 /* CuotasModuleLandingInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1176124436056008A80F6 /* CuotasModuleLandingInteractorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +52,22 @@
 		607FACE51AFB9204008FA782 /* CuotasModule_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CuotasModule_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E0AD4A52426A0C800DA4B56 /* Configurations.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configurations.plist; sourceTree = "<group>"; };
+		8E5652562443712400828EB9 /* EnterAmountCleanWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanWorkerTests.swift; sourceTree = "<group>"; };
+		8E5652572443712400828EB9 /* EnterAmountCleanPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanPresenterTests.swift; sourceTree = "<group>"; };
+		8E5652592443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanRoutingLogicSpy.swift; sourceTree = "<group>"; };
+		8E56525A2443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanBusinessLogicSpy.swift; sourceTree = "<group>"; };
+		8E56525B2443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanPresentationLogicSpy.swift; sourceTree = "<group>"; };
+		8E56525C2443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanDisplayLogicSpy.swift; sourceTree = "<group>"; };
+		8E56525D2443712400828EB9 /* EnterAmountCleanViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanViewControllerTests.swift; sourceTree = "<group>"; };
+		8E56525E2443712400828EB9 /* EnterAmountCleanInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAmountCleanInteractorTests.swift; sourceTree = "<group>"; };
+		8EA1175924436056008A80F6 /* CuotasModuleLandingWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingWorkerTests.swift; sourceTree = "<group>"; };
+		8EA1175B24436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingBusinessLogicSpy.swift; sourceTree = "<group>"; };
+		8EA1175C24436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingPresentationLogicSpy.swift; sourceTree = "<group>"; };
+		8EA1175D24436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingDisplayLogicSpy.swift; sourceTree = "<group>"; };
+		8EA1175E24436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingRoutingLogicSpy.swift; sourceTree = "<group>"; };
+		8EA1175F24436056008A80F6 /* CuotasModuleLandingPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingPresenterTests.swift; sourceTree = "<group>"; };
+		8EA1176024436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingViewControllerTests.swift; sourceTree = "<group>"; };
+		8EA1176124436056008A80F6 /* CuotasModuleLandingInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingInteractorTests.swift; sourceTree = "<group>"; };
 		90D848B48DB90D5CAB3ACA97 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D26AF18BC9C76682DBBDE4FD /* CuotasModule.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CuotasModule.podspec; path = ../CuotasModule.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E82752D925A9E546CE7A3607 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -105,6 +137,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8E5652552443712400828EB9 /* EnterAmount */,
+				8EA1175824436056008A80F6 /* CuotasLanding */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -126,6 +160,52 @@
 				E82752D925A9E546CE7A3607 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		8E5652552443712400828EB9 /* EnterAmount */ = {
+			isa = PBXGroup;
+			children = (
+				8E5652582443712400828EB9 /* Spies */,
+				8E5652562443712400828EB9 /* EnterAmountCleanWorkerTests.swift */,
+				8E5652572443712400828EB9 /* EnterAmountCleanPresenterTests.swift */,
+				8E56525D2443712400828EB9 /* EnterAmountCleanViewControllerTests.swift */,
+				8E56525E2443712400828EB9 /* EnterAmountCleanInteractorTests.swift */,
+			);
+			path = EnterAmount;
+			sourceTree = "<group>";
+		};
+		8E5652582443712400828EB9 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				8E5652592443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift */,
+				8E56525A2443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift */,
+				8E56525B2443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift */,
+				8E56525C2443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift */,
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
+		8EA1175824436056008A80F6 /* CuotasLanding */ = {
+			isa = PBXGroup;
+			children = (
+				8EA1175A24436056008A80F6 /* Spies */,
+				8EA1175924436056008A80F6 /* CuotasModuleLandingWorkerTests.swift */,
+				8EA1175F24436056008A80F6 /* CuotasModuleLandingPresenterTests.swift */,
+				8EA1176024436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift */,
+				8EA1176124436056008A80F6 /* CuotasModuleLandingInteractorTests.swift */,
+			);
+			path = CuotasLanding;
+			sourceTree = "<group>";
+		};
+		8EA1175A24436056008A80F6 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				8EA1175B24436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift */,
+				8EA1175C24436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift */,
+				8EA1175D24436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift */,
+				8EA1175E24436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 		BB1C2890B28B0084B9AA49AB /* Pods */ = {
@@ -185,10 +265,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = F7Z96QXV9V;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = F7Z96QXV9V;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -249,6 +331,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E5652652443712400828EB9 /* EnterAmountCleanViewControllerTests.swift in Sources */,
+				8EA1176824436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift in Sources */,
+				8EA1176424436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift in Sources */,
+				8E5652662443712400828EB9 /* EnterAmountCleanInteractorTests.swift in Sources */,
+				8EA1176724436056008A80F6 /* CuotasModuleLandingPresenterTests.swift in Sources */,
+				8E5652602443712400828EB9 /* EnterAmountCleanPresenterTests.swift in Sources */,
+				8E56525F2443712400828EB9 /* EnterAmountCleanWorkerTests.swift in Sources */,
+				8EA1176924436056008A80F6 /* CuotasModuleLandingInteractorTests.swift in Sources */,
+				8E5652612443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift in Sources */,
+				8EA1176524436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift in Sources */,
+				8E5652632443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift in Sources */,
+				8E5652642443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift in Sources */,
+				8E5652622443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift in Sources */,
+				8EA1176324436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift in Sources */,
+				8EA1176224436056008A80F6 /* CuotasModuleLandingWorkerTests.swift in Sources */,
+				8EA1176624436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				INFOPLIST_FILE = CuotasModule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -401,6 +500,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				INFOPLIST_FILE = CuotasModule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -415,6 +515,7 @@
 		607FACF31AFB9204008FA782 /* DEV-Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -436,6 +537,7 @@
 		607FACF41AFB9204008FA782 /* PROD-Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -507,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				INFOPLIST_FILE = CuotasModule/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -522,6 +625,7 @@
 		8EA980572438B7C5003B1DCA /* QA-Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = F7Z96QXV9V;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

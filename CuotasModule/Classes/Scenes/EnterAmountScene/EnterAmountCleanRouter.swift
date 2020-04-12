@@ -24,7 +24,6 @@ class EnterAmountCleanRouter: NSObject, EnterAmountCleanRoutingLogic, EnterAmoun
   var dataStore: EnterAmountCleanDataStore?
   
   // MARK: Routing
-    
     func routeToRootViewController() {
         viewController?.navigationController?.popToRootViewController(animated: true)
     }
@@ -37,31 +36,13 @@ class EnterAmountCleanRouter: NSObject, EnterAmountCleanRoutingLogic, EnterAmoun
         passDataToPaymentMethod(source: dataStore!, destination: &destinationDS)
         navigateToPaymentMethod(source: viewController!, destination: destinationVC)
     }
-    
-//    func routeToPaymentMethod(segue: UIStoryboardSegue?) {
-//        if let segue = segue {
-//            let destinationVC = segue.destination as! PaymentMethodCleanViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToPaymentMethod(source: dataStore!, destination: &destinationDS)
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let destinationVC = storyboard.instantiateViewController(withIdentifier: "PaymentMethodCleanViewController") as! PaymentMethodCleanViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToPaymentMethod(source: dataStore!, destination: &destinationDS)
-//            navigateToPaymentMethod(source: viewController!, destination: destinationVC)
-//        }
-//    }
 
   // MARK: Navigation
-
     func navigateToPaymentMethod(source: EnterAmountCleanViewController, destination: PaymentMethodCleanViewController) {
-        // should change to show(destination, sender: nil)???
-        // should use segue???
-        source.navigationController?.pushViewController(destination, animated: true)
+        source.navigationController?.show(destination, sender: nil)
     }
     
 //    MARK: Passing data
-    
     func passDataToPaymentMethod(source: EnterAmountCleanDataStore, destination: inout PaymentMethodCleanDataStore) {
         destination.amountEntered = source.amountEnteredDataStore
     }

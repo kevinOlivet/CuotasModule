@@ -35,7 +35,7 @@ class PaymentMethodCleanRouter: NSObject, PaymentMethodCleanRoutingLogic, Paymen
   // MARK: Navigation
   
   func navigateToBankSelect(source: PaymentMethodCleanViewController, destination: BankSelectCleanViewController) {
-    viewController?.navigationController?.pushViewController(destination, animated: true)
+    viewController?.navigationController?.show(destination, sender: nil)
   }
   
   // MARK: Passing data

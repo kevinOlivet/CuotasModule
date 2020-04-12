@@ -23,16 +23,11 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     public var router: (NSObjectProtocol & EnterAmountCleanRoutingLogic & EnterAmountCleanDataPassing)?
     
     //@IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var enterAmountTextField: UITextField!
-    @IBOutlet weak var enterAmountLabel: UILabel!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet private weak var enterAmountTextField: UITextField!
+    @IBOutlet private weak var enterAmountLabel: UILabel!
+    @IBOutlet private weak var nextButton: UIButton!
     
     // MARK: Object lifecycle
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -53,18 +48,7 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
         router.viewController = viewController
         router.dataStore = interactor
     }
-    
-    // MARK: Routing
-    
-    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
+
     // MARK: View lifecycle
     
     override public func viewDidLoad() {
@@ -84,6 +68,7 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
         title = viewModel.title
         enterAmountLabel.text = viewModel.enterAmountLabel
         nextButton.titleLabel?.text = viewModel.nextButton
+        nextButton.addTapAction(target: self, action: #selector(nextButtonTapped))
     }
 
     private func setupNotiications() {
@@ -126,10 +111,20 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
             actionBtnText: viewModel.buttonTitle
         )
     }
-    
-    @IBAction func nextButtonTapped(_ sender: Any) {
+
+    @objc
+    func nextButtonTapped() {
         guard let amountEntered = enterAmountTextField.text else  { return }
         let request = EnterAmountClean.EnterAmount.Request(amountEntered: amountEntered)
         interactor?.handleNextButtonTapped(request: request)
     }
+
+    // GettersSetters
+    var titleText: String? { self.title }
+    var enterAmountLabelText: String? { enterAmountLabel.text }
+    var enterAmountTextFieldText: String? {
+        get { enterAmountTextField.text}
+        set { enterAmountTextField.text = newValue }
+    }
+    var nextButtonText: String? { nextButton.titleLabel?.text }
 }

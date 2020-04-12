@@ -15,7 +15,7 @@ use_frameworks!
 ###
 
 #Use this variable to change pod install from local_pods, develop_pods, master_pods, feature_pods
-pods_environment = "develop" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
+pods_environment = "local" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
 
 ###
 ### --- METHODS ---
@@ -90,4 +90,15 @@ pod_selector(pods_environment)
   target 'CuotasModule_Tests' do
     inherit! :search_paths
   end
+end
+
+#Needed to enable testability for the custom build scheme
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            if config.name == 'DEV-Debug'|| config.name == 'QA-Debug'
+                config.build_settings['ENABLE_TESTABILITY'] = 'YES'
+            end
+        end
+    end
 end
