@@ -82,7 +82,7 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                     errorMessage: errorMessage,
                     buttonTitle: "Ok"
                 )
-                presenter?.presentWrongAmountAlert(response: response)
+                presenter?.presentErrorAlert(response: response)
             }
         }
     }

@@ -41,7 +41,6 @@ class EnterAmountCleanViewControllerTests: XCTestCase {
     // MARK: Test setup
 
     func setupEnterAmountCleanViewController() {
-
         let bundle = Utils.bundle(forClass: EnterAmountCleanViewController.classForCoder())!
         let storyboard = UIStoryboard(name: "CuotasMain", bundle: bundle)
         sut = (
@@ -90,7 +89,14 @@ class EnterAmountCleanViewControllerTests: XCTestCase {
         let archiver = NSKeyedUnarchiver(forReadingWith: Data())
         sut = EnterAmountCleanViewController(coder: archiver)
         // Then
-        XCTAssertNotNil(sut, "sut instantiated using the overrideInit")
+        XCTAssertNotNil(
+            sut,
+            "sut instantiated using the overrideInit"
+        )
+        XCTAssertTrue(
+            spyInteractor.prepareSetUpUICalled,
+            "viewDidLoad should call the interactor to setup the UI"
+        )
     }
     func testDisplaySetupUI() {
         // Given

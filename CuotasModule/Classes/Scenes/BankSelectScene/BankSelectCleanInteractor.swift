@@ -9,6 +9,7 @@
 import UIKit
 
 protocol BankSelectCleanBusinessLogic {
+    func prepareSetUpUI(request: BankSelectClean.Texts.Request)
     func getBankSelect(request: BankSelectClean.BankSelect.Request)
     func handleDidSelectItem(request: BankSelectClean.BankSelectDetails.Request)
 }
@@ -30,20 +31,30 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
     var bankSelectModelArray = [BankSelectModel]()
     var selectedBankSelect: BankSelectModel?
     
-    // MARK: Do something
+    // MARK: Methods
+
+    func prepareSetUpUI(request: BankSelectClean.Texts.Request) {
+        if let selectedPaymentMethod = selectedPaymentMethod {
+            let response = BankSelectClean.Texts.Response(title: selectedPaymentMethod.name)
+            presenter?.presentSetUpUI(response: response)
+        }
+    }
     
     func getBankSelect(request: BankSelectClean.BankSelect.Request) {
+        guard let selectedPaymentMethod = selectedPaymentMethod else {
+            return
+        }
         presenter?.presentSpinner()
         
         worker?.getBankSelect(
-            request: request,
+            selectedPaymentMethodId: selectedPaymentMethod.id,
             successCompletion: { (receivedBankSelectModels) in
                 self.presenter?.hideSpinner()
                 if let receivedBankSelectModels = receivedBankSelectModels {
                     self.bankSelectModelArray = receivedBankSelectModels
                     let response = BankSelectClean.BankSelect.Response.Success(
                         bankSelectArray: receivedBankSelectModels,
-                        selectedPaymentMethod: self.selectedPaymentMethod
+                        selectedPaymentMethod: selectedPaymentMethod
                     )
                     self.presenter?.presentBankSelects(response: response)
                 } else {
@@ -67,22 +78,7 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
     }
     
     func handleDidSelectItem(request: BankSelectClean.BankSelectDetails.Request) {
-        selectedBankSelect = (bankSelectModelArray.count > 0) ? bankSelectModelArray[request.indexPath.row] : nil
-        if let amountEntered = amountEntered, let selectedPaymentMethod = selectedPaymentMethod {
-            let response = BankSelectClean.BankSelectDetails.Response.Success(
-                amountEntered: amountEntered,
-                selectedPaymentMethod: selectedPaymentMethod,
-                bankSelected: selectedBankSelect
-            )
-            presenter?.showCuotas(response: response)
-        } else {
-            let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error",
-                errorMessage: "Error with amount",
-                buttonTitle: "Cancel"
-            )
-            presenter?.presentErrorAlert(response: response)
-        }
-        
+        selectedBankSelect = !bankSelectModelArray.isEmpty ? bankSelectModelArray[request.indexPath.row] : nil
+        presenter?.presentCuotas()
     }
 }
