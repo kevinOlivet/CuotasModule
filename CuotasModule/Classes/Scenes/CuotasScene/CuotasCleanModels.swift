@@ -10,7 +10,17 @@ import UIKit
 
 enum CuotasClean {
   // MARK: Use cases
-  
+
+    enum Texts {
+        struct Request {}
+        struct Response {
+            let title: String
+        }
+        struct ViewModel {
+            let title: String
+        }
+    }
+
   enum Cuotas {
     struct Request {
         var amountEntered: Int

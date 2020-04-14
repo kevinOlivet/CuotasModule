@@ -84,7 +84,7 @@ class BankSelectCleanViewControllerTests: XCTestCase {
         )
         XCTAssertTrue(
             spyInteractor.getBankSelectCalled,
-            "viewDidLoad should call the interactor to setup the UI"
+            "viewDidLoad should call the interactor getBankSelect"
         )
     }
     func testRequiredInit() {
@@ -108,7 +108,7 @@ class BankSelectCleanViewControllerTests: XCTestCase {
         )
         XCTAssertTrue(
             spyInteractor.getBankSelectCalled,
-            "viewDidLoad should call the interactor to setup the UI"
+            "viewDidLoad should call the interactor getBankSelect"
         )
     }
     func testDisplaySetupUI() {

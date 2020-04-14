@@ -38,6 +38,14 @@
 		8EA1176724436056008A80F6 /* CuotasModuleLandingPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1175F24436056008A80F6 /* CuotasModuleLandingPresenterTests.swift */; };
 		8EA1176824436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1176024436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift */; };
 		8EA1176924436056008A80F6 /* CuotasModuleLandingInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA1176124436056008A80F6 /* CuotasModuleLandingInteractorTests.swift */; };
+		8EBF06042445F7C40016D005 /* CuotasCleanViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF05FC2445F7C40016D005 /* CuotasCleanViewControllerTests.swift */; };
+		8EBF06052445F7C40016D005 /* CuotasCleanInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF05FD2445F7C40016D005 /* CuotasCleanInteractorTests.swift */; };
+		8EBF06062445F7C40016D005 /* CuotasCleanDisplayLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF05FE2445F7C40016D005 /* CuotasCleanDisplayLogicSpy.swift */; };
+		8EBF06072445F7C40016D005 /* CuotasCleanWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF05FF2445F7C40016D005 /* CuotasCleanWorkerTests.swift */; };
+		8EBF06082445F7C40016D005 /* CuotasCleanPresentationLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF06002445F7C40016D005 /* CuotasCleanPresentationLogicSpy.swift */; };
+		8EBF06092445F7C40016D005 /* CuotasCleanRoutingLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF06012445F7C40016D005 /* CuotasCleanRoutingLogicSpy.swift */; };
+		8EBF060A2445F7C40016D005 /* CuotasCleanBusinessLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF06022445F7C40016D005 /* CuotasCleanBusinessLogicSpy.swift */; };
+		8EBF060B2445F7C40016D005 /* CuotasCleanPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF06032445F7C40016D005 /* CuotasCleanPresenterTests.swift */; };
 		8EFBC02B2443A7D500BBB27C /* PaymentMethodCleanViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFBC0232443A7D500BBB27C /* PaymentMethodCleanViewControllerTests.swift */; };
 		8EFBC02C2443A7D500BBB27C /* PaymentMethodCleanInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFBC0242443A7D500BBB27C /* PaymentMethodCleanInteractorTests.swift */; };
 		8EFBC02D2443A7D500BBB27C /* PaymentMethodCleanDisplayLogicSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFBC0252443A7D500BBB27C /* PaymentMethodCleanDisplayLogicSpy.swift */; };
@@ -94,6 +102,14 @@
 		8EA1175F24436056008A80F6 /* CuotasModuleLandingPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingPresenterTests.swift; sourceTree = "<group>"; };
 		8EA1176024436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingViewControllerTests.swift; sourceTree = "<group>"; };
 		8EA1176124436056008A80F6 /* CuotasModuleLandingInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuotasModuleLandingInteractorTests.swift; sourceTree = "<group>"; };
+		8EBF05FC2445F7C40016D005 /* CuotasCleanViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanViewControllerTests.swift; sourceTree = "<group>"; };
+		8EBF05FD2445F7C40016D005 /* CuotasCleanInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanInteractorTests.swift; sourceTree = "<group>"; };
+		8EBF05FE2445F7C40016D005 /* CuotasCleanDisplayLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanDisplayLogicSpy.swift; sourceTree = "<group>"; };
+		8EBF05FF2445F7C40016D005 /* CuotasCleanWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanWorkerTests.swift; sourceTree = "<group>"; };
+		8EBF06002445F7C40016D005 /* CuotasCleanPresentationLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanPresentationLogicSpy.swift; sourceTree = "<group>"; };
+		8EBF06012445F7C40016D005 /* CuotasCleanRoutingLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanRoutingLogicSpy.swift; sourceTree = "<group>"; };
+		8EBF06022445F7C40016D005 /* CuotasCleanBusinessLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanBusinessLogicSpy.swift; sourceTree = "<group>"; };
+		8EBF06032445F7C40016D005 /* CuotasCleanPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuotasCleanPresenterTests.swift; sourceTree = "<group>"; };
 		8EFBC0232443A7D500BBB27C /* PaymentMethodCleanViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCleanViewControllerTests.swift; sourceTree = "<group>"; };
 		8EFBC0242443A7D500BBB27C /* PaymentMethodCleanInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCleanInteractorTests.swift; sourceTree = "<group>"; };
 		8EFBC0252443A7D500BBB27C /* PaymentMethodCleanDisplayLogicSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCleanDisplayLogicSpy.swift; sourceTree = "<group>"; };
@@ -171,6 +187,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8EBF05FA2445F7AE0016D005 /* Cuotas */,
 				8E10B33F2443DE13007EFC3C /* CuotasCommons */,
 				8E21FB022443C316009D16A7 /* BankSelect */,
 				8EFBC0212443A7B300BBB27C /* PaymentMethod */,
@@ -272,6 +289,29 @@
 				8EA1175C24436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift */,
 				8EA1175D24436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift */,
 				8EA1175E24436056008A80F6 /* CuotasModuleLandingRoutingLogicSpy.swift */,
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
+		8EBF05FA2445F7AE0016D005 /* Cuotas */ = {
+			isa = PBXGroup;
+			children = (
+				8EBF05FB2445F7AE0016D005 /* Spies */,
+				8EBF05FC2445F7C40016D005 /* CuotasCleanViewControllerTests.swift */,
+				8EBF05FD2445F7C40016D005 /* CuotasCleanInteractorTests.swift */,
+				8EBF05FF2445F7C40016D005 /* CuotasCleanWorkerTests.swift */,
+				8EBF06032445F7C40016D005 /* CuotasCleanPresenterTests.swift */,
+			);
+			path = Cuotas;
+			sourceTree = "<group>";
+		};
+		8EBF05FB2445F7AE0016D005 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				8EBF05FE2445F7C40016D005 /* CuotasCleanDisplayLogicSpy.swift */,
+				8EBF06002445F7C40016D005 /* CuotasCleanPresentationLogicSpy.swift */,
+				8EBF06012445F7C40016D005 /* CuotasCleanRoutingLogicSpy.swift */,
+				8EBF06022445F7C40016D005 /* CuotasCleanBusinessLogicSpy.swift */,
 			);
 			path = Spies;
 			sourceTree = "<group>";
@@ -426,11 +466,13 @@
 				8EA1176824436056008A80F6 /* CuotasModuleLandingViewControllerTests.swift in Sources */,
 				8EA1176424436056008A80F6 /* CuotasModuleLandingPresentationLogicSpy.swift in Sources */,
 				8E21FB0C2443C332009D16A7 /* BankSelectCleanViewControllerTests.swift in Sources */,
+				8EBF060A2445F7C40016D005 /* CuotasCleanBusinessLogicSpy.swift in Sources */,
 				8E5652662443712400828EB9 /* EnterAmountCleanInteractorTests.swift in Sources */,
 				8EA1176724436056008A80F6 /* CuotasModuleLandingPresenterTests.swift in Sources */,
 				8E5652602443712400828EB9 /* EnterAmountCleanPresenterTests.swift in Sources */,
 				8EFBC0322443A7D500BBB27C /* PaymentMethodCleanPresenterTests.swift in Sources */,
 				8E10B3412443DE2D007EFC3C /* ReachabilitySpy.swift in Sources */,
+				8EBF06072445F7C40016D005 /* CuotasCleanWorkerTests.swift in Sources */,
 				8E21FB132443C332009D16A7 /* BankSelectCleanPresenterTests.swift in Sources */,
 				8E21FB112443C332009D16A7 /* BankSelectCleanRoutingLogicSpy.swift in Sources */,
 				8E56525F2443712400828EB9 /* EnterAmountCleanWorkerTests.swift in Sources */,
@@ -439,15 +481,21 @@
 				8EA1176924436056008A80F6 /* CuotasModuleLandingInteractorTests.swift in Sources */,
 				8EFBC02D2443A7D500BBB27C /* PaymentMethodCleanDisplayLogicSpy.swift in Sources */,
 				8E21FB122443C332009D16A7 /* BankSelectCleanBusinessLogicSpy.swift in Sources */,
+				8EBF06082445F7C40016D005 /* CuotasCleanPresentationLogicSpy.swift in Sources */,
+				8EBF06042445F7C40016D005 /* CuotasCleanViewControllerTests.swift in Sources */,
 				8EFBC02C2443A7D500BBB27C /* PaymentMethodCleanInteractorTests.swift in Sources */,
+				8EBF06052445F7C40016D005 /* CuotasCleanInteractorTests.swift in Sources */,
 				8E5652612443712400828EB9 /* EnterAmountCleanRoutingLogicSpy.swift in Sources */,
 				8EFBC02F2443A7D500BBB27C /* PaymentMethodCleanPresentationLogicSpy.swift in Sources */,
 				8EA1176524436056008A80F6 /* CuotasModuleLandingDisplayLogicSpy.swift in Sources */,
 				8E5652632443712400828EB9 /* EnterAmountCleanPresentationLogicSpy.swift in Sources */,
 				8E21FB102443C332009D16A7 /* BankSelectCleanPresentationLogicSpy.swift in Sources */,
 				8E5652642443712400828EB9 /* EnterAmountCleanDisplayLogicSpy.swift in Sources */,
+				8EBF06062445F7C40016D005 /* CuotasCleanDisplayLogicSpy.swift in Sources */,
 				8E5652622443712400828EB9 /* EnterAmountCleanBusinessLogicSpy.swift in Sources */,
 				8EA1176324436056008A80F6 /* CuotasModuleLandingBusinessLogicSpy.swift in Sources */,
+				8EBF06092445F7C40016D005 /* CuotasCleanRoutingLogicSpy.swift in Sources */,
+				8EBF060B2445F7C40016D005 /* CuotasCleanPresenterTests.swift in Sources */,
 				8E21FB0D2443C332009D16A7 /* BankSelectCleanInteractorTests.swift in Sources */,
 				8EA1176224436056008A80F6 /* CuotasModuleLandingWorkerTests.swift in Sources */,
 				8E21FB0E2443C332009D16A7 /* BankSelectCleanDisplayLogicSpy.swift in Sources */,

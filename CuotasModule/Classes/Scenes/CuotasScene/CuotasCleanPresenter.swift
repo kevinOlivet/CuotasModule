@@ -9,6 +9,7 @@
 import UIKit
 
 protocol CuotasCleanPresentationLogic {
+    func presentSetUpUI(response: CuotasClean.Texts.Response)
     func presentSpinner()
     func hideSpinner()
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure)
@@ -19,7 +20,11 @@ class CuotasCleanPresenter: CuotasCleanPresentationLogic {
     weak var viewController: CuotasCleanDisplayLogic?
     
     // MARK: Methods
-    
+    func presentSetUpUI(response: CuotasClean.Texts.Response) {
+        let viewModel = CuotasClean.Texts.ViewModel(title: response.title)
+        viewController?.displaySetUpUI(viewModel: viewModel)
+    }
+
     func presentSpinner() {
         viewController?.displaySpinner()
     }
