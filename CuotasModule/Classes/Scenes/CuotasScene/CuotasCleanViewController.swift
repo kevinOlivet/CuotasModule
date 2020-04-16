@@ -51,6 +51,7 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         interactor?.prepareSetUpUI(request: CuotasClean.Texts.Request())
         fetchCuotas()
     }
@@ -88,6 +89,16 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
 }
 
 extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate {
+
+    private static let cellIdentifier = "CuotasCell"
+    private func setupTableView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        tableView.reloadData()
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cuotasArrayDisplay.count
     }

@@ -56,6 +56,7 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         interactor?.prepareSetUpUI(request: PaymentMethodClean.Texts.Request())
         interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
     }
@@ -94,6 +95,16 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
 }
 
 extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDelegate {
+
+    private static let cellIdentifier = "PaymentMethodCell"
+    private func setupTableView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        tableView.reloadData()
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return paymentMethodsToDisplay.count
     }

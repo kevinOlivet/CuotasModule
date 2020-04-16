@@ -71,43 +71,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cOq-oo-Umi">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PaymentMethodCell" rowHeight="96" id="weO-kd-pcY" customClass="PaymentMethodTableViewCell" customModule="CuotasModule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="96"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="weO-kd-pcY" id="qyN-lS-KlB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dME-E7-hFM">
-                                                    <rect key="frame" x="338.5" y="11" width="60.5" height="60.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="dME-E7-hFM" secondAttribute="height" multiplier="1:1" id="3Gr-Ix-WYB"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eO-ff-olu">
-                                                    <rect key="frame" x="20" y="37" width="295.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="dME-E7-hFM" secondAttribute="bottom" constant="24.5" id="LEv-fL-RaC"/>
-                                                <constraint firstItem="dME-E7-hFM" firstAttribute="top" secondItem="qyN-lS-KlB" secondAttribute="top" constant="11" id="Mol-ns-aS1"/>
-                                                <constraint firstAttribute="trailing" secondItem="dME-E7-hFM" secondAttribute="trailing" constant="15" id="hdw-5C-AkM"/>
-                                                <constraint firstItem="dME-E7-hFM" firstAttribute="leading" secondItem="9eO-ff-olu" secondAttribute="trailing" constant="23" id="ncm-2P-B9j"/>
-                                                <constraint firstItem="9eO-ff-olu" firstAttribute="leading" secondItem="qyN-lS-KlB" secondAttribute="leadingMargin" id="tXk-sD-Uhe"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9eO-ff-olu" secondAttribute="bottom" constant="27" id="weH-BU-9sv"/>
-                                                <constraint firstItem="9eO-ff-olu" firstAttribute="top" secondItem="qyN-lS-KlB" secondAttribute="topMargin" constant="26" id="xV1-6O-4Gd"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="paymentImageView" destination="dME-E7-hFM" id="lK1-jh-uSu"/>
-                                            <outlet property="paymentMethodNameLabel" destination="9eO-ff-olu" id="jUN-aY-uWp"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="XuJ-RS-WZA" id="Dg5-BK-4Kd"/>
                                     <outlet property="delegate" destination="XuJ-RS-WZA" id="Q0T-bk-Hrg"/>
@@ -150,41 +113,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BankSelectCell" id="2oX-wA-YGZ" customClass="BankSelectCollectionViewCell" customModule="CuotasModule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QI5-ux-2eR">
-                                                    <rect key="frame" x="0.0" y="79" width="100" height="21"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GTJ-22-LVL">
-                                                    <rect key="frame" x="20" y="20" width="60" height="60"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="GTJ-22-LVL" firstAttribute="centerX" secondItem="QI5-ux-2eR" secondAttribute="centerX" id="DVv-EE-rDm"/>
-                                            <constraint firstItem="GTJ-22-LVL" firstAttribute="leading" secondItem="2oX-wA-YGZ" secondAttribute="leadingMargin" constant="12" id="HMn-EA-ogV"/>
-                                            <constraint firstAttribute="bottom" secondItem="QI5-ux-2eR" secondAttribute="bottom" id="Nfw-Il-vtl"/>
-                                            <constraint firstItem="QI5-ux-2eR" firstAttribute="top" secondItem="2oX-wA-YGZ" secondAttribute="topMargin" constant="71" id="RYM-tr-jF0"/>
-                                            <constraint firstItem="QI5-ux-2eR" firstAttribute="leading" secondItem="2oX-wA-YGZ" secondAttribute="leading" id="TSd-Yy-ZFe"/>
-                                            <constraint firstAttribute="trailing" secondItem="QI5-ux-2eR" secondAttribute="trailing" id="ZJm-bd-HlQ"/>
-                                            <constraint firstItem="GTJ-22-LVL" firstAttribute="top" secondItem="2oX-wA-YGZ" secondAttribute="topMargin" constant="12" id="qXt-vl-b8m"/>
-                                            <constraint firstItem="GTJ-22-LVL" firstAttribute="centerY" secondItem="2oX-wA-YGZ" secondAttribute="centerY" id="yLS-Jg-UCU"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="bankNameLabel" destination="QI5-ux-2eR" id="nGf-wA-c2P"/>
-                                            <outlet property="bankSelectImageView" destination="GTJ-22-LVL" id="gKr-7a-Pu8"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="8lc-aE-Xci" id="lxt-pj-FcH"/>
                                     <outlet property="delegate" destination="8lc-aE-Xci" id="EDO-rm-XLv"/>
@@ -221,44 +150,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dOr-hb-6BZ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CuotasCell" rowHeight="80" id="86V-Gl-v5t" customClass="CuotasTableViewCell" customModule="CuotasModule" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="86V-Gl-v5t" id="9J5-f3-PWX">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Installments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQl-On-4c2">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyz-UW-tl4">
-                                                    <rect key="frame" x="20" y="40" width="374" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Yyz-UW-tl4" firstAttribute="trailing" secondItem="9J5-f3-PWX" secondAttribute="trailingMargin" id="2AD-CF-4Vi"/>
-                                                <constraint firstItem="Yyz-UW-tl4" firstAttribute="top" secondItem="vQl-On-4c2" secondAttribute="bottom" constant="8" id="2dl-mC-e9A"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Yyz-UW-tl4" secondAttribute="bottom" constant="8" id="3Z1-6s-xfL"/>
-                                                <constraint firstItem="vQl-On-4c2" firstAttribute="top" secondItem="9J5-f3-PWX" secondAttribute="topMargin" id="66C-NS-QC4"/>
-                                                <constraint firstItem="vQl-On-4c2" firstAttribute="leading" secondItem="9J5-f3-PWX" secondAttribute="leadingMargin" id="GIs-vy-SyH"/>
-                                                <constraint firstItem="vQl-On-4c2" firstAttribute="trailing" secondItem="9J5-f3-PWX" secondAttribute="trailingMargin" id="ixr-6o-xcS"/>
-                                                <constraint firstItem="Yyz-UW-tl4" firstAttribute="top" secondItem="vQl-On-4c2" secondAttribute="bottom" constant="8" id="qu2-si-OZD"/>
-                                                <constraint firstItem="Yyz-UW-tl4" firstAttribute="leading" secondItem="9J5-f3-PWX" secondAttribute="leadingMargin" id="tdS-cu-LrJ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="numberOfInstallmentsLabel" destination="vQl-On-4c2" id="Xqb-P8-Mhk"/>
-                                            <outlet property="recommendedMessageLabel" destination="Yyz-UW-tl4" id="Ti5-v8-0d9"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="3aj-cL-Odb" id="75b-nI-mLS"/>
                                     <outlet property="delegate" destination="3aj-cL-Odb" id="rh5-cb-wHM"/>

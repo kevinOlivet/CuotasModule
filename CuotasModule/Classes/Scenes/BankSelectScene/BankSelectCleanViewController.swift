@@ -56,6 +56,7 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
         interactor?.prepareSetUpUI(request: BankSelectClean.Texts.Request())
         fetchBankSelect()
     }
@@ -100,6 +101,16 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
 }
 
 extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+
+    private static let cellIdentifier = "BankSelectCell"
+    private func setupCollectionView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.reloadData()
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return !bankSelectModelArray.isEmpty ? bankSelectModelArray.count : 1
     }
