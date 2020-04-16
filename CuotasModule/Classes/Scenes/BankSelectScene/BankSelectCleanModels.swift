@@ -10,11 +10,19 @@ import UIKit
 
 enum BankSelectClean {
     // MARK: Use cases
+
+    enum Texts {
+        struct Request {}
+        struct Response {
+            let title: String
+        }
+        struct ViewModel {
+            let title: String
+        }
+    }
     
     enum BankSelect {
-        struct Request {
-            var selectedPaymentMethod: PaymentMethodModel
-        }
+        struct Request {}
         enum Response {
             struct Success {
                 var bankSelectArray: [BankSelectModel]

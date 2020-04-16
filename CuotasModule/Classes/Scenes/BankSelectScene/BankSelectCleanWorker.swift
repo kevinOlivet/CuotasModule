@@ -14,7 +14,7 @@ class BankSelectCleanWorker {
     var repo: APICuotasModuleProtocol = APICuotasModule()
 
     func getBankSelect(
-        request: BankSelectClean.BankSelect.Request,
+        selectedPaymentMethodId: String,
         successCompletion: @escaping ([BankSelectModel]?) -> Void,
         failureCompletion: @escaping (NTError) -> Void
     ) {
@@ -23,7 +23,7 @@ class BankSelectCleanWorker {
             return
         }
         repo.getBankSelect(
-            selectedPaymentMethodId: request.selectedPaymentMethod.id,
+            selectedPaymentMethodId: selectedPaymentMethodId,
             success: { (receivedBankSelectModels, _) in
                 successCompletion(receivedBankSelectModels)
             },

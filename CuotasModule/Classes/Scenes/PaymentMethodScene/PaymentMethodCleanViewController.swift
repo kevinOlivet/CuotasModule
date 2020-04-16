@@ -17,7 +17,6 @@ protocol PaymentMethodCleanDisplayLogic: class {
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure)
     func displayPaymentMethodArray(viewModel: PaymentMethodClean.PaymentMethods.ViewModel)
     func showBankSelect(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success)
-    func displayWrongAmountAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure)
 }
 
 class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisplayLogic {
@@ -28,14 +27,10 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
     var spinner: UIActivityIndicatorView!
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
 
+
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Object lifecycle
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,22 +51,12 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
         router.viewController = viewController
         router.dataStore = interactor
     }
-    
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
+
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         interactor?.prepareSetUpUI(request: PaymentMethodClean.Texts.Request())
         interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
     }
@@ -104,21 +89,22 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
         )
     }
     
-    func displayWrongAmountAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure) {
-        Alerts.dismissableAlert(
-            title: viewModel.errorTitle,
-            message: viewModel.errorMessage,
-            vc: self,
-            actionBtnText: viewModel.buttonTitle
-        )
-    }
-    
     func showBankSelect(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success) {
         router?.routeToBankSelect()
     }
 }
 
 extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDelegate {
+
+    private static let cellIdentifier = "PaymentMethodCell"
+    private func setupTableView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        tableView.reloadData()
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return paymentMethodsToDisplay.count
     }
@@ -129,7 +115,6 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
             for: indexPath
             ) as! PaymentMethodTableViewCell
         
-        // Change to ViewModel
         let paymentMethod = paymentMethodsToDisplay[indexPath.row]
         cell.paymentMethodNameLabel.text = paymentMethod.name
         
@@ -142,4 +127,7 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
         let request = PaymentMethodClean.PaymentMethodsDetails.Request(indexPath: indexPath.row)
         interactor?.handleDidSelectRow(request: request)
     }
+
+    // MARK: - GettersSetters
+    var titleText: String? { self.title }
 }

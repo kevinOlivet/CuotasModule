@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PaymentMethodCell" rowHeight="96" id="lMc-9G-rlN" customClass="PaymentMethodTableViewCell" customModule="CuotasModule" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lMc-9G-rlN" id="36u-C4-Fd0">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TLu-Dm-tQz">
+                        <rect key="frame" x="338.5" y="11" width="60.5" height="60.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="TLu-Dm-tQz" secondAttribute="height" multiplier="1:1" id="uaQ-jp-gDM"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtB-9u-r2M">
+                        <rect key="frame" x="20" y="24" width="295.5" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="J3P-dd-SuJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vtB-9u-r2M" firstAttribute="top" secondItem="36u-C4-Fd0" secondAttribute="top" constant="24" id="AiD-n3-ium"/>
+                    <constraint firstItem="TLu-Dm-tQz" firstAttribute="top" secondItem="36u-C4-Fd0" secondAttribute="top" constant="11" id="ILW-pJ-2nA"/>
+                    <constraint firstItem="TLu-Dm-tQz" firstAttribute="leading" secondItem="vtB-9u-r2M" secondAttribute="trailing" constant="23" id="NJ3-gt-END"/>
+                    <constraint firstItem="vtB-9u-r2M" firstAttribute="leading" secondItem="36u-C4-Fd0" secondAttribute="leadingMargin" id="Yrz-Yf-41D"/>
+                    <constraint firstAttribute="trailing" secondItem="TLu-Dm-tQz" secondAttribute="trailing" constant="15" id="iZA-6U-hoI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vtB-9u-r2M" secondAttribute="bottom" constant="27" id="o4G-yd-VT4"/>
+                    <constraint firstAttribute="bottom" secondItem="TLu-Dm-tQz" secondAttribute="bottom" constant="24.5" id="q0V-oz-nLB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="paymentImageView" destination="TLu-Dm-tQz" id="tgf-DN-DcS"/>
+                <outlet property="paymentMethodNameLabel" destination="vtB-9u-r2M" id="VBp-S9-p20"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="148.66071428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

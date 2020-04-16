@@ -9,18 +9,22 @@
 import UIKit
 
 protocol BankSelectCleanPresentationLogic {
-    //  func presentSomething(response: BankSelectClean.Something.Response)
+    func presentSetUpUI(response: BankSelectClean.Texts.Response)
     func presentSpinner()
     func hideSpinner()
     func presentBankSelects(response: BankSelectClean.BankSelect.Response.Success)
     func presentErrorAlert(response: BankSelectClean.BankSelect.Response.Failure)
-    func showCuotas(response: BankSelectClean.BankSelectDetails.Response.Success)
+    func presentCuotas()
 }
 
 class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
     weak var viewController: BankSelectCleanDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Methods
+    func presentSetUpUI(response: BankSelectClean.Texts.Response) {
+        let viewModel = BankSelectClean.Texts.ViewModel(title: response.title)
+        viewController?.displaySetUpUI(viewModel: viewModel)
+    }
     
     func presentSpinner() {
         viewController?.displaySpinner()
@@ -56,12 +60,7 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     
-    func showCuotas(response: BankSelectClean.BankSelectDetails.Response.Success) {
-        let viewModel = BankSelectClean.BankSelectDetails.ViewModel.Success(
-            amountEntered: response.amountEntered,
-            selectedPaymentMethod: response.selectedPaymentMethod,
-            bankSelected: response.bankSelected
-        )
-        viewController?.showCuotas(viewModel: viewModel)
+    func presentCuotas() {
+        viewController?.showCuotas()
     }
 }

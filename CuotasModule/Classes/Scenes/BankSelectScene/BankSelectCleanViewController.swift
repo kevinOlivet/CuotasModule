@@ -11,12 +11,13 @@ import Alamofire
 import AlamofireImage
 
 protocol BankSelectCleanDisplayLogic: class {
+    func displaySetUpUI(viewModel: BankSelectClean.Texts.ViewModel)
     func displaySpinner()
     func hideSpinner()
     func fetchBankSelect()
     func displayBankSelects(viewModel: BankSelectClean.BankSelect.ViewModel.Success)
     func displayErrorAlert(viewModel: BankSelectClean.BankSelect.ViewModel.Failure)
-    func showCuotas(viewModel: BankSelectClean.BankSelectDetails.ViewModel.Success)
+    func showCuotas()
 }
 
 class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLogic {
@@ -30,11 +31,6 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: Object lifecycle
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -56,35 +52,23 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        setupCollectionView()
+        interactor?.prepareSetUpUI(request: BankSelectClean.Texts.Request())
         fetchBankSelect()
     }
     
-    // MARK: Do something
+    // MARK: Methods
     
-    func setUpUI() {
-        if let selectedPaymentMethod = interactor?.selectedPaymentMethod {
-            self.title = selectedPaymentMethod.name
-        }
+    func displaySetUpUI(viewModel: BankSelectClean.Texts.ViewModel) {
+        self.title = viewModel.title
     }
     
     func fetchBankSelect() {
-        let request = BankSelectClean.BankSelect.Request(selectedPaymentMethod: interactor!.selectedPaymentMethod!)
+        let request = BankSelectClean.BankSelect.Request()
         interactor?.getBankSelect(request: request)
     }
     
@@ -111,14 +95,24 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
         )
     }
     
-    func showCuotas(viewModel: BankSelectClean.BankSelectDetails.ViewModel.Success) {
+    func showCuotas() {
         router?.routeToCuotas()
     }
 }
 
 extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+
+    private static let cellIdentifier = "BankSelectCell"
+    private func setupCollectionView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.reloadData()
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return bankSelectModelArray.count > 0 ? bankSelectModelArray.count : 1
+        return !bankSelectModelArray.isEmpty ? bankSelectModelArray.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -129,7 +123,7 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
             cell.bankNameLabel.text = bankSelectModel.name
             cell.bankSelectImageView.af_setImage(withURL: URL(string: bankSelectModel.secureThumbnail)!)
         } else {
-            if let selectedPaymentMethod = interactor?.selectedPaymentMethod {
+            if let selectedPaymentMethod = selectedPaymentMethod {
                 cell.bankNameLabel.text = selectedPaymentMethod.name
                 cell.bankSelectImageView.af_setImage(withURL: URL(string: selectedPaymentMethod.secureThumbnail)!)
             }
@@ -142,4 +136,7 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
         let request = BankSelectClean.BankSelectDetails.Request(indexPath: indexPath)
         interactor?.handleDidSelectItem(request: request)
     }
+
+    // MARK: - Getters
+    var titleText: String? { self.title }
 }

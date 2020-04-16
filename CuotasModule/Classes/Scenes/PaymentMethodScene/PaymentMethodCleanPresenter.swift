@@ -15,7 +15,6 @@ protocol PaymentMethodCleanPresentationLogic {
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure)
     func presentPaymentMethods(response: PaymentMethodClean.PaymentMethods.Response)
     func showBankSelect(response: PaymentMethodClean.PaymentMethodsDetails.Response.Success)
-    func presentWrongAmountAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure)
 }
 
 class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
@@ -68,14 +67,5 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
             selectedPaymentMethod: response.selectedPaymentMethod
         )
         viewController?.showBankSelect(viewModel: viewModel)
-    }
-    
-    func presentWrongAmountAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
-            errorTitle: response.errorTitle.localized,
-            errorMessage: response.errorMessage.localized,
-            buttonTitle: response.buttonTitle.localized
-        )
-        viewController?.displayWrongAmountAlert(viewModel: viewModel)
     }
 }

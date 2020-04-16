@@ -9,6 +9,7 @@
 import BasicCommons
 
 protocol CuotasCleanDisplayLogic: class {
+    func displaySetUpUI(viewModel: CuotasClean.Texts.ViewModel)
     func displaySpinner()
     func hideSpinner()
     func displayErrorAlert(viewModel: CuotasClean.Cuotas.ViewModel.Failure)
@@ -25,11 +26,6 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: Object lifecycle
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,38 +47,22 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        setupTableView()
+        interactor?.prepareSetUpUI(request: CuotasClean.Texts.Request())
         fetchCuotas()
     }
     
-    func setUpUI() {
-        let displayName = interactor?.bankSelected != nil ? interactor?.bankSelected!.name : interactor?.selectedPaymentMethod?.name
-        self.title = displayName
+    func displaySetUpUI(viewModel: CuotasClean.Texts.ViewModel) {
+        self.title = viewModel.title
     }
     
-    // MARK: Do something
+    // MARK: Methods
     func fetchCuotas() {
-        let request = CuotasClean.Cuotas.Request(
-            amountEntered: interactor!.amountEntered,
-            selectedPaymentMethodId: interactor!.selectedPaymentMethod,
-            bankSelectedId: interactor!.bankSelected
-        )
-        interactor?.getCuotas(request: request)
+        interactor?.getCuotas()
     }
     
     func displaySpinner() {
@@ -109,6 +89,16 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
 }
 
 extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate {
+
+    private static let cellIdentifier = "CuotasCell"
+    private func setupTableView() {
+        let cellIdentifier = type(of: self).cellIdentifier
+        let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
+        let nib = UINib(nibName: cellIdentifier, bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        tableView.reloadData()
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cuotasArrayDisplay.count
     }
@@ -126,5 +116,7 @@ extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate 
         let request = CuotasClean.CuotasDetails.Request(indexPath: indexPath)
         interactor?.handleDidSelectRow(request: request)
     }
-    
+
+    // MARK: - Getters
+    var titleText: String? { self.title }
 }

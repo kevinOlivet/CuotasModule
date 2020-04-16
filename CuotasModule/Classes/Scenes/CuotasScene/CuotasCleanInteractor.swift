@@ -9,7 +9,8 @@
 import UIKit
 
 protocol CuotasCleanBusinessLogic {
-    func getCuotas(request: CuotasClean.Cuotas.Request)
+    func prepareSetUpUI(request: CuotasClean.Texts.Request)
+    func getCuotas()
     func handleDidSelectRow(request: CuotasClean.CuotasDetails.Request)
 }
 
@@ -30,8 +31,21 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
     var cuotasModelArray: [CuotasResult.PayerCost]?
     
     // MARK: Methods
+    func prepareSetUpUI(request: CuotasClean.Texts.Request) {
+        guard let selectedPaymentName = selectedPaymentMethod?.name else {
+            return
+        }
+        let displayName = bankSelected?.name ?? selectedPaymentName
+        let response = CuotasClean.Texts.Response(title: displayName)
+        presenter?.presentSetUpUI(response: response)
+    }
     
-    func getCuotas(request: CuotasClean.Cuotas.Request) {
+    func getCuotas() {
+        let request = CuotasClean.Cuotas.Request(
+                amountEntered: amountEntered,
+                selectedPaymentMethodId: selectedPaymentMethod,
+                bankSelectedId: bankSelected
+            )
         presenter?.presentSpinner()
         
         worker?.getCuotas(
@@ -46,7 +60,7 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
                     let response = CuotasClean.Cuotas.Response.Failure(
                         errorTitle: "Error",
                         errorMessage: "Error Parsing",
-                        buttonTitle: "Ok")
+                        buttonTitle: "Cancel")
 
                     self.presenter?.presentErrorAlert(response: response)
                 }
@@ -55,27 +69,30 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
             let response = CuotasClean.Cuotas.Response.Failure(
                 errorTitle: "Error",
                 errorMessage: "Service Error",
-                buttonTitle: "Ok"
+                buttonTitle: "Cancel"
             )
             self.presenter?.presentErrorAlert(response: response)
         }
     }
     
     func handleDidSelectRow(request: CuotasClean.CuotasDetails.Request) {
-        if let amountEntered = amountEntered, let  selectedPaymentMethod = selectedPaymentMethod {
-            let bankSelectedName = (bankSelected != nil) ? bankSelected!.name : selectedPaymentMethod.name
+        if let amountEntered = amountEntered,
+            let  selectedPaymentMethod = selectedPaymentMethod {
+            let bankSelectedName = bankSelected?.name ?? selectedPaymentMethod.name
             let finalMessage = "Amount: $\(amountEntered)\n"
                 + "Selected Payment Method: \(selectedPaymentMethod.name)\n"
                 + "Bank Selected: \(bankSelectedName)\n"
                 + cuotasModelArray![request.indexPath.row].recommendedMessage
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "cuotasFinishedNotification"),
-                                            object: nil,
-                                            userInfo: ["finalMessage": finalMessage])
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: "cuotasFinishedNotification"),
+                object: nil,
+                userInfo: ["finalMessage": finalMessage]
+            )
         } else {
             let response = CuotasClean.Cuotas.Response.Failure(
                 errorTitle: "Error",
                 errorMessage: "Error Parsing",
-                buttonTitle: "Ok"
+                buttonTitle: "Cancel"
             )
             self.presenter?.presentErrorAlert(response: response)
         }

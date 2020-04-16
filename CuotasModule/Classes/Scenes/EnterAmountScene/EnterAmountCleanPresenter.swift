@@ -23,7 +23,7 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
     // MARK: Do something
     func presentSetUpUI(response: EnterAmountClean.Texts.Response) {
         let viewModel = EnterAmountClean.Texts.ViewModel(
-            title: response.title,
+            title: response.title.localized,
             enterAmountLabel: response.enterAmountLabel.localized,
             nextButton: response.nextButton.localized
         )
