@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cOq-oo-Umi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PaymentMethodCell" rowHeight="96" id="weO-kd-pcY" customClass="PaymentMethodTableViewCell" customModule="CuotasModule" customModuleProvider="target">
@@ -119,7 +119,7 @@
                             <constraint firstItem="cOq-oo-Umi" firstAttribute="trailing" secondItem="cEu-Ue-P6J" secondAttribute="trailing" id="ZoZ-o6-JrK"/>
                             <constraint firstItem="cOq-oo-Umi" firstAttribute="leading" secondItem="cEu-Ue-P6J" secondAttribute="leading" id="hLh-uH-CQq"/>
                             <constraint firstItem="cOq-oo-Umi" firstAttribute="top" secondItem="cEu-Ue-P6J" secondAttribute="top" id="kfc-sN-lEH"/>
-                            <constraint firstItem="cOq-oo-Umi" firstAttribute="bottom" secondItem="cEu-Ue-P6J" secondAttribute="bottom" id="vS1-i4-IWR"/>
+                            <constraint firstItem="cOq-oo-Umi" firstAttribute="bottom" secondItem="hcd-Yr-73Q" secondAttribute="bottom" id="vS1-i4-IWR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cEu-Ue-P6J"/>
                     </view>
@@ -142,7 +142,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="O2l-7U-vbV">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mga-Qn-kjH">
                                     <size key="itemSize" width="100" height="100"/>
@@ -194,7 +194,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="O2l-7U-vbV" firstAttribute="top" secondItem="RS6-tj-mpz" secondAttribute="top" id="VwF-KE-hFa"/>
-                            <constraint firstItem="O2l-7U-vbV" firstAttribute="bottom" secondItem="RS6-tj-mpz" secondAttribute="bottom" id="cDg-2M-KVa"/>
+                            <constraint firstItem="O2l-7U-vbV" firstAttribute="bottom" secondItem="dbs-A2-6IQ" secondAttribute="bottom" id="cDg-2M-KVa"/>
                             <constraint firstItem="O2l-7U-vbV" firstAttribute="trailing" secondItem="RS6-tj-mpz" secondAttribute="trailing" id="fpr-7L-5LF"/>
                             <constraint firstItem="O2l-7U-vbV" firstAttribute="leading" secondItem="RS6-tj-mpz" secondAttribute="leading" id="fsc-ek-1QA"/>
                         </constraints>
@@ -219,7 +219,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dOr-hb-6BZ">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CuotasCell" rowHeight="80" id="86V-Gl-v5t" customClass="CuotasTableViewCell" customModule="CuotasModule" customModuleProvider="target">
@@ -270,7 +270,7 @@
                             <constraint firstItem="dOr-hb-6BZ" firstAttribute="trailing" secondItem="3Yj-ss-tWf" secondAttribute="trailing" id="WqL-EL-jQI"/>
                             <constraint firstItem="dOr-hb-6BZ" firstAttribute="top" secondItem="3Yj-ss-tWf" secondAttribute="top" id="YEn-Jd-TNa"/>
                             <constraint firstItem="dOr-hb-6BZ" firstAttribute="leading" secondItem="3Yj-ss-tWf" secondAttribute="leading" id="a2i-vt-dea"/>
-                            <constraint firstItem="dOr-hb-6BZ" firstAttribute="bottom" secondItem="3Yj-ss-tWf" secondAttribute="bottom" id="x7i-AB-aC8"/>
+                            <constraint firstItem="dOr-hb-6BZ" firstAttribute="bottom" secondItem="PWG-Za-Jgi" secondAttribute="bottom" id="x7i-AB-aC8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Yj-ss-tWf"/>
                     </view>
