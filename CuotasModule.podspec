@@ -21,6 +21,7 @@ Used to inject the Cuotas scene
   ]
 
   s.dependency 'BasicCommons'
+  s.dependency 'BasicUIElements'
 
   # s.script_phases = [
   #   {

@@ -60,33 +60,29 @@ class CuotasCleanPresenterTests: XCTestCase {
             "presentSetupUI should pass and format the text"
         )
     }
-    func testPresentSpinner() {
+    func testPresentLoadingView() {
         // Given
         // When
-        sut.presentSpinner()
+        sut.presentLoadingView()
         // Then
         XCTAssertTrue(
-            spyViewController.displaySpinnerCalled,
-            "presentSpinner should ask the view controller to displaySpinner"
+            spyViewController.displayLoadingViewCalled,
+            "presentLoadingView should ask the view controller to displayLoadingView"
         )
     }
-    func testHideSpinner() {
+    func testHideLoadingView() {
         // Given
         // When
-        sut.hideSpinner()
+        sut.hideLoadingView()
         // Then
         XCTAssertTrue(
-            spyViewController.hideSpinnerCalled,
-            "hideSpinner should ask the view controller to hideSpinner"
+            spyViewController.hideLoadingViewCalled,
+            "hideLoadingView should ask the view controller to hideLoadingView"
         )
     }
     func testPresentErrorAlert() {
         // Given
-        let response = CuotasClean.Cuotas.Response.Failure(
-            errorTitle: "Error",
-            errorMessage: "Service Error",
-            buttonTitle: "Cancel"
-        )
+        let response = CuotasClean.Cuotas.Response.Failure(errorType: .internet)
         // When
         sut.presentErrorAlert(response: response)
         // Then
@@ -95,20 +91,10 @@ class CuotasCleanPresenterTests: XCTestCase {
             "presentErrorAlert should ask the view controller to displayErrorAlert"
         )
         XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.errorTitle,
-            "Error".localized,
-            "the presenter should format the response"
-        )
-        XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.errorMessage,
-            "Service Error".localized,
-            "the presenter should format the response"
-        )
-        XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.buttonTitle,
-            "Cancel".localized,
-            "the presenter should format the response"
-        )
+            spyViewController.displayErrorAlertViewModel?.errorType,
+                .internet,
+                "Error parsing should have the correct errorType"
+            )
     }
     func testPresentCuotas() {
         // Given

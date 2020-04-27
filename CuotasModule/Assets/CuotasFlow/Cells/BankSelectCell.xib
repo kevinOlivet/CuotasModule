@@ -17,13 +17,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXR-MW-Y9Y">
-                        <rect key="frame" x="5" y="95" width="90" height="0.0"/>
+                        <rect key="frame" x="5" y="80.5" width="90" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="bVl-LS-xh5"/>
+                            <constraint firstAttribute="height" constant="14.5" id="xpW-jR-AJb"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lF4-pc-qFV">
-                        <rect key="frame" x="8" y="5" width="84" height="85"/>
+                        <rect key="frame" x="8" y="5" width="84" height="70.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70.5" id="P3e-Uc-pDw"/>
+                            <constraint firstAttribute="width" constant="84" id="rKV-1P-SxV"/>
+                        </constraints>
                     </imageView>
                 </subviews>
             </view>

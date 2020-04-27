@@ -6,6 +6,7 @@
 //
 
 import BasicCommons
+import BasicUIElements
 
 /// Class for the CuotasModuleFactory
 public class CuotasModuleFactory {
@@ -33,7 +34,7 @@ private class CuotasModuleMainNavigationController: UINavigationController {
     init() {
         viewController.tabBarItem = UITabBarItem(
             title: "Cuotas",
-            image: UIImage(named: "tab_home"),
+            image: MainAsset.tabHome.image,
             tag: 0
         )
         let bundleToUse = Utils.bundle(forClass: CuotasModuleLandingViewController.classForCoder())

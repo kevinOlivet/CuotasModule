@@ -10,8 +10,8 @@ import UIKit
 
 protocol BankSelectCleanPresentationLogic {
     func presentSetUpUI(response: BankSelectClean.Texts.Response)
-    func presentSpinner()
-    func hideSpinner()
+    func presentLoadingView()
+    func hideLoadingView()
     func presentBankSelects(response: BankSelectClean.BankSelect.Response.Success)
     func presentErrorAlert(response: BankSelectClean.BankSelect.Response.Failure)
     func presentCuotas()
@@ -26,12 +26,12 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
         viewController?.displaySetUpUI(viewModel: viewModel)
     }
     
-    func presentSpinner() {
-        viewController?.displaySpinner()
+    func presentLoadingView() {
+        viewController?.displayLoadingView()
     }
     
-    func hideSpinner() {
-        viewController?.hideSpinner()
+    func hideLoadingView() {
+        viewController?.hideLoadingView()
     }
     
     func presentBankSelects(response: BankSelectClean.BankSelect.Response.Success) {
@@ -52,11 +52,7 @@ class BankSelectCleanPresenter: BankSelectCleanPresentationLogic {
     }
     
     func presentErrorAlert(response: BankSelectClean.BankSelect.Response.Failure) {
-        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(
-            errorTitle: response.errorTitle.localized,
-            errorMessage: response.errorMessage.localized,
-            buttonTitle: response.buttonTitle.localized
-        )
+        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(errorType: response.errorType)
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     

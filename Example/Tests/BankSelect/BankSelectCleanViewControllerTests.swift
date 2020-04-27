@@ -12,6 +12,7 @@
 // swiftlint:disable implicitly_unwrapped_optional
 // swiftlint:disable line_length
 import BasicCommons
+import BasicUIElements
 @testable import CuotasModule
 import XCTest
 
@@ -123,38 +124,12 @@ class BankSelectCleanViewControllerTests: XCTestCase {
             "displaySetUpUI should set the title correctly"
         )
     }
-    func testDisplaySpinner() {
+    func testDisplayLoadingView() {
         // Given
         // When
-        sut.displaySpinner()
+        sut.displayLoadingView()
         // Then
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
-    }
-    func testHideSpinner() {
-        // Given
-        sut.displaySpinner()
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
-        // When
-        sut.hideSpinner()
-        // Then
-        XCTAssertTrue(
-            sut.spinner.isHidden,
-            "spinner should hide when told to do so"
-        )
+        XCTAssertTrue(sut.view.subviews.last is MainActivityIndicator)
     }
     func testDisplayBankSelects() {
         // Given
@@ -191,32 +166,11 @@ class BankSelectCleanViewControllerTests: XCTestCase {
     }
     func testDisplayErrorAlert() {
         // Given
-        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(
-            errorTitle: "testErrorTitle",
-            errorMessage: "testErrorMessage",
-            buttonTitle: "testButtonTitle"
-        )
+        let viewModel = BankSelectClean.BankSelect.ViewModel.Failure(errorType: .internet)
         // When
         sut.displayErrorAlert(viewModel: viewModel)
         // Then
-        XCTAssertTrue(
-            sut.presentedViewController is UIAlertController,
-            "displayInputAlert should present an alert"
-        )
-        guard let alert = sut.presentedViewController as? UIAlertController else {
-            XCTFail("The alert didn't get presented")
-            return
-        }
-        XCTAssertEqual(
-            alert.title,
-            "testErrorTitle",
-            "should be the title"
-        )
-        XCTAssertEqual(
-            alert.message,
-            "testErrorMessage",
-            "should be the message"
-        )
+        XCTAssertTrue(sut.view.subviews.last is FullScreenMessageErrorAnimated)
     }
     func testShowCuotas() {
         // Given
@@ -237,10 +191,10 @@ class BankSelectCleanViewControllerTests: XCTestCase {
         )
         sut.bankSelectModelArray = [bank]
 
-        sut.collectionView.reloadData()
+        sut.getBankCollectionView.reloadData()
         let indexPathToUse = IndexPath(row: 0, section: 0)
         // When
-        let cell = sut.collectionView(sut.collectionView, cellForItemAt: indexPathToUse)
+        let cell = sut.collectionView(sut.getBankCollectionView, cellForItemAt: indexPathToUse)
         XCTAssertTrue(
             cell is BankSelectCollectionViewCell,
             "cell should be BankSelectCollectionViewCell"
@@ -266,10 +220,10 @@ class BankSelectCleanViewControllerTests: XCTestCase {
             maxAllowedAmount: 12345
         )
         sut.selectedPaymentMethod = model
-        sut.collectionView.reloadData()
+        sut.getBankCollectionView.reloadData()
         let indexPathToUse = IndexPath(row: 0, section: 0)
         // When
-        let cell = sut.collectionView(sut.collectionView, cellForItemAt: indexPathToUse)
+        let cell = sut.collectionView(sut.getBankCollectionView, cellForItemAt: indexPathToUse)
         XCTAssertTrue(
             cell is BankSelectCollectionViewCell,
             "cell should be BankSelectCollectionViewCell"
@@ -283,6 +237,13 @@ class BankSelectCleanViewControllerTests: XCTestCase {
             "testPaymentName",
             "should equal the name passed to the cell"
         )
+    }
+    func testCloseButtonTapped() {
+        // Given
+        // When
+        sut.closeButtonTapped()
+        // Then
+        XCTAssertTrue(spyRouter.closeToDashboardCalled)
     }
 }
 

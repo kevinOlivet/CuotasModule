@@ -15,7 +15,7 @@ use_frameworks!
 ###
 
 #Use this variable to change pod install from local_pods, develop_pods, master_pods, feature_pods
-pods_environment = "local" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
+pods_environment = "develop" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
 
 ###
 ### --- METHODS ---
@@ -25,6 +25,7 @@ pods_environment = "local" # <- HERE: Change this line, options are: 'local', de
 def local_pods
   color(32) { puts "Installing Local Pods..." }
   pod 'BasicCommons', :path => '../../BasicCommons/'
+  pod 'BasicUIElements', :path => '../../BasicUIElements/'
 end
 
 #Use this funcion to compile feature pods as development in featue
@@ -35,18 +36,21 @@ def feature_pods
 
     color(32) { puts "Installing Develop Pods from branch: #{feature_branch}" }
     pod 'BasicCommons', :git => 'git@github.com:kevinOlivet/BasicCommons.git', :branch => "#{feature_branch}"
+    pod 'BasicUIElements', :git => 'git@github.com:kevinOlivet/BasicUIElements.git', :branch => "#{feature_branch}"
 end
 
 #Use this funcion to compile develop pods as development in develop
 def develop_pods
     color(32) { puts "Installing Develop Pods..." }
     pod 'BasicCommons', :git => 'git@github.com:kevinOlivet/BasicCommons.git', :branch => 'develop'
+    pod 'BasicUIElements', :git => 'git@github.com:kevinOlivet/BasicUIElements.git', :branch => 'develop'
 end
 
 #Use this funcion to compile master pods as development in master
 def master_pods
     color(32) { puts "Installing Develop Pods..." }
     pod 'BasicCommons', :git => 'git@github.com:kevinOlivet/BasicCommons.git', :branch => 'master'
+    pod 'BasicUIElements', :git => 'git@github.com:kevinOlivet/BasicUIElements.git', :branch => 'master'
 end
 
 ###

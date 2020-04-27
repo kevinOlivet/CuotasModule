@@ -141,20 +141,10 @@ class CuotasCleanInteractorTests: XCTestCase {
             "getBankSelect with failure parsing should call presenter presentErrorAlert"
         )
         XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorTitle,
-            "Error",
-            "Error parsing should have a title Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorMessage,
-            "Error Parsing",
-            "Error parsing should have a message Error Parsing"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.buttonTitle,
-            "Cancel",
-            "Error parsing should have a button Cancel"
-        )
+            spyPresenter.presentErrorAlertResponse?.errorType,
+                .service,
+                "Error parsing should have the correct errorType"
+            )
     }
     func testGetCuotasGeneralFail() {
         // Given
@@ -167,22 +157,28 @@ class CuotasCleanInteractorTests: XCTestCase {
             "getBankSelect with failure should call presenter presentErrorAlert"
         )
         XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorTitle,
-            "Error",
-            "Error in general should have a title Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorMessage,
-            "Service Error",
-            "Error in general should have a message Service Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.buttonTitle,
-            "Cancel",
-            "Error in general should have a button Cancel"
-        )
+            spyPresenter.presentErrorAlertResponse?.errorType,
+                .internet,
+                "Error parsing should have the correct errorType"
+            )
     }
-
+    func testHandleDidSelectRowFail() {
+        // Given
+        sut.amountEntered = nil
+        let request = CuotasClean.CuotasDetails.Request(indexPath: IndexPath(row: 0, section: 0))
+        // When
+        sut.handleDidSelectRow(request: request)
+        // Then
+        XCTAssertTrue(
+            spyPresenter.presentErrorAlertCalled,
+            "getBankSelect with failure should call presenter presentErrorAlert"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentErrorAlertResponse?.errorType,
+                .service,
+                "Error parsing should have the correct errorType"
+            )
+    }
 }
 
 // swiftlint:enable line_length

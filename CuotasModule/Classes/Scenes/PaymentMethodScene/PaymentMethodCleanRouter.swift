@@ -9,7 +9,7 @@
 import BasicCommons
 
 @objc protocol PaymentMethodCleanRoutingLogic {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func closeToDashboard()
     func routeToBankSelect()
 }
 
@@ -22,6 +22,10 @@ class PaymentMethodCleanRouter: NSObject, PaymentMethodCleanRoutingLogic, Paymen
   var dataStore: PaymentMethodCleanDataStore?
     
   // MARK: Routing
+
+    func closeToDashboard() {
+        viewController?.navigationController?.dismiss(animated: true)
+    }
     
     func routeToBankSelect() {
         let storyboard = UIStoryboard(name: "CuotasMain", bundle: Utils.bundle(forClass: BankSelectCleanViewController.classForCoder()))

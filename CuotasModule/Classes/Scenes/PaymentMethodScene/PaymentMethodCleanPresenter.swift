@@ -10,9 +10,10 @@ import UIKit
 
 protocol PaymentMethodCleanPresentationLogic {
     func presentSetupUI(response: PaymentMethodClean.Texts.Response)
-    func presentSpinner()
-    func hideSpinner()
+    func presentLoadingView()
+    func hideLoadingView()
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure)
+    func presentAmountErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.AmountFailure)
     func presentPaymentMethods(response: PaymentMethodClean.PaymentMethods.Response)
     func showBankSelect(response: PaymentMethodClean.PaymentMethodsDetails.Response.Success)
 }
@@ -28,21 +29,25 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
         viewController?.displaySetupUI(viewModel: viewModel)
     }
     
-    func presentSpinner() {
-        viewController?.displaySpinner()
+    func presentLoadingView() {
+        viewController?.displayLoadingView()
     }
     
-    func hideSpinner() {
-        viewController?.hideSpinner()
+    func hideLoadingView() {
+        viewController?.hideLoadingView()
     }
     
     func presentErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.Failure) {
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(errorType: response.errorType)
+        viewController?.displayErrorAlert(viewModel: viewModel)
+    }
+    func presentAmountErrorAlert(response: PaymentMethodClean.PaymentMethodsDetails.Response.AmountFailure) {
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure(
             errorTitle: response.errorTitle.localized,
             errorMessage: response.errorMessage.localized,
             buttonTitle: response.buttonTitle.localized
         )
-        viewController?.displayErrorAlert(viewModel: viewModel)
+        viewController?.displayAmountErrorAlert(viewModel: viewModel)
     }
     
     func presentPaymentMethods(response: PaymentMethodClean.PaymentMethods.Response) {

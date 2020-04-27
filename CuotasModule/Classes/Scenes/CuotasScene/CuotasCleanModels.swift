@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import BasicUIElements
 
 enum CuotasClean {
   // MARK: Use cases
@@ -23,42 +23,38 @@ enum CuotasClean {
 
   enum Cuotas {
     struct Request {
-        var amountEntered: Int
-        var selectedPaymentMethodId: PaymentMethodModel
-        var bankSelectedId: BankSelectModel?
+        let amountEntered: Int
+        let selectedPaymentMethodId: PaymentMethodModel
+        let bankSelectedId: BankSelectModel?
     }
     enum Response {
         struct Success {
-            var cuotasModelArray: [CuotasResult.PayerCost]
+            let cuotasModelArray: [CuotasResult.PayerCost]
         }
         struct Failure {
-            var errorTitle: String
-            var errorMessage: String
-            var buttonTitle: String
+            let errorType: FullScreenErrorType
         }
     }
     enum ViewModel {
         
         struct DisplayCuota {
-            var installments: String
-            var recommendedMessage: String
+            let installments: String
+            let recommendedMessage: String
         }
         
         struct Success {
-            var cuotasModelArray: [DisplayCuota]
+            let cuotasModelArray: [DisplayCuota]
         }
         
         struct Failure {
-            var errorTitle: String
-            var errorMessage: String
-            var buttonTitle: String
+            let errorType: FullScreenErrorType
         }
     }
   }
     
     enum CuotasDetails {
         struct Request {
-            var indexPath: IndexPath
+            let indexPath: IndexPath
         }
     }
 }

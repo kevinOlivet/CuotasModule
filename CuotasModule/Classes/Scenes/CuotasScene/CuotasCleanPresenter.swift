@@ -10,8 +10,8 @@ import UIKit
 
 protocol CuotasCleanPresentationLogic {
     func presentSetUpUI(response: CuotasClean.Texts.Response)
-    func presentSpinner()
-    func hideSpinner()
+    func presentLoadingView()
+    func hideLoadingView()
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure)
     func presentCuotas(response: CuotasClean.Cuotas.Response.Success)
 }
@@ -25,20 +25,16 @@ class CuotasCleanPresenter: CuotasCleanPresentationLogic {
         viewController?.displaySetUpUI(viewModel: viewModel)
     }
 
-    func presentSpinner() {
-        viewController?.displaySpinner()
+    func presentLoadingView() {
+        viewController?.displayLoadingView()
     }
     
-    func hideSpinner() {
-        viewController?.hideSpinner()
+    func hideLoadingView() {
+        viewController?.hideLoadingView()
     }
     
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure) {
-        let viewModel = CuotasClean.Cuotas.ViewModel.Failure(
-            errorTitle: response.errorTitle.localized,
-            errorMessage: response.errorMessage.localized,
-            buttonTitle: response.buttonTitle.localized
-        )
+        let viewModel = CuotasClean.Cuotas.ViewModel.Failure(errorType: response.errorType)
         viewController?.displayErrorAlert(viewModel: viewModel)
     }
     

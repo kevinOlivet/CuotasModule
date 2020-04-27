@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import Foundation
+import BasicUIElements
 
 enum PaymentMethodClean {
   // MARK: Use cases
@@ -50,6 +50,9 @@ enum PaymentMethodClean {
                 let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
+                let errorType: FullScreenErrorType
+            }
+            struct AmountFailure {
                 let errorTitle: String
                 let errorMessage: String
                 let buttonTitle: String
@@ -62,6 +65,9 @@ enum PaymentMethodClean {
                 let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
+                let errorType: FullScreenErrorType
+            }
+            struct AmountFailure {
                 let errorTitle: String
                 let errorMessage: String
                 let buttonTitle: String

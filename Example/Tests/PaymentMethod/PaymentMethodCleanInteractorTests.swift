@@ -114,9 +114,7 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         sut.fetchPaymentMethods(request: request)
         // Then
         XCTAssertTrue(spyPresenter.presentErrorAlertCalled, "fetchPaymentMethods with failure parsing should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorTitle, "Error", "Error parsing should have a title Error")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorMessage, "Error Parsing", "Error parsing should have a message Error Parsing")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.buttonTitle, "Cancel", "Error parsing should have a button Cancel")
+        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorType, .service, "Error parsing should have a title Error")
     }
     func testFetchPaymentMethodsGeneralFail() {
         // Given
@@ -126,9 +124,8 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         sut.fetchPaymentMethods(request: request)
         // Then
         XCTAssertTrue(spyPresenter.presentErrorAlertCalled, "fetchPaymentMethods with failure should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorTitle, "Error", "Error in general should have a title Error")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorMessage, "Service Error", "Error in general should have a message Service Error")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.buttonTitle, "Cancel", "Error in general should have a button Cancel")
+        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorType, .internet, "Error in general should have a title Error")
+
     }
     func testHandleDidSelectRowAmountSuccess() {
         // Given
@@ -166,10 +163,10 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.handleDidSelectRow(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentErrorAlertCalled, "handleDidSelectRow with too much should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorTitle, "Choose another", "Error for too much should have a title Error")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorMessage, "testName has a minimum amount of 123.00 and a maximum ammount of 1234.00", "Error in general should have a message specific message")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.buttonTitle, "Ok", "Error for too much should have a button Ok")
+        XCTAssertTrue(spyPresenter.presentAmountErrorAlertCalled, "handleDidSelectRow with too much should call presenter presentErrorAlert")
+        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.errorTitle, "Choose another", "Error for too much should have a title Error")
+        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.errorMessage, "testName has a minimum amount of 123.00 and a maximum ammount of 1234.00", "Error in general should have a message specific message")
+        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.buttonTitle, "Ok", "Error for too much should have a button Ok")
     }
 }
 

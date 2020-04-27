@@ -12,8 +12,12 @@ class BankSelectCleanRoutingLogicSpy: NSObject, BankSelectCleanRoutingLogic, Ban
 
     var dataStore: BankSelectCleanDataStore?
     var routeToCuotasCalled = false
+    var closeToDashboardCalled = false
 
     func routeToCuotas() {
         routeToCuotasCalled = true
+    }
+    func closeToDashboard() {
+        closeToDashboardCalled = true
     }
 }

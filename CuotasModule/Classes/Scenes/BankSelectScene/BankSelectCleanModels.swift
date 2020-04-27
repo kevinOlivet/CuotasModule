@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import BasicUIElements
 
 enum BankSelectClean {
     // MARK: Use cases
@@ -25,61 +25,53 @@ enum BankSelectClean {
         struct Request {}
         enum Response {
             struct Success {
-                var bankSelectArray: [BankSelectModel]
-                var selectedPaymentMethod: PaymentMethodModel
+                let bankSelectArray: [BankSelectModel]
+                let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorType: FullScreenErrorType
             }
         }
         enum ViewModel {
             struct DisplayBankSelect {
-                var name: String
-                var bankId: String
-                var secureThumbnail: String
+                let name: String
+                let bankId: String
+                let secureThumbnail: String
             }
             struct Success {
-                var bankSelectArray: [DisplayBankSelect]
-                var selectedPaymentMethod: PaymentMethodModel
+                let bankSelectArray: [DisplayBankSelect]
+                let selectedPaymentMethod: PaymentMethodModel
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorType: FullScreenErrorType
             }
         }
     }
     
     enum BankSelectDetails {
         struct Request {
-            var indexPath: IndexPath
+            let indexPath: IndexPath
         }
         
         enum Response {
             struct Success {
-                var amountEntered: Int
-                var selectedPaymentMethod: PaymentMethodModel
-                var bankSelected: BankSelectModel?
+                let amountEntered: Int
+                let selectedPaymentMethod: PaymentMethodModel
+                let bankSelected: BankSelectModel?
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorType: FullScreenErrorType
             }
         }
         
         enum ViewModel {
             struct Success {
-                var amountEntered: Int
-                var selectedPaymentMethod: PaymentMethodModel
-                var bankSelected: BankSelectModel?
+                let amountEntered: Int
+                let selectedPaymentMethod: PaymentMethodModel
+                let bankSelected: BankSelectModel?
             }
             struct Failure {
-                var errorTitle: String
-                var errorMessage: String
-                var buttonTitle: String
+                let errorType: FullScreenErrorType
             }
         }
     }

@@ -7,28 +7,30 @@
 //
 
 import BasicCommons
+import BasicUIElements
 import Alamofire
 import AlamofireImage
 
 protocol PaymentMethodCleanDisplayLogic: class {
     func displaySetupUI(viewModel: PaymentMethodClean.Texts.ViewModel)
-    func displaySpinner()
-    func hideSpinner()
+    func displayLoadingView()
+    func hideLoadingView()
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure)
+    func displayAmountErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure)
     func displayPaymentMethodArray(viewModel: PaymentMethodClean.PaymentMethods.ViewModel)
     func showBankSelect(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success)
 }
 
-class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisplayLogic {
+class PaymentMethodCleanViewController: BaseViewController, PaymentMethodCleanDisplayLogic {
     
     var interactor: (PaymentMethodCleanBusinessLogic & PaymentMethodCleanDataStore)?
     var router: (NSObjectProtocol & PaymentMethodCleanRoutingLogic & PaymentMethodCleanDataPassing)?
     
-    var spinner: UIActivityIndicatorView!
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
 
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var closeButton: UIBarButtonItem!
+    @IBOutlet private weak var paymentTableView: UITableView!
     
     // MARK: Object lifecycle
     
@@ -58,29 +60,52 @@ class PaymentMethodCleanViewController: UIViewController, PaymentMethodCleanDisp
         super.viewDidLoad()
         setupTableView()
         interactor?.prepareSetUpUI(request: PaymentMethodClean.Texts.Request())
-        interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
+        fetchPaymentMethods()
     }
     
     // MARK: Methods
+    @objc
+    func fetchPaymentMethods() {
+        genericHideErrorView()
+        interactor?.fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request())
+    }
     
     func displaySetupUI(viewModel: PaymentMethodClean.Texts.ViewModel) {
         self.title = viewModel.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
+            target: self,
+            action: #selector(closeButtonTapped)
+        )
+    }
+
+    @objc
+    func closeButtonTapped() {
+        genericHideErrorView()
+        router?.closeToDashboard()
     }
     
-    func displaySpinner() {
-        spinner = self.showModalSpinner()
+    func displayLoadingView() {
+        genericDisplayLoadingView()
     }
     
-    func hideSpinner() {
-        self.hideModalSpinner(indicator: spinner)
+    func hideLoadingView() {
+        genericHideLoadingView()
     }
     
     func displayPaymentMethodArray(viewModel: PaymentMethodClean.PaymentMethods.ViewModel) {
         paymentMethodsToDisplay = viewModel.displayPaymentMethodViewModelArray
-        tableView.reloadData()
+        paymentTableView.reloadData()
     }
     
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure) {
+        genericDisplayErrorView(
+            typeOfError: viewModel.errorType,
+            retryAction: #selector(fetchPaymentMethods),
+            closeAction: #selector(closeButtonTapped)
+        )
+    }
+    func displayAmountErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure) {
         Alerts.dismissableAlert(
             title: viewModel.errorTitle,
             message: viewModel.errorMessage,
@@ -101,8 +126,8 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
         let cellIdentifier = type(of: self).cellIdentifier
         let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
         let nib = UINib(nibName: cellIdentifier, bundle: bundle)
-        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-        tableView.reloadData()
+        paymentTableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        paymentTableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,12 +139,17 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
             withIdentifier: "PaymentMethodCell",
             for: indexPath
             ) as! PaymentMethodTableViewCell
-        
         let paymentMethod = paymentMethodsToDisplay[indexPath.row]
         cell.paymentMethodNameLabel.text = paymentMethod.name
-        
-        cell.paymentImageView.af_setImage(withURL: URL(string: paymentMethod.secureThumbnail)!)
-
+        if let imageUrl = URL(string: paymentMethod.secureThumbnail) {
+            cell.paymentImageView.af_setImage(
+                withURL: imageUrl,
+                placeholderImage: MainAsset.noImage.image,
+                imageTransition: .flipFromBottom(0.5)
+            )
+        } else {
+            cell.paymentImageView.image = MainAsset.noImage.image
+        }
         return cell
     }
     
@@ -130,4 +160,5 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
 
     // MARK: - GettersSetters
     var titleText: String? { self.title }
+    var getPaymentTableView: UITableView { paymentTableView }
 }

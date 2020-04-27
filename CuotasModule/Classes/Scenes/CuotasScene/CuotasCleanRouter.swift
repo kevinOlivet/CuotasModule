@@ -8,20 +8,20 @@
 
 import UIKit
 
-@objc protocol CuotasCleanRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol CuotasCleanRoutingLogic {
+    func closeToDashboard()
 }
 
-protocol CuotasCleanDataPassing
-{
+protocol CuotasCleanDataPassing {
   var dataStore: CuotasCleanDataStore? { get }
 }
 
-class CuotasCleanRouter: NSObject, CuotasCleanRoutingLogic, CuotasCleanDataPassing
-{
+class CuotasCleanRouter: NSObject, CuotasCleanRoutingLogic, CuotasCleanDataPassing {
   weak var viewController: CuotasCleanViewController?
   var dataStore: CuotasCleanDataStore?
   
   // MARK: Routing
+    func closeToDashboard() {
+        viewController?.navigationController?.dismiss(animated: true)
+    }
 }

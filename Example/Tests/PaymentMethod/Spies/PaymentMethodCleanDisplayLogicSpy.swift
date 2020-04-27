@@ -10,30 +10,36 @@
 class PaymentMethodCleanDisplayLogicSpy: PaymentMethodCleanDisplayLogic {
 
     var displaySetupUICalled = false
-    var displaySpinnerCalled = false
-    var hideSpinnerCalled = false
+    var displayLoadingViewCalled = false
+    var hideLoadingViewCalled = false
     var displayErrorAlertCalled = false
     var displayPaymentMethodArrayCalled = false
     var showBankSelectCalled = false
+    var displayAmountErrorAlertCalled = false
 
     var displaySetupUIViewModel: PaymentMethodClean.Texts.ViewModel?
     var displayErrorAlertViewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure?
     var displayPaymentMethodArrayViewModel: PaymentMethodClean.PaymentMethods.ViewModel?
     var showBankSelectViewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success?
+    var displayAmountErrorAlertViewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure?
 
     func displaySetupUI(viewModel: PaymentMethodClean.Texts.ViewModel) {
         displaySetupUICalled = true
         displaySetupUIViewModel = viewModel
     }
-    func displaySpinner() {
-        displaySpinnerCalled = true
+    func displayLoadingView() {
+        displayLoadingViewCalled = true
     }
-    func hideSpinner() {
-        hideSpinnerCalled = true
+    func hideLoadingView() {
+        hideLoadingViewCalled = true
     }
     func displayErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure) {
         displayErrorAlertCalled = true
         displayErrorAlertViewModel = viewModel
+    }
+    func displayAmountErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure) {
+        displayAmountErrorAlertCalled = true
+        displayAmountErrorAlertViewModel = viewModel
     }
     func displayPaymentMethodArray(viewModel: PaymentMethodClean.PaymentMethods.ViewModel) {
         displayPaymentMethodArrayCalled = true
