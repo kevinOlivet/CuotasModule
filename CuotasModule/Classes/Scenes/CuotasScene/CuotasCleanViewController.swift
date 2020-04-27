@@ -7,23 +7,24 @@
 //
 
 import BasicCommons
+import BasicUIElements
 
 protocol CuotasCleanDisplayLogic: class {
     func displaySetUpUI(viewModel: CuotasClean.Texts.ViewModel)
-    func displaySpinner()
-    func hideSpinner()
+    func displayLoadingView()
+    func hideLoadingView()
     func displayErrorAlert(viewModel: CuotasClean.Cuotas.ViewModel.Failure)
     func displayCuotasArray(viewModel: CuotasClean.Cuotas.ViewModel.Success)
 }
 
-class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
+class CuotasCleanViewController: BaseViewController, CuotasCleanDisplayLogic {
     var interactor: (CuotasCleanBusinessLogic & CuotasCleanDataStore)?
     var router: (NSObjectProtocol & CuotasCleanRoutingLogic & CuotasCleanDataPassing)?
     
-    var spinner: UIActivityIndicatorView!
     var cuotasArrayDisplay = [CuotasClean.Cuotas.ViewModel.DisplayCuota]()
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var closeButton: UIBarButtonItem!
+    @IBOutlet private weak var cuotasTableView: UITableView!
     
     // MARK: Object lifecycle
     
@@ -58,33 +59,45 @@ class CuotasCleanViewController: UIViewController, CuotasCleanDisplayLogic {
     
     func displaySetUpUI(viewModel: CuotasClean.Texts.ViewModel) {
         self.title = viewModel.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
+            target: self,
+            action: #selector(closeButtonTapped)
+        )
     }
     
     // MARK: Methods
+    @objc
     func fetchCuotas() {
+        genericHideErrorView()
         interactor?.getCuotas()
     }
-    
-    func displaySpinner() {
-        spinner = self.showModalSpinner()
+
+    @objc
+    func closeButtonTapped() {
+        genericHideErrorView()
+        router?.closeToDashboard()
     }
     
-    func hideSpinner() {
-        self.hideModalSpinner(indicator: spinner)
+    func displayLoadingView() {
+        genericDisplayLoadingView()
+    }
+    
+    func hideLoadingView() {
+        genericHideLoadingView()
     }
     
     func displayErrorAlert(viewModel: CuotasClean.Cuotas.ViewModel.Failure) {
-        Alerts.dismissableAlert(
-            title: viewModel.errorTitle,
-            message: viewModel.errorMessage,
-            vc: self,
-            actionBtnText: viewModel.buttonTitle
+        genericDisplayErrorView(
+            typeOfError: viewModel.errorType,
+            retryAction: #selector(fetchCuotas),
+            closeAction: #selector(closeButtonTapped)
         )
     }
     
     func displayCuotasArray(viewModel: CuotasClean.Cuotas.ViewModel.Success) {
         cuotasArrayDisplay = viewModel.cuotasModelArray
-        tableView.reloadData()
+        cuotasTableView.reloadData()
     }
 }
 
@@ -95,8 +108,8 @@ extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate 
         let cellIdentifier = type(of: self).cellIdentifier
         let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
         let nib = UINib(nibName: cellIdentifier, bundle: bundle)
-        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-        tableView.reloadData()
+        cuotasTableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        cuotasTableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,4 +132,5 @@ extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate 
 
     // MARK: - Getters
     var titleText: String? { self.title }
+    var getCuotasTableView: UITableView { cuotasTableView }
 }

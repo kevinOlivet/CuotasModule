@@ -10,7 +10,7 @@ import BasicCommons
 
 @objc
 public protocol EnterAmountCleanRoutingLogic {
-//    func routeToSomewhere(segue: UIStoryboardSegue?)
+    func closeToDashboard()
     func routeToRootViewController()
     func routeToPaymentMethod()
 }
@@ -24,6 +24,10 @@ class EnterAmountCleanRouter: NSObject, EnterAmountCleanRoutingLogic, EnterAmoun
   var dataStore: EnterAmountCleanDataStore?
   
   // MARK: Routing
+    func closeToDashboard() {
+        viewController?.navigationController?.dismiss(animated: true)
+    }
+
     func routeToRootViewController() {
         viewController?.navigationController?.popToRootViewController(animated: true)
     }

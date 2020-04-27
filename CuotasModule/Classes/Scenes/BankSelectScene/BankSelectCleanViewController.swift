@@ -7,28 +7,29 @@
 //
 
 import BasicCommons
+import BasicUIElements
 import Alamofire
 import AlamofireImage
 
 protocol BankSelectCleanDisplayLogic: class {
     func displaySetUpUI(viewModel: BankSelectClean.Texts.ViewModel)
-    func displaySpinner()
-    func hideSpinner()
+    func displayLoadingView()
+    func hideLoadingView()
     func fetchBankSelect()
     func displayBankSelects(viewModel: BankSelectClean.BankSelect.ViewModel.Success)
     func displayErrorAlert(viewModel: BankSelectClean.BankSelect.ViewModel.Failure)
     func showCuotas()
 }
 
-class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLogic {
+class BankSelectCleanViewController: BaseViewController, BankSelectCleanDisplayLogic {
     var interactor: (BankSelectCleanBusinessLogic & BankSelectCleanDataStore)?
     var router: (NSObjectProtocol & BankSelectCleanRoutingLogic & BankSelectCleanDataPassing)?
     
-    var spinner: UIActivityIndicatorView!
     var bankSelectModelArray = [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect]()
     var selectedPaymentMethod: PaymentMethodModel!
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var closeButton: UIBarButtonItem!
+    @IBOutlet private weak var bankCollectionView: UICollectionView!
     
     // MARK: Object lifecycle
     
@@ -65,33 +66,44 @@ class BankSelectCleanViewController: UIViewController, BankSelectCleanDisplayLog
     
     func displaySetUpUI(viewModel: BankSelectClean.Texts.ViewModel) {
         self.title = viewModel.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
+            target: self,
+            action: #selector(closeButtonTapped)
+        )
     }
-    
+
+    @objc
     func fetchBankSelect() {
         let request = BankSelectClean.BankSelect.Request()
         interactor?.getBankSelect(request: request)
     }
-    
-    func displaySpinner() {
-        spinner = self.showModalSpinner()
+    @objc
+    func closeButtonTapped() {
+        genericHideErrorView()
+        router?.closeToDashboard()
     }
     
-    func hideSpinner() {
-        self.hideModalSpinner(indicator: spinner)
+    func displayLoadingView() {
+        genericHideErrorView()
+        genericDisplayLoadingView()
+    }
+    
+    func hideLoadingView() {
+        genericHideLoadingView()
     }
     
     func displayBankSelects(viewModel: BankSelectClean.BankSelect.ViewModel.Success) {
         bankSelectModelArray = viewModel.bankSelectArray
         selectedPaymentMethod = viewModel.selectedPaymentMethod
-        collectionView.reloadData()
+        bankCollectionView.reloadData()
     }
     
     func displayErrorAlert(viewModel: BankSelectClean.BankSelect.ViewModel.Failure) {
-        Alerts.dismissableAlert(
-            title: viewModel.errorTitle,
-            message: viewModel.errorMessage,
-            vc: self,
-            actionBtnText: viewModel.buttonTitle
+        genericDisplayErrorView(
+            typeOfError: viewModel.errorType,
+            retryAction: #selector(fetchBankSelect),
+            closeAction: #selector(closeButtonTapped)
         )
     }
     
@@ -107,8 +119,8 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
         let cellIdentifier = type(of: self).cellIdentifier
         let bundle = Utils.bundle(forClass: type(of: self).classForCoder())
         let nib = UINib(nibName: cellIdentifier, bundle: bundle)
-        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
-        collectionView.reloadData()
+        bankCollectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
+        bankCollectionView.reloadData()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -121,11 +133,27 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
         if !bankSelectModelArray.isEmpty {
             let bankSelectModel = bankSelectModelArray[indexPath.row]
             cell.bankNameLabel.text = bankSelectModel.name
-            cell.bankSelectImageView.af_setImage(withURL: URL(string: bankSelectModel.secureThumbnail)!)
+            if let imageUrl = URL(string: bankSelectModel.secureThumbnail) {
+                cell.bankSelectImageView.af_setImage(
+                    withURL: imageUrl,
+                    placeholderImage: MainAsset.noImage.image,
+                    imageTransition: .flipFromBottom(0.5)
+                )
+            } else {
+                cell.bankSelectImageView.image = MainAsset.noImage.image
+            }
         } else {
             if let selectedPaymentMethod = selectedPaymentMethod {
                 cell.bankNameLabel.text = selectedPaymentMethod.name
-                cell.bankSelectImageView.af_setImage(withURL: URL(string: selectedPaymentMethod.secureThumbnail)!)
+                if let imageUrl = URL(string: selectedPaymentMethod.secureThumbnail) {
+                    cell.bankSelectImageView.af_setImage(
+                        withURL: imageUrl,
+                        placeholderImage: MainAsset.noImage.image,
+                        imageTransition: .flipFromBottom(0.5)
+                    )
+                } else {
+                    cell.bankSelectImageView.image = MainAsset.noImage.image
+                }
             }
         }
         return cell
@@ -139,4 +167,5 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
 
     // MARK: - Getters
     var titleText: String? { self.title }
+    var getBankCollectionView: UICollectionView { bankCollectionView }
 }

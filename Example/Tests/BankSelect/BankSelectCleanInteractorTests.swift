@@ -142,20 +142,10 @@ class BankSelectCleanInteractorTests: XCTestCase {
             "getBankSelect with failure parsing should call presenter presentErrorAlert"
         )
         XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorTitle,
-            "Error",
-            "Error parsing should have a title Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorMessage,
-            "Error Parsing",
-            "Error parsing should have a message Error Parsing"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.buttonTitle,
-            "Cancel",
-            "Error parsing should have a button Cancel"
-        )
+            spyPresenter.presentErrorAlertResponse?.errorType,
+                .service,
+                "Error parsing should have the correct errorType"
+            )
     }
     func testFetchPaymentMethodsGeneralFail() {
         // Given
@@ -169,20 +159,10 @@ class BankSelectCleanInteractorTests: XCTestCase {
             "getBankSelect with failure should call presenter presentErrorAlert"
         )
         XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorTitle,
-            "Error",
-            "Error in general should have a title Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.errorMessage,
-            "Service Error",
-            "Error in general should have a message Service Error"
-        )
-        XCTAssertEqual(
-            spyPresenter.presentErrorAlertResponse?.buttonTitle,
-            "Cancel",
-            "Error in general should have a button Cancel"
-        )
+            spyPresenter.presentErrorAlertResponse?.errorType,
+                .internet,
+                "Error parsing should have the correct errorType"
+            )
     }
     func testHandleDidSelectItem() {
         // Given

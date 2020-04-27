@@ -232,6 +232,13 @@ class EnterAmountCleanViewControllerTests: XCTestCase {
             "should pass the text to the interactor"
         )
     }
+    func testCloseButtonTapped() {
+        // Given
+        // When
+        sut.closeButtonTapped()
+        // Then
+        XCTAssertTrue(spyRouter.closeToDashboardCalled)
+    }
 }
 
 // swiftlint:enable line_length

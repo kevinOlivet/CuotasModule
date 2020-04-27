@@ -13,6 +13,7 @@
                 <outlet property="subtitleLabel" destination="A0H-ca-wkD" id="CDN-oL-iMf"/>
                 <outlet property="titleLabel" destination="Ng1-KQ-4hG" id="Bhd-Kb-CN8"/>
                 <outlet property="view" destination="yiv-vu-v6R" id="Qql-ga-3hQ"/>
+                <outlet property="welcomeView" destination="fxO-BA-xAo" id="CPd-iX-Nf7"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,8 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxO-BA-xAo">
+                    <rect key="frame" x="0.0" y="44" width="414" height="448"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gb3-Pq-kbn">
-                    <rect key="frame" x="0.0" y="428.5" width="414" height="49"/>
+                    <rect key="frame" x="0.0" y="492" width="414" height="49"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to the CuotasLandingModule page" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng1-KQ-4hG">
                             <rect key="frame" x="37.5" y="0.0" width="339.5" height="20.5"/>
@@ -40,12 +45,16 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="fxO-BA-xAo" firstAttribute="trailing" secondItem="fZd-Jx-fRw" secondAttribute="trailing" id="GUV-c9-osw"/>
+                <constraint firstItem="fxO-BA-xAo" firstAttribute="leading" secondItem="fZd-Jx-fRw" secondAttribute="leading" id="GeQ-gi-nMb"/>
                 <constraint firstItem="Gb3-Pq-kbn" firstAttribute="leading" secondItem="fZd-Jx-fRw" secondAttribute="leading" id="SIg-G8-UPc"/>
-                <constraint firstItem="Gb3-Pq-kbn" firstAttribute="centerY" secondItem="fZd-Jx-fRw" secondAttribute="centerY" id="nHF-uf-78B"/>
+                <constraint firstItem="fxO-BA-xAo" firstAttribute="top" secondItem="fZd-Jx-fRw" secondAttribute="top" id="eCz-GL-Ley"/>
+                <constraint firstItem="Gb3-Pq-kbn" firstAttribute="top" secondItem="fxO-BA-xAo" secondAttribute="bottom" id="eEz-N6-6f8"/>
+                <constraint firstItem="fxO-BA-xAo" firstAttribute="height" secondItem="yiv-vu-v6R" secondAttribute="height" multiplier="0.5" id="fPH-Ye-rbE"/>
                 <constraint firstItem="fZd-Jx-fRw" firstAttribute="trailing" secondItem="Gb3-Pq-kbn" secondAttribute="trailing" id="vbs-HM-EkB"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fZd-Jx-fRw"/>
-            <point key="canvasLocation" x="1352" y="76"/>
+            <point key="canvasLocation" x="1350.7246376811595" y="75.669642857142847"/>
         </view>
     </objects>
 </document>

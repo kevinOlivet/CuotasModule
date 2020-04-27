@@ -22,7 +22,6 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     var interactor: EnterAmountCleanBusinessLogic?
     public var router: (NSObjectProtocol & EnterAmountCleanRoutingLogic & EnterAmountCleanDataPassing)?
     
-    //@IBOutlet weak var nameTextField: UITextField!
     @IBOutlet private weak var enterAmountTextField: UITextField!
     @IBOutlet private weak var enterAmountLabel: UILabel!
     @IBOutlet private weak var nextButton: UIButton!
@@ -62,13 +61,19 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: Do something
+    // MARK: Methods
 
     func displaySetUpUI(viewModel: EnterAmountClean.Texts.ViewModel) {
         title = viewModel.title
         enterAmountLabel.text = viewModel.enterAmountLabel
         nextButton.titleLabel?.text = viewModel.nextButton
         nextButton.addTapAction(target: self, action: #selector(nextButtonTapped))
+        nextButton.setStyle(.first)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.stop,
+            target: self,
+            action: #selector(closeButtonTapped)
+        )
     }
 
     private func setupNotiications() {
@@ -78,6 +83,11 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
             queue: nil,
             using: catchCuota
         )
+    }
+
+    @objc
+    func closeButtonTapped() {
+        router?.closeToDashboard()
     }
     
     func catchCuota(notification: Notification) {

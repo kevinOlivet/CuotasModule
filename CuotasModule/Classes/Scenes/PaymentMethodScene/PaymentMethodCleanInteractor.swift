@@ -35,10 +35,10 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
     }
     
     func fetchPaymentMethods(request: PaymentMethodClean.PaymentMethods.Request) {
-        presenter?.presentSpinner()
+        presenter?.presentLoadingView()
         
         worker?.getPaymentMethods(successCompletion: { (receivedPaymentMethods) in
-            self.presenter?.hideSpinner()
+            self.presenter?.hideLoadingView()
             if let receivedPaymentMethods = receivedPaymentMethods {
                 for item in receivedPaymentMethods where item.paymentTypeId == "credit_card" {
                     self.paymentMethodArray.append(item)
@@ -46,21 +46,13 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                 let response = PaymentMethodClean.PaymentMethods.Response(paymentMethodArray: self.paymentMethodArray)
                 self.presenter?.presentPaymentMethods(response: response)
             } else {
-                let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-                    errorTitle: "Error",
-                    errorMessage: "Error Parsing",
-                    buttonTitle: "Cancel"
-                )
+                let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(errorType: .service)
                 self.presenter?.presentErrorAlert(response: response)
             }
             
         }) { (_) in
-            self.presenter?.hideSpinner()
-            let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-                errorTitle: "Error",
-                errorMessage: "Service Error",
-                buttonTitle: "Cancel"
-            )
+            self.presenter?.hideLoadingView()
+            let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(errorType: .internet)
             self.presenter?.presentErrorAlert(response: response)
         }
     }
@@ -77,12 +69,12 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
             } else {
                 let errorMessage = "\(selectedPaymentMethod.name) has a minimum amount of \(String(format: "%.2f", selectedPaymentMethod.minAllowedAmount)) and a maximum ammount of \(String(format: "%.2f", selectedPaymentMethod.maxAllowedAmount))"
                 
-                let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
+                let response = PaymentMethodClean.PaymentMethodsDetails.Response.AmountFailure(
                     errorTitle: "Choose another",
                     errorMessage: errorMessage,
                     buttonTitle: "Ok"
                 )
-                presenter?.presentErrorAlert(response: response)
+                presenter?.presentAmountErrorAlert(response: response)
             }
         }
     }

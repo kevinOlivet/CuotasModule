@@ -10,8 +10,8 @@
 class BankSelectCleanDisplayLogicSpy: BankSelectCleanDisplayLogic {
 
     var displaySetUpUICalled = false
-    var displaySpinnerCalled = false
-    var hideSpinnerCalled = false
+    var displayLoadingViewCalled = false
+    var hideLoadingViewCalled = false
     var fetchBankSelectCalled = false
     var displayBankSelectsCalled = false
     var displayErrorAlertCalled = false
@@ -25,11 +25,11 @@ class BankSelectCleanDisplayLogicSpy: BankSelectCleanDisplayLogic {
         displaySetUpUICalled = true
         displaySetUpUIViewModel = viewModel
     }
-    func displaySpinner() {
-        displaySpinnerCalled = true
+    func displayLoadingView() {
+        displayLoadingViewCalled = true
     }
-    func hideSpinner() {
-        hideSpinnerCalled = true
+    func hideLoadingView() {
+        hideLoadingViewCalled = true
     }
     func fetchBankSelect() {
         fetchBankSelectCalled = true

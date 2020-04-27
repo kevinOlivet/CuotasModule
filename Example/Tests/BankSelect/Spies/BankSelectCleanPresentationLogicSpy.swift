@@ -10,8 +10,8 @@
 class BankSelectCleanPresentationLogicSpy: BankSelectCleanPresentationLogic {
 
     var presentSetUpUICalled = false
-    var presentSpinnerCalled = false
-    var hideSpinnerCalled = false
+    var presentLoadingViewCalled = false
+    var hideLoadingViewCalled = false
     var presentBankSelectsCalled = false
     var presentErrorAlertCalled = false
     var presentCuotasCalled = false
@@ -24,11 +24,11 @@ class BankSelectCleanPresentationLogicSpy: BankSelectCleanPresentationLogic {
         presentSetUpUICalled = true
         presentSetUpUIResponse = response
     }
-    func presentSpinner() {
-        presentSpinnerCalled = true
+    func presentLoadingView() {
+        presentLoadingViewCalled = true
     }
-    func hideSpinner() {
-        hideSpinnerCalled = true
+    func hideLoadingView() {
+        hideLoadingViewCalled = true
     }
     func presentBankSelects(response: BankSelectClean.BankSelect.Response.Success) {
         presentBankSelectsCalled = true

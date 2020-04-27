@@ -6,6 +6,8 @@
 //
 
 import BasicCommons
+import BasicUIElements
+import Lottie
 
 protocol CuotasModuleLandingDisplayLogic: AnyObject {
     func displaySetupUI(viewModel: CuotasModuleLanding.Basic.ViewModel)
@@ -15,6 +17,9 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
     var interactor: CuotasModuleLandingBusinessLogic?
     var router: (NSObjectProtocol & CuotasModuleLandingRoutingLogic & CuotasModuleLandingDataPassing)?
 
+    var animation: MainAnimationView?
+
+    @IBOutlet private weak var welcomeView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
 
@@ -51,11 +56,21 @@ class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDi
         interactor?.setupUI(request: CuotasModuleLanding.Basic.Request())
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animation?.play()
+    }
+
     // MARK: Methods
     func displaySetupUI(viewModel: CuotasModuleLanding.Basic.ViewModel) {
         view.addTapAction(target: self, action: #selector(goToCuotasModule))
         titleLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        animation = WelcomeAnimation(
+            width: welcomeView.frame.size.width,
+            height: welcomeView.frame.size.height
+        )
+        welcomeView.addSubview(animation!)
     }
 
     @objc

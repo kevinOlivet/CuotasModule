@@ -10,8 +10,8 @@
 class CuotasCleanPresentationLogicSpy: CuotasCleanPresentationLogic {
 
     var presentSetUpUICalled = false
-    var presentSpinnerCalled = false
-    var hideSpinnerCalled = false
+    var presentLoadingViewCalled = false
+    var hideLoadingViewCalled = false
     var presentErrorAlertCalled = false
     var presentCuotasCalled = false
 
@@ -23,11 +23,11 @@ class CuotasCleanPresentationLogicSpy: CuotasCleanPresentationLogic {
         presentSetUpUICalled = true
         presentSetUpUIResponse = response
     }
-    func presentSpinner() {
-        presentSpinnerCalled = true
+    func presentLoadingView() {
+        presentLoadingViewCalled = true
     }
-    func hideSpinner() {
-        hideSpinnerCalled = true
+    func hideLoadingView() {
+        hideLoadingViewCalled = true
     }
     func presentErrorAlert(response: CuotasClean.Cuotas.Response.Failure) {
         presentErrorAlertCalled = true

@@ -9,5 +9,12 @@
 import Foundation
 
 class CuotasCleanRoutingLogicSpy: NSObject, CuotasCleanRoutingLogic, CuotasCleanDataPassing {
+
     var dataStore: CuotasCleanDataStore?
+
+    var closeToDashboardCalled = false
+
+    func closeToDashboard() {
+        closeToDashboardCalled = true
+    }
 }

@@ -10,8 +10,8 @@
 class CuotasCleanDisplayLogicSpy: CuotasCleanDisplayLogic {
 
     var displaySetUpUICalled = false
-    var displaySpinnerCalled = false
-    var hideSpinnerCalled = false
+    var displayLoadingViewCalled = false
+    var hideLoadingViewCalled = false
     var displayErrorAlertCalled = false
     var displayCuotasArrayCalled = false
 
@@ -23,11 +23,11 @@ class CuotasCleanDisplayLogicSpy: CuotasCleanDisplayLogic {
         displaySetUpUICalled = true
         displaySetUpUIViewModel = viewModel
     }
-    func displaySpinner() {
-        displaySpinnerCalled = true
+    func displayLoadingView() {
+        displayLoadingViewCalled = true
     }
-    func hideSpinner() {
-        hideSpinnerCalled = true
+    func hideLoadingView() {
+        hideLoadingViewCalled = true
     }
     func displayErrorAlert(viewModel: CuotasClean.Cuotas.ViewModel.Failure) {
         displayErrorAlertCalled = true

@@ -14,9 +14,13 @@ class EnterAmountCleanRoutingLogicSpy: NSObject,
 
     var dataStore: EnterAmountCleanDataStore?
 
+    var closeToDashboardCalled = false
     var routeToRootViewControllerCalled = false
     var routeToPaymentMethodCalled = false
 
+    func closeToDashboard() {
+        closeToDashboardCalled = true
+    }
     func routeToRootViewController() {
         routeToRootViewControllerCalled = true
     }

@@ -59,33 +59,29 @@ class PaymentMethodCleanPresenterTests: XCTestCase {
             "presentSetupUI should add the $ sign"
         )
     }
-    func testPresentSpinner() {
+    func testPresentLoadingView() {
         // Given
         // When
-        sut.presentSpinner()
+        sut.presentLoadingView()
         // Then
         XCTAssertTrue(
-            spyViewController.displaySpinnerCalled,
-            "presentSpinner should ask the view controller to displaySpinner"
+            spyViewController.displayLoadingViewCalled,
+            "presentLoadingView should ask the view controller to displayLoadingView"
         )
     }
-    func testHideSpinner() {
+    func testHideLoadingView() {
         // Given
         // When
-        sut.hideSpinner()
+        sut.hideLoadingView()
         // Then
         XCTAssertTrue(
-            spyViewController.hideSpinnerCalled,
-            "hideSpinner should ask the view controller to hideSpinner"
+            spyViewController.hideLoadingViewCalled,
+            "hideLoadingView should ask the view controller to hideLoadingView"
         )
     }
     func testPresentErrorAlert() {
         // Given
-        let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(
-            errorTitle: "Error",
-            errorMessage: "Service Error",
-            buttonTitle: "Cancel"
-        )
+        let response = PaymentMethodClean.PaymentMethodsDetails.Response.Failure(errorType: .internet)
         // When
         sut.presentErrorAlert(response: response)
         // Then
@@ -94,17 +90,37 @@ class PaymentMethodCleanPresenterTests: XCTestCase {
             "presentErrorAlert should ask the view controller to displayErrorAlert"
         )
         XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.errorTitle,
+            spyViewController.displayErrorAlertViewModel?.errorType,
+            .internet,
+            "the presenter should pass the response"
+        )
+    }
+    func testPresentAmountErrorAlert() {
+        // Given
+        let response = PaymentMethodClean.PaymentMethodsDetails.Response.AmountFailure(
+            errorTitle: "Error",
+            errorMessage: "Service Error",
+            buttonTitle: "Cancel"
+        )
+        // When
+        sut.presentAmountErrorAlert(response: response)
+        // Then
+        XCTAssertTrue(
+            spyViewController.displayAmountErrorAlertCalled,
+            "presentErrorAlert should ask the view controller to displayErrorAlert"
+        )
+        XCTAssertEqual(
+            spyViewController.displayAmountErrorAlertViewModel?.errorTitle,
             "Error".localized,
             "the presenter should format the response"
         )
         XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.errorMessage,
+            spyViewController.displayAmountErrorAlertViewModel?.errorMessage,
             "Service Error".localized,
             "the presenter should format the response"
         )
         XCTAssertEqual(
-            spyViewController.displayErrorAlertViewModel?.buttonTitle,
+            spyViewController.displayAmountErrorAlertViewModel?.buttonTitle,
             "Cancel".localized,
             "the presenter should format the response"
         )

@@ -9,7 +9,7 @@
 import BasicCommons
 
 @objc protocol BankSelectCleanRoutingLogic {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func closeToDashboard()
     func routeToCuotas()
 }
 
@@ -22,6 +22,9 @@ class BankSelectCleanRouter: NSObject, BankSelectCleanRoutingLogic, BankSelectCl
   var dataStore: BankSelectCleanDataStore?
   
   // MARK: Routing
+    func closeToDashboard() {
+        viewController?.navigationController?.dismiss(animated: true)
+    }
     
     func routeToCuotas() {
         let storyboard = UIStoryboard(name: "CuotasMain", bundle: Utils.bundle(forClass: CuotasCleanViewController.classForCoder()))

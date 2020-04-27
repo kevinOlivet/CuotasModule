@@ -12,6 +12,7 @@
 // swiftlint:disable implicitly_unwrapped_optional
 // swiftlint:disable line_length
 import BasicCommons
+import BasicUIElements
 @testable import CuotasModule
 import XCTest
 
@@ -117,38 +118,12 @@ class PaymentMethodCleanViewControllerTests: XCTestCase {
             "displaySetUpUI should set the title correctly"
         )
     }
-    func testDisplaySpinner() {
+    func testDisplayLoadingView() {
         // Given
         // When
-        sut.displaySpinner()
+        sut.displayLoadingView()
         // Then
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
-    }
-    func testHideSpinner() {
-        // Given
-        sut.displaySpinner()
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
-        // When
-        sut.hideSpinner()
-        // Then
-        XCTAssertTrue(
-            sut.spinner.isHidden,
-            "spinner should hide when told to do so"
-        )
+        XCTAssertTrue(sut.view.subviews.last is MainActivityIndicator)
     }
     func testDisplayPaymentMethodArray() {
         // Given
@@ -173,33 +148,41 @@ class PaymentMethodCleanViewControllerTests: XCTestCase {
     }
     func testDisplayErrorAlert() {
         // Given
-        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(
-            errorTitle: "testErrorTitle",
-            errorMessage: "testErrorMessage",
-            buttonTitle: "testButtonTitle"
-        )
+        let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.Failure(errorType: .internet)
         // When
         sut.displayErrorAlert(viewModel: viewModel)
         // Then
-        XCTAssertTrue(
-            sut.presentedViewController is UIAlertController,
-            "displayInputAlert should present an alert"
-        )
-        guard let alert = sut.presentedViewController as? UIAlertController else {
-            XCTFail("The alert didn't get presented")
-            return
-        }
-        XCTAssertEqual(
-            alert.title,
-            "testErrorTitle",
-            "should be the title"
-        )
-        XCTAssertEqual(
-            alert.message,
-            "testErrorMessage",
-            "should be the message"
-        )
+        XCTAssertTrue(sut.view.subviews.last is FullScreenMessageErrorAnimated)
     }
+    func testDisplayAmountErrorAlert() {
+         // Given
+         let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure(
+             errorTitle: "testErrorTitle",
+             errorMessage: "testErrorMessage",
+             buttonTitle: "testButtonTitle"
+         )
+         // When
+         sut.displayAmountErrorAlert(viewModel: viewModel)
+         // Then
+         XCTAssertTrue(
+             sut.presentedViewController is UIAlertController,
+             "displayInputAlert should present an alert"
+         )
+         guard let alert = sut.presentedViewController as? UIAlertController else {
+             XCTFail("The alert didn't get presented")
+             return
+         }
+         XCTAssertEqual(
+             alert.title,
+             "testErrorTitle",
+             "should be the title"
+         )
+         XCTAssertEqual(
+             alert.message,
+             "testErrorMessage",
+             "should be the message"
+         )
+     }
     func testShowBankSelect() {
         // Given
         let model = PaymentMethodModel(
@@ -236,10 +219,10 @@ class PaymentMethodCleanViewControllerTests: XCTestCase {
             displayPaymentMethodViewModelArray: [item]
         )
         sut.paymentMethodsToDisplay = paymentMethodsArray.displayPaymentMethodViewModelArray
-        sut.tableView.reloadData()
+        sut.getPaymentTableView.reloadData()
         let indexPathToUse = IndexPath(row: 0, section: 0)
         // When
-        let cell = sut.tableView(sut.tableView, cellForRowAt: indexPathToUse)
+        let cell = sut.tableView(sut.getPaymentTableView, cellForRowAt: indexPathToUse)
         XCTAssertTrue(cell is PaymentMethodTableViewCell, "cell should be PaymentMethodTableViewCell")
         guard let paymentCell = cell as? PaymentMethodTableViewCell else {
             XCTFail("cell is not PaymentMethodTableViewCell")
@@ -250,6 +233,13 @@ class PaymentMethodCleanViewControllerTests: XCTestCase {
             "testName",
             "should equal the name passed to the cell"
         )
+    }
+    func testCloseButtonTapped() {
+        // Given
+        // When
+        sut.closeButtonTapped()
+        // Then
+        XCTAssertTrue(spyRouter.closeToDashboardCalled)
     }
 }
 

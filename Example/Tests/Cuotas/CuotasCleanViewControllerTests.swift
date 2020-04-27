@@ -12,6 +12,7 @@
 // swiftlint:disable implicitly_unwrapped_optional
 // swiftlint:disable line_length
 import BasicCommons
+import BasicUIElements
 @testable import CuotasModule
 import XCTest
 
@@ -122,67 +123,29 @@ class CuotasCleanViewControllerTests: XCTestCase {
             "displaySetUpUI should set the title correctly"
         )
     }
-    func testDisplaySpinner() {
+    func testDisplayLoadingView() {
         // Given
         // When
-        sut.displaySpinner()
+        sut.displayLoadingView()
         // Then
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
+        XCTAssertTrue(sut.view.subviews.last is MainActivityIndicator)
     }
-    func testHideSpinner() {
+    func testHideLoadingView() {
         // Given
-        sut.displaySpinner()
-        XCTAssertNotNil(
-            sut.spinner,
-            "display spinner should instantiate the spinner"
-        )
-        XCTAssertFalse(
-            sut.spinner.isHidden,
-            "spinner should show"
-        )
+        sut.displayLoadingView()
+        XCTAssertTrue(sut.view.subviews.last is MainActivityIndicator)
         // When
-        sut.hideSpinner()
+        sut.hideLoadingView()
         // Then
-        XCTAssertTrue(
-            sut.spinner.isHidden,
-            "spinner should hide when told to do so"
-        )
+        XCTAssertFalse(UIApplication.shared.keyWindow?.subviews.last is MainActivityIndicator)
     }
     func testDisplayErrorAlert() {
            // Given
-           let viewModel = CuotasClean.Cuotas.ViewModel.Failure(
-               errorTitle: "testErrorTitle",
-               errorMessage: "testErrorMessage",
-               buttonTitle: "testButtonTitle"
-           )
+        let viewModel = CuotasClean.Cuotas.ViewModel.Failure(errorType: .internet)
            // When
            sut.displayErrorAlert(viewModel: viewModel)
            // Then
-           XCTAssertTrue(
-               sut.presentedViewController is UIAlertController,
-               "displayInputAlert should present an alert"
-           )
-           guard let alert = sut.presentedViewController as? UIAlertController else {
-               XCTFail("The alert didn't get presented")
-               return
-           }
-           XCTAssertEqual(
-               alert.title,
-               "testErrorTitle",
-               "should be the title"
-           )
-           XCTAssertEqual(
-               alert.message,
-               "testErrorMessage",
-               "should be the message"
-           )
+           XCTAssertTrue(sut.view.subviews.last is FullScreenMessageErrorAnimated)
        }
     func testDisplayCuotasArray() {
         // Given
@@ -208,10 +171,10 @@ class CuotasCleanViewControllerTests: XCTestCase {
         )
         let cuotasArrayDisplay = [item]
         sut.cuotasArrayDisplay = cuotasArrayDisplay
-        sut.tableView.reloadData()
+        sut.getCuotasTableView.reloadData()
         let indexPathToUse = IndexPath(row: 0, section: 0)
         // When
-        let cell = sut.tableView(sut.tableView, cellForRowAt: indexPathToUse)
+        let cell = sut.tableView(sut.getCuotasTableView, cellForRowAt: indexPathToUse)
         XCTAssertTrue(cell is CuotasTableViewCell, "cell should be CuotasTableViewCell")
         guard let cuotaCell = cell as? CuotasTableViewCell else {
             XCTFail("cell is not CuotasTableViewCell")
@@ -227,6 +190,13 @@ class CuotasCleanViewControllerTests: XCTestCase {
             "testRecommendedMessage",
             "should equal the name passed to the cell"
         )
+    }
+    func testCloseButtonTapped() {
+        // Given
+        // When
+        sut.closeButtonTapped()
+        // Then
+        XCTAssertTrue(spyRouter.closeToDashboardCalled)
     }
 }
 

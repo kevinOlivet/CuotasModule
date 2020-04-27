@@ -21,6 +21,9 @@
                         <accessibility key="accessibilityConfiguration" identifier="CuotasTableViewCell.titleLabel">
                             <accessibilityTraits key="traits" staticText="YES" adjustable="YES"/>
                         </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="6EO-gY-YU1"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -30,6 +33,9 @@
                         <accessibility key="accessibilityConfiguration" identifier="CuotasTableViewCell.subtitleLabel">
                             <accessibilityTraits key="traits" staticText="YES" adjustable="YES"/>
                         </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="u6Z-2D-Zdu"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

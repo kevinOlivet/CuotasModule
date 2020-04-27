@@ -26,11 +26,14 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7c0-QM-K1e">
-                                <rect key="frame" x="191" y="473" width="32" height="30"/>
+                                <rect key="frame" x="50" y="481" width="314" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1D2-S1-LBg"/>
+                                </constraints>
                                 <state key="normal" title="Next"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount to transfer in Chilean Pesos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjQ-ef-KjJ">
-                                <rect key="frame" x="16" y="402.5" width="382" height="20.5"/>
+                                <rect key="frame" x="16" y="394.5" width="382" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,9 +43,11 @@
                         <constraints>
                             <constraint firstItem="MjQ-ef-KjJ" firstAttribute="leading" secondItem="ozV-8r-mo6" secondAttribute="leading" constant="16" id="0tw-dc-amL"/>
                             <constraint firstItem="ozV-8r-mo6" firstAttribute="trailing" secondItem="MjQ-ef-KjJ" secondAttribute="trailing" constant="16" id="2jw-Kq-awD"/>
+                            <constraint firstItem="ozV-8r-mo6" firstAttribute="trailing" secondItem="7c0-QM-K1e" secondAttribute="trailing" constant="50" id="3mJ-wv-aex"/>
                             <constraint firstItem="qAd-m1-1Gh" firstAttribute="centerY" secondItem="hO9-rx-T17" secondAttribute="centerY" id="53p-FH-T5z"/>
-                            <constraint firstItem="qAd-m1-1Gh" firstAttribute="top" secondItem="MjQ-ef-KjJ" secondAttribute="bottom" constant="8" id="HWe-pk-EdZ"/>
-                            <constraint firstItem="7c0-QM-K1e" firstAttribute="top" secondItem="qAd-m1-1Gh" secondAttribute="bottom" constant="8" id="Rvb-IG-VX7"/>
+                            <constraint firstItem="qAd-m1-1Gh" firstAttribute="top" secondItem="MjQ-ef-KjJ" secondAttribute="bottom" constant="16" id="HWe-pk-EdZ"/>
+                            <constraint firstItem="7c0-QM-K1e" firstAttribute="leading" secondItem="ozV-8r-mo6" secondAttribute="leading" constant="50" id="R7q-Ot-W0S"/>
+                            <constraint firstItem="7c0-QM-K1e" firstAttribute="top" secondItem="qAd-m1-1Gh" secondAttribute="bottom" constant="16" id="Rvb-IG-VX7"/>
                             <constraint firstItem="qAd-m1-1Gh" firstAttribute="centerX" secondItem="hO9-rx-T17" secondAttribute="centerX" id="W0f-B4-dDj"/>
                             <constraint firstItem="7c0-QM-K1e" firstAttribute="centerX" secondItem="hO9-rx-T17" secondAttribute="centerX" id="Zjq-l8-KJw"/>
                         </constraints>
@@ -86,9 +91,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cEu-Ue-P6J"/>
                     </view>
-                    <navigationItem key="navigationItem" id="mX2-oH-6YQ"/>
+                    <navigationItem key="navigationItem" id="mX2-oH-6YQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="t5O-eG-HOL"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="cOq-oo-Umi" id="iJh-TR-ExQ"/>
+                        <outlet property="paymentTableView" destination="cOq-oo-Umi" id="iJh-TR-ExQ"/>
                         <segue destination="8lc-aE-Xci" kind="show" identifier="ShowBankSelect" id="oyP-Pm-SgA"/>
                     </connections>
                 </viewController>
@@ -129,9 +136,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RS6-tj-mpz"/>
                     </view>
-                    <navigationItem key="navigationItem" id="d0x-mO-zYC"/>
+                    <navigationItem key="navigationItem" id="d0x-mO-zYC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="dHD-NJ-fYs"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="collectionView" destination="O2l-7U-vbV" id="Nfi-GP-HBb"/>
+                        <outlet property="bankCollectionView" destination="O2l-7U-vbV" id="Nfi-GP-HBb"/>
                         <segue destination="3aj-cL-Odb" kind="show" identifier="ShowCuotas" id="RAP-V1-W71"/>
                     </connections>
                 </viewController>
@@ -165,9 +174,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Yj-ss-tWf"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5yu-b8-Am6"/>
+                    <navigationItem key="navigationItem" id="5yu-b8-Am6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="O4t-f6-Bjf"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="dOr-hb-6BZ" id="6Kx-zp-qcf"/>
+                        <outlet property="cuotasTableView" destination="dOr-hb-6BZ" id="6Kx-zp-qcf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97D-TL-Kdv" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -13,8 +13,12 @@ class PaymentMethodCleanRoutingLogicSpy: NSObject,
     PaymentMethodCleanDataPassing {
 
     var dataStore: PaymentMethodCleanDataStore?
+    var closeToDashboardCalled = false
     var routeToBankSelectCalled = false
 
+    func closeToDashboard() {
+        closeToDashboardCalled = true
+    }
     func routeToBankSelect() {
         routeToBankSelectCalled = true
     }

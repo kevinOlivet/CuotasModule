@@ -44,12 +44,12 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
         guard let selectedPaymentMethod = selectedPaymentMethod else {
             return
         }
-        presenter?.presentSpinner()
+        presenter?.presentLoadingView()
         
         worker?.getBankSelect(
             selectedPaymentMethodId: selectedPaymentMethod.id,
             successCompletion: { (receivedBankSelectModels) in
-                self.presenter?.hideSpinner()
+                self.presenter?.hideLoadingView()
                 if let receivedBankSelectModels = receivedBankSelectModels {
                     self.bankSelectModelArray = receivedBankSelectModels
                     let response = BankSelectClean.BankSelect.Response.Success(
@@ -58,21 +58,13 @@ class BankSelectCleanInteractor: BankSelectCleanBusinessLogic, BankSelectCleanDa
                     )
                     self.presenter?.presentBankSelects(response: response)
                 } else {
-                    let response = BankSelectClean.BankSelect.Response.Failure(
-                        errorTitle: "Error",
-                        errorMessage: "Error Parsing",
-                        buttonTitle: "Cancel"
-                    )
+                    let response = BankSelectClean.BankSelect.Response.Failure(errorType: .service)
                     self.presenter?.presentErrorAlert(response: response)
                 }
 
         }, failureCompletion: { (error) in
-            self.presenter?.hideSpinner()
-            let response = BankSelectClean.BankSelect.Response.Failure(
-                errorTitle: "Error",
-                errorMessage: "Service Error",
-                buttonTitle: "Cancel"
-            )
+            self.presenter?.hideLoadingView()
+            let response = BankSelectClean.BankSelect.Response.Failure(errorType: .internet)
             self.presenter?.presentErrorAlert(response: response)
         })
     }
