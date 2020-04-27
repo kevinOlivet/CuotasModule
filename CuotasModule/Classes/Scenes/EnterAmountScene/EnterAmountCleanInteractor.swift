@@ -25,7 +25,7 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
     var amountEnteredDataStore: Int = 0
     let validator: TextValidationProtocol = NumericValidation()
 
-    // MARK: Do something
+    // MARK: Methods
     func prepareSetUpUI(request: EnterAmountClean.Texts.Request) {
         let response = EnterAmountClean.Texts.Response(
             title: "Amount",
@@ -37,11 +37,11 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
 
     func handleNextButtonTapped(request: EnterAmountClean.EnterAmount.Request) {
         if !request.amountEntered.isEmpty {
-            if validator.validateString(str: request.amountEntered) {
-                if let amountEntered = Int(request.amountEntered) {
-                    amountEnteredDataStore = amountEntered
-                    presenter?.presentPaymentMethod()
-                }
+            if validator.validateString(str: request.amountEntered),
+                let amountEntered = Int(request.amountEntered),
+                amountEntered > 0 {
+                amountEnteredDataStore = amountEntered
+                presenter?.presentPaymentMethod()
             } else {
                 let numberToUse = validator.getMatchingString(str: request.amountEntered)
                 let numberResponse = EnterAmountClean.Regex.Response(numberToUse: numberToUse!)
@@ -50,7 +50,7 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
                 let response = EnterAmountClean.Errors.Response(
                     errorTitle: "Invalid number",
                     errorMessage: validator.validationMessage,
-                    buttonTitle: "Ok"
+                    buttonTitle: "UNDERSTOOD"
                 )
                 presenter?.presentInputAlert(response: response)
             }
@@ -58,7 +58,7 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
             let response = EnterAmountClean.Errors.Response(
                 errorTitle: "Enter amount",
                 errorMessage: "You need to enter an amount",
-                buttonTitle: "Ok"
+                buttonTitle: "UNDERSTOOD"
             )
             presenter?.presentInputAlert(response: response)
         }

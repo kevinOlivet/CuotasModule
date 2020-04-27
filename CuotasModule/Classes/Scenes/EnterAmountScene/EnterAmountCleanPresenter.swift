@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import BasicUIElements
 
 protocol EnterAmountCleanPresentationLogic {
     func presentSetUpUI(response: EnterAmountClean.Texts.Response)
@@ -20,7 +20,7 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
     
     weak var viewController: EnterAmountCleanDisplayLogic?
     
-    // MARK: Do something
+    // MARK: Methods
     func presentSetUpUI(response: EnterAmountClean.Texts.Response) {
         let viewModel = EnterAmountClean.Texts.ViewModel(
             title: response.title.localized,
@@ -52,7 +52,8 @@ class EnterAmountCleanPresenter: EnterAmountCleanPresentationLogic {
         let viewModel = EnterAmountClean.Errors.ViewModel(
             errorTitle: response.errorTitle.localized,
             errorMessage: response.errorMessage.localized,
-            buttonTitle: response.buttonTitle.localized
+            buttonTitle: response.buttonTitle.localized,
+            image: MainAsset.iconCloseBlack.image
         )
         viewController?.displayInputAlert(viewModel: viewModel)
     }

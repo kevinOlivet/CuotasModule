@@ -25,11 +25,10 @@ class PaymentMethodCleanViewController: BaseViewController, PaymentMethodCleanDi
     
     var interactor: (PaymentMethodCleanBusinessLogic & PaymentMethodCleanDataStore)?
     var router: (NSObjectProtocol & PaymentMethodCleanRoutingLogic & PaymentMethodCleanDataPassing)?
-    
+    var messageView: BottomMessage?
+
     var paymentMethodsToDisplay: [PaymentMethodClean.PaymentMethods.ViewModel.DisplayPaymentMethodViewModelSuccess] = []
 
-
-    @IBOutlet private weak var closeButton: UIBarButtonItem!
     @IBOutlet private weak var paymentTableView: UITableView!
     
     // MARK: Object lifecycle
@@ -106,12 +105,20 @@ class PaymentMethodCleanViewController: BaseViewController, PaymentMethodCleanDi
         )
     }
     func displayAmountErrorAlert(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure) {
-        Alerts.dismissableAlert(
-            title: viewModel.errorTitle,
-            message: viewModel.errorMessage,
-            vc: self,
-            actionBtnText: viewModel.buttonTitle
+        messageView = BottomMessage(
+            withTitle: viewModel.errorTitle,
+            andMessage: viewModel.errorMessage,
+            buttonText: viewModel.buttonTitle,
+            style: .basic,
+            headerImage: viewModel.image,
+            action: nil,
+            self
         )
+        guard let messageView = messageView else {
+            return
+        }
+        messageView.elementsAlignment = .center
+        view.addSubview(messageView)
     }
     
     func showBankSelect(viewModel: PaymentMethodClean.PaymentMethodsDetails.ViewModel.Success) {
@@ -136,7 +143,7 @@ extension PaymentMethodCleanViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: "PaymentMethodCell",
+            withIdentifier: type(of: self).cellIdentifier,
             for: indexPath
             ) as! PaymentMethodTableViewCell
         let paymentMethod = paymentMethodsToDisplay[indexPath.row]

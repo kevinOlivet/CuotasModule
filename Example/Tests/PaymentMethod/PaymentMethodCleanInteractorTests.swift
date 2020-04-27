@@ -94,8 +94,15 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.prepareSetUpUI(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentSetupUICalled, "doSomething(request:) should ask the presenter to format the result")
-        XCTAssertEqual(spyPresenter.presentSetupUIResponse?.title, 1234, "should pass the amount entered to the presenter to setup the UI")
+        XCTAssertTrue(
+            spyPresenter.presentSetupUICalled,
+            "doSomething(request:) should ask the presenter to format the result"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentSetupUIResponse?.title,
+            1234,
+            "should pass the amount entered to the presenter to setup the UI"
+        )
     }
     func testFetchPaymentMethodsSuccess() {
         // Given
@@ -104,7 +111,10 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.fetchPaymentMethods(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentPaymentMethodsCalled, "fetchPaymentMethods with success should call presenter presentPaymentMethods")
+        XCTAssertTrue(
+            spyPresenter.presentPaymentMethodsCalled,
+            "fetchPaymentMethods with success should call presenter presentPaymentMethods"
+        )
     }
     func testFetchPaymentMethodsParsingFail() {
         // Given
@@ -113,8 +123,15 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.fetchPaymentMethods(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentErrorAlertCalled, "fetchPaymentMethods with failure parsing should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorType, .service, "Error parsing should have a title Error")
+        XCTAssertTrue(
+            spyPresenter.presentErrorAlertCalled,
+            "fetchPaymentMethods with failure parsing should call presenter presentErrorAlert"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentErrorAlertResponse?.errorType,
+            .service,
+            "Error parsing should have a title Error"
+        )
     }
     func testFetchPaymentMethodsGeneralFail() {
         // Given
@@ -123,8 +140,15 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.fetchPaymentMethods(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentErrorAlertCalled, "fetchPaymentMethods with failure should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentErrorAlertResponse?.errorType, .internet, "Error in general should have a title Error")
+        XCTAssertTrue(
+            spyPresenter.presentErrorAlertCalled,
+            "fetchPaymentMethods with failure should call presenter presentErrorAlert"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentErrorAlertResponse?.errorType,
+            .internet,
+            "Error in general should have a title Error"
+        )
 
     }
     func testHandleDidSelectRowAmountSuccess() {
@@ -143,9 +167,19 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.handleDidSelectRow(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.showBankSelectCalled, "handleDidSelectRow success should call presenter showBankSelect")
-        XCTAssertEqual(spyPresenter.showBankSelectResponse?.amountEntered, 1234, "should match the amount entered")
-        XCTAssertEqual(spyPresenter.showBankSelectResponse?.selectedPaymentMethod.name, "testName", "should match the model info")
+        XCTAssertTrue(
+            spyPresenter.showBankSelectCalled,
+            "handleDidSelectRow success should call presenter showBankSelect"
+        )
+        XCTAssertEqual(
+            spyPresenter.showBankSelectResponse?.amountEntered,
+            1234,
+            "should match the amount entered"
+        )
+        XCTAssertEqual(
+            spyPresenter.showBankSelectResponse?.selectedPaymentMethod.name,
+            "testName", "should match the model info"
+        )
     }
     func testHandleDidSelectRowAmountTooMuch() {
         // Given
@@ -163,10 +197,24 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         // When
         sut.handleDidSelectRow(request: request)
         // Then
-        XCTAssertTrue(spyPresenter.presentAmountErrorAlertCalled, "handleDidSelectRow with too much should call presenter presentErrorAlert")
-        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.errorTitle, "Choose another", "Error for too much should have a title Error")
-        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.errorMessage, "testName has a minimum amount of 123.00 and a maximum ammount of 1234.00", "Error in general should have a message specific message")
-        XCTAssertEqual(spyPresenter.presentAmountErrorAlertResponse?.buttonTitle, "Ok", "Error for too much should have a button Ok")
+        XCTAssertTrue(
+            spyPresenter.presentAmountErrorAlertCalled,
+            "handleDidSelectRow with too much should call presenter presentErrorAlert"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentAmountErrorAlertResponse?.errorTitle,
+            "Choose another",
+            "Error for too much should have a title Error"
+        )
+        XCTAssertEqual(
+            spyPresenter.presentAmountErrorAlertResponse?.errorMessage,
+            "testName has a minimum amount of 123.00 and a maximum amount of 1234.00", "Error in general should have a message specific message"
+            )
+        XCTAssertEqual(
+            spyPresenter.presentAmountErrorAlertResponse?.buttonTitle,
+            "UNDERSTOOD",
+            "Error for too much should have a button UNDERSTOOD"
+        )
     }
 }
 

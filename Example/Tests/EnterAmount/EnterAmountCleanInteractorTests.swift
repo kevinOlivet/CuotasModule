@@ -113,7 +113,7 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.buttonTitle,
-            "Ok",
+            "UNDERSTOOD",
             "handleNextButtonTapped with an invalid number gets an invalid button"
         )
     }
@@ -134,12 +134,12 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.errorMessage,
-            "You've exceeded the limit",
+            "You haven\'t entered a valid number.\nCome on now.",
             "handleNextButtonTapped with an invalid number gets an invalid message"
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.buttonTitle,
-            "Ok",
+            "UNDERSTOOD",
             "handleNextButtonTapped with an invalid number gets an invalid button"
         )
     }

@@ -159,26 +159,28 @@ class PaymentMethodCleanViewControllerTests: XCTestCase {
          let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure(
              errorTitle: "testErrorTitle",
              errorMessage: "testErrorMessage",
-             buttonTitle: "testButtonTitle"
+             buttonTitle: "testButtonTitle",
+             image: MainAsset.iconCloseBlack.image
          )
          // When
          sut.displayAmountErrorAlert(viewModel: viewModel)
+        sut.messageView!.dismissAnimation = false
          // Then
          XCTAssertTrue(
-             sut.presentedViewController is UIAlertController,
-             "displayInputAlert should present an alert"
+            sut.view.subviews.last is BottomMessage,
+             "displayInputAlert should present an BottomMessage"
          )
-         guard let alert = sut.presentedViewController as? UIAlertController else {
-             XCTFail("The alert didn't get presented")
+        guard let alert = sut.view.subviews.last as? BottomMessage else {
+             XCTFail("The BottomMessage didn't get presented")
              return
          }
          XCTAssertEqual(
-             alert.title,
+            alert.titleLabel.text,
              "testErrorTitle",
              "should be the title"
          )
          XCTAssertEqual(
-             alert.message,
+            alert.messageLabel.text,
              "testErrorMessage",
              "should be the message"
          )

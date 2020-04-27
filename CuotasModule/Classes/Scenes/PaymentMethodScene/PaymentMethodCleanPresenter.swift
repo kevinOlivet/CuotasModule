@@ -6,7 +6,7 @@
 //  Copyright (c) 2018 Jon Olivet. All rights reserved.
 //
 
-import UIKit
+import BasicUIElements
 
 protocol PaymentMethodCleanPresentationLogic {
     func presentSetupUI(response: PaymentMethodClean.Texts.Response)
@@ -45,7 +45,8 @@ class PaymentMethodCleanPresenter: PaymentMethodCleanPresentationLogic {
         let viewModel = PaymentMethodClean.PaymentMethodsDetails.ViewModel.AmountFailure(
             errorTitle: response.errorTitle.localized,
             errorMessage: response.errorMessage.localized,
-            buttonTitle: response.buttonTitle.localized
+            buttonTitle: response.buttonTitle.localized,
+            image: MainAsset.iconCloseBlack.image
         )
         viewController?.displayAmountErrorAlert(viewModel: viewModel)
     }
