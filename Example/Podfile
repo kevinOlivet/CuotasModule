@@ -15,7 +15,7 @@ use_frameworks!
 ###
 
 #Use this variable to change pod install from local_pods, develop_pods, master_pods, feature_pods
-pods_environment = "local" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
+pods_environment = "develop" # <- HERE: Change this line, options are: 'local', develop', 'master' or 'feature'
 
 ###
 ### --- METHODS ---
