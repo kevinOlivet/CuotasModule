@@ -39,6 +39,7 @@
                     <constraint firstItem="TLu-Dm-tQz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vtB-9u-r2M" secondAttribute="trailing" constant="8" id="rqA-Ad-Oke"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="paymentImageView" destination="TLu-Dm-tQz" id="tgf-DN-DcS"/>
                 <outlet property="paymentMethodNameLabel" destination="vtB-9u-r2M" id="VBp-S9-p20"/>

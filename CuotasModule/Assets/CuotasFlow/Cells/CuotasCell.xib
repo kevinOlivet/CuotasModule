@@ -52,6 +52,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="tN5-DH-bSx" secondAttribute="bottom" constant="8" id="eDk-XG-nGN"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="numberOfInstallmentsLabel" destination="Ww5-oE-8dO" id="vAB-vO-9hu"/>
                 <outlet property="recommendedMessageLabel" destination="tN5-DH-bSx" id="nfD-mJ-H5C"/>

@@ -18,7 +18,7 @@ protocol EnterAmountCleanDisplayLogic: class {
     func displayInputAlert(viewModel: EnterAmountClean.Errors.ViewModel)
 }
 
-public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanDisplayLogic {
+public class EnterAmountCleanViewController: BaseViewController, EnterAmountCleanDisplayLogic {
     
     var interactor: EnterAmountCleanBusinessLogic?
     public var router: (NSObjectProtocol & EnterAmountCleanRoutingLogic & EnterAmountCleanDataPassing)?
