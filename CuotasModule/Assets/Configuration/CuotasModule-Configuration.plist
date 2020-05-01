@@ -53,7 +53,7 @@
 			<string>/payment_methods</string>
 			<key>main-qa</key>
 			<string>/payment_methods</string>
-			<key>main.prod</key>
+			<key>main-prod</key>
 			<string>/payment_methods</string>
 		</dict>
 		<key>API_PAYMENT_METHODS</key>
