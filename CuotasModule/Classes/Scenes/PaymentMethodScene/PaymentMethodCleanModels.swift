@@ -71,6 +71,7 @@ enum PaymentMethodClean {
                 let errorTitle: String
                 let errorMessage: String
                 let buttonTitle: String
+                let image: UIImage
             }
         }
         

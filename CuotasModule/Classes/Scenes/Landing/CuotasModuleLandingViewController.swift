@@ -13,7 +13,7 @@ protocol CuotasModuleLandingDisplayLogic: AnyObject {
     func displaySetupUI(viewModel: CuotasModuleLanding.Basic.ViewModel)
 }
 
-class CuotasModuleLandingViewController: UIViewController, CuotasModuleLandingDisplayLogic {
+class CuotasModuleLandingViewController: BaseViewController, CuotasModuleLandingDisplayLogic {
     var interactor: CuotasModuleLandingBusinessLogic?
     var router: (NSObjectProtocol & CuotasModuleLandingRoutingLogic & CuotasModuleLandingDataPassing)?
 

@@ -28,7 +28,6 @@ class BankSelectCleanViewController: BaseViewController, BankSelectCleanDisplayL
     var bankSelectModelArray = [BankSelectClean.BankSelect.ViewModel.DisplayBankSelect]()
     var selectedPaymentMethod: PaymentMethodModel!
 
-    @IBOutlet private weak var closeButton: UIBarButtonItem!
     @IBOutlet private weak var bankCollectionView: UICollectionView!
     
     // MARK: Object lifecycle
@@ -128,7 +127,9 @@ extension BankSelectCleanViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BankSelectCell", for: indexPath) as! BankSelectCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: type(of: self).cellIdentifier, for: indexPath
+            ) as! BankSelectCollectionViewCell
 
         if !bankSelectModelArray.isEmpty {
             let bankSelectModel = bankSelectModelArray[indexPath.row]

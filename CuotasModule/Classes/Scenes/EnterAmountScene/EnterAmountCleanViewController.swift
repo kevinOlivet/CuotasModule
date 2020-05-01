@@ -7,6 +7,7 @@
 //
 
 import BasicCommons
+import BasicUIElements
 
 protocol EnterAmountCleanDisplayLogic: class {
     func displaySetUpUI(viewModel: EnterAmountClean.Texts.ViewModel)
@@ -17,10 +18,12 @@ protocol EnterAmountCleanDisplayLogic: class {
     func displayInputAlert(viewModel: EnterAmountClean.Errors.ViewModel)
 }
 
-public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanDisplayLogic {
+public class EnterAmountCleanViewController: BaseViewController, EnterAmountCleanDisplayLogic {
     
     var interactor: EnterAmountCleanBusinessLogic?
     public var router: (NSObjectProtocol & EnterAmountCleanRoutingLogic & EnterAmountCleanDataPassing)?
+
+    var messageView: BottomMessage?
     
     @IBOutlet private weak var enterAmountTextField: UITextField!
     @IBOutlet private weak var enterAmountLabel: UILabel!
@@ -114,12 +117,20 @@ public class EnterAmountCleanViewController: UIViewController, EnterAmountCleanD
     }
     
     func displayInputAlert(viewModel: EnterAmountClean.Errors.ViewModel) {
-        Alerts.dismissableAlert(
-            title: viewModel.errorTitle,
-            message: viewModel.errorMessage,
-            vc: self,
-            actionBtnText: viewModel.buttonTitle
+        messageView = BottomMessage(
+            withTitle: viewModel.errorTitle,
+            andMessage: viewModel.errorMessage,
+            buttonText: viewModel.buttonTitle,
+            style: .basic,
+            headerImage: viewModel.image,
+            action: nil,
+            self
         )
+        guard let messageView = messageView else {
+            return
+        }
+        messageView.elementsAlignment = .center
+        view.addSubview(messageView)
     }
 
     @objc

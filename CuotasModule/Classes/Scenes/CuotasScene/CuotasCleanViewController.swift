@@ -23,7 +23,6 @@ class CuotasCleanViewController: BaseViewController, CuotasCleanDisplayLogic {
     
     var cuotasArrayDisplay = [CuotasClean.Cuotas.ViewModel.DisplayCuota]()
     
-    @IBOutlet private weak var closeButton: UIBarButtonItem!
     @IBOutlet private weak var cuotasTableView: UITableView!
     
     // MARK: Object lifecycle
@@ -117,7 +116,9 @@ extension CuotasCleanViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CuotasCell", for: indexPath) as! CuotasTableViewCell
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: type(of: self).cellIdentifier, for: indexPath
+            ) as! CuotasTableViewCell
         let cuota = cuotasArrayDisplay[indexPath.row]
         cell.numberOfInstallmentsLabel.text = cuota.installments
         cell.recommendedMessageLabel.text = cuota.recommendedMessage
