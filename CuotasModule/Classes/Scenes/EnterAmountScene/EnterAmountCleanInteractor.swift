@@ -28,9 +28,9 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
     // MARK: Methods
     func prepareSetUpUI(request: EnterAmountClean.Texts.Request) {
         let response = EnterAmountClean.Texts.Response(
-            title: "Amount",
-            enterAmountLabel: "Enter amount in Chilean Pesos",
-            nextButton: "Next"
+            title: "AMOUNT",
+            enterAmountLabel: "ENTER_AMOUNT_IN_PESOS",
+            nextButton: "NEXT"
         )
         presenter?.presentSetUpUI(response: response)
     }
@@ -48,17 +48,17 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
                 presenter?.presentTextFieldWithRegexNumber(response: numberResponse)
                 
                 let response = EnterAmountClean.Errors.Response(
-                    errorTitle: "Invalid number",
+                    errorTitle: "INVALID_NUMBER",
                     errorMessage: validator.validationMessage,
-                    buttonTitle: "UNDERSTOOD"
+                    buttonTitle: "BIG_UNDERSTOOD"
                 )
                 presenter?.presentInputAlert(response: response)
             }
         } else {
             let response = EnterAmountClean.Errors.Response(
-                errorTitle: "Enter amount",
-                errorMessage: "You need to enter an amount",
-                buttonTitle: "UNDERSTOOD"
+                errorTitle: "ENTER_AMOUNT",
+                errorMessage: "MUST_ENTER_AMOUNT",
+                buttonTitle: "BIG_UNDERSTOOD"
             )
             presenter?.presentInputAlert(response: response)
         }
@@ -68,9 +68,9 @@ class EnterAmountCleanInteractor: EnterAmountCleanBusinessLogic, EnterAmountClea
         guard let userInfo = request.notification.userInfo,
             let finalMessage = userInfo["finalMessage"] as? String else { return }
         let response = EnterAmountClean.CatchNotification.Response(
-            successTitle: "Finished",
+            successTitle: "FINISHED",
             successMessage: finalMessage,
-            buttonTitle: "Ok"
+            buttonTitle: "OK"
         )
         presenter?.presentCatchCuotaAlert(response: response)
     }

@@ -67,12 +67,15 @@ class PaymentMethodCleanInteractor: PaymentMethodCleanBusinessLogic, PaymentMeth
                 )
                 presenter?.showBankSelect(response: response)
             } else {
-                let errorMessage = "\(selectedPaymentMethod.name) has a minimum amount of \(String(format: "%.2f", selectedPaymentMethod.minAllowedAmount)) and a maximum amount of \(String(format: "%.2f", selectedPaymentMethod.maxAllowedAmount))"
-                
+                let errorMessage = "\(selectedPaymentMethod.name)"
+                    + "MINIMUM_MESSAGE".localized
+                + "\(String(format: "%.2f", selectedPaymentMethod.minAllowedAmount))"
+                    + "MAXIMUM_MESSAGE".localized
+                    + "\(String(format: "%.2f", selectedPaymentMethod.maxAllowedAmount))"
                 let response = PaymentMethodClean.PaymentMethodsDetails.Response.AmountFailure(
-                    errorTitle: "Choose another",
+                    errorTitle: "CHOOSE_AGAIN",
                     errorMessage: errorMessage,
-                    buttonTitle: "UNDERSTOOD"
+                    buttonTitle: "BIG_UNDERSTOOD"
                 )
                 presenter?.presentAmountErrorAlert(response: response)
             }
