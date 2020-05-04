@@ -66,17 +66,17 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentSetUpUIResponse?.title,
-            "Amount",
+            "AMOUNT",
             "prepareSetUpUI should ask the presenter to format the result"
         )
         XCTAssertEqual(
             spyPresenter.presentSetUpUIResponse?.enterAmountLabel,
-            "Enter amount in Chilean Pesos",
+            "ENTER_AMOUNT_IN_PESOS",
             "prepareSetUpUI should ask the presenter to format the result"
         )
         XCTAssertEqual(
             spyPresenter.presentSetUpUIResponse?.nextButton,
-            "Next",
+            "NEXT",
             "prepareSetUpUI should ask the presenter to format the result"
         )
     }
@@ -103,17 +103,17 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.errorTitle,
-            "Enter amount",
+            "ENTER_AMOUNT",
             "handleNextButtonTapped with an invalid number gets an invalid title"
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.errorMessage,
-            "You need to enter an amount",
+            "MUST_ENTER_AMOUNT",
             "handleNextButtonTapped with an invalid number gets an invalid message"
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.buttonTitle,
-            "UNDERSTOOD",
+            "BIG_UNDERSTOOD",
             "handleNextButtonTapped with an invalid number gets an invalid button"
         )
     }
@@ -129,7 +129,7 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.errorTitle,
-            "Invalid number",
+            "INVALID_NUMBER",
             "handleNextButtonTapped with an invalid number gets an invalid title"
         )
         XCTAssertEqual(
@@ -139,7 +139,7 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentInputAlertResponse?.buttonTitle,
-            "UNDERSTOOD",
+            "BIG_UNDERSTOOD",
             "handleNextButtonTapped with an invalid number gets an invalid button"
         )
     }
@@ -158,7 +158,7 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentCatchCuotaAlertResponse?.successTitle,
-            "Finished",
+            "FINISHED",
             "handleNextButtonTapped with an invalid number gets an invalid title"
         )
         XCTAssertEqual(
@@ -168,7 +168,7 @@ class EnterAmountCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentCatchCuotaAlertResponse?.buttonTitle,
-            "Ok",
+            "OK",
             "handleNextButtonTapped with an invalid number gets an invalid button"
         )
     }
