@@ -72,9 +72,9 @@ class CuotasCleanInteractor: CuotasCleanBusinessLogic, CuotasCleanDataStore {
         if let amountEntered = amountEntered,
             let  selectedPaymentMethod = selectedPaymentMethod {
             let bankSelectedName = bankSelected?.name ?? selectedPaymentMethod.name
-            let finalMessage = "Amount: $\(amountEntered)\n"
-                + "Selected Payment Method: \(selectedPaymentMethod.name)\n"
-                + "Bank Selected: \(bankSelectedName)\n"
+            let finalMessage = "AMOUNT_WITH_SIGN".localized + "\(amountEntered)\n"
+                + "SELECTED_PAYMENT".localized + "\(selectedPaymentMethod.name)\n"
+                + "SELECTED_BANK".localized + "\(bankSelectedName)\n"
                 + cuotasModelArray![request.indexPath.row].recommendedMessage
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: "cuotasFinishedNotification"),

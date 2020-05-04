@@ -6,7 +6,32 @@
   
 */
 
-// MARK: - CuotasModule
+// CuotasModule
 
+// MARK: - Landing
 WELCOME_TITLE = "Welcome to the CuotasModuleLanding page";
 WELCOME_SUBTITLE = "Please tap anywhere to begin";
+
+// MARK: - CuotasScene
+AMOUNT_WITH_SIGN = "Amount: $";
+SELECTED_PAYMENT = "Selected Payment Method: ";
+SELECTED_BANK = "Bank Selected: ";
+
+INSTALLMENTS = "Installments: ";
+
+// MARK: - EnterAmountScene
+AMOUNT = "Amount";
+ENTER_AMOUNT_IN_PESOS = "Enter amount in Chilean Pesos";
+NEXT = "Next";
+INVALID_NUMBER = "Invalid number";
+BIG_UNDERSTOOD = "UNDERSTOOD";
+ENTER_AMOUNT = "Enter amount";
+MUST_ENTER_AMOUNT = "You need to enter an amount";
+
+FINISHED = "Finished";
+OK = "OK";
+
+// MARK: - PaymentMethodScene
+MINIMUM_MESSAGE = " has a minimum amount of ";
+MAXIMUM_MESSAGE = " and a maximum amount of ";
+CHOOSE_AGAIN = "Choose another";

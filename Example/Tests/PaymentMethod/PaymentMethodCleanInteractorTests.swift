@@ -203,7 +203,7 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
         )
         XCTAssertEqual(
             spyPresenter.presentAmountErrorAlertResponse?.errorTitle,
-            "Choose another",
+            "CHOOSE_AGAIN",
             "Error for too much should have a title Error"
         )
         XCTAssertEqual(
@@ -212,7 +212,7 @@ class PaymentMethodCleanInteractorTests: XCTestCase {
             )
         XCTAssertEqual(
             spyPresenter.presentAmountErrorAlertResponse?.buttonTitle,
-            "UNDERSTOOD",
+            "BIG_UNDERSTOOD",
             "Error for too much should have a button UNDERSTOOD"
         )
     }
