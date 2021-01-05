@@ -106,10 +106,8 @@ public class CuotasModuleStubs: NSObject {
             }
         } else {
             newDescriptor = stub(condition: isPath(stubUrl.path)) { _ in
-                let jsonFilePath = OHPathForFile(
-                    jsonFile,
-                    type(of: self).classForCoder()
-                    ) ?? ""
+                let jsonFilePath = OHPathForFileInBundle(jsonFile, CuotasModuleSDK.resourceBundle) ?? ""
+
 
                 let stubsFixture = fixture(
                     filePath: jsonFilePath,

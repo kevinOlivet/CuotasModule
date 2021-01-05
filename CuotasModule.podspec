@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'CuotasModule'
-  s.version          = '1.0.0'
+  s.version          = '2.0.0'
   s.summary          = 'Cuotas Module'
 
   s.description      = <<-DESC
@@ -16,9 +16,7 @@ Used to inject the Cuotas scene
   s.swift_version = '5.0'
 
   s.source_files = 'CuotasModule/Classes/**/*'
-  s.resources = [
-  'CuotasModule/Assets/**/*.{storyboard,xib,xcassets,html,json,pdf,otf,ttf,plist,strings}'
-  ]
+  s.resource_bundles = { 'CuotasModule' => ['CuotasModule/Assets/**/*.{storyboard,xib,xcassets,html,json,pdf,otf,ttf,plist,strings,png}'] }
 
   s.dependency 'BasicCommons'
   s.dependency 'BasicUIElements'
