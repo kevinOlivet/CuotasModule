@@ -31,7 +31,7 @@ end
 #Use this funcion to compile feature pods as development in featue
 def feature_pods
     ### ONLY FOR DEVELOP PURPOSES ###
-    feature_branch = "develop" # <- HERE: Change this line to setup ALL the pods repository from another branch WHEN pods_environment = "develop"
+    feature_branch = "feature-bankUnited" # <- HERE: Change this line to setup ALL the pods repository from another branch WHEN pods_environment = "develop"
     ### ONLY FOR DEVELOP PURPOSES ###
 
     color(32) { puts "Installing Develop Pods from branch: #{feature_branch}" }
@@ -100,6 +100,7 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
             if config.name == 'DEV-Debug'|| config.name == 'QA-Debug'
                 config.build_settings['ENABLE_TESTABILITY'] = 'YES'
             end
